@@ -5,7 +5,6 @@ import Navigation from './components/Navigation';
 
 /**
  * This will retry failed chunks up to 5 times
- * Hopefully it will decrease Sentry errors
  * @param {Function} lazyComponent - lazy component import function
  * @param {Number} attemptsLeft - number of attempts to make (defaults to 5)
  * @returns {Promise<any>} Promise that rejects if all additional attempts fail.
