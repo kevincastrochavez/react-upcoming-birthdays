@@ -34,10 +34,6 @@ function LoginBody() {
       font-size: 20px;
     }
 
-    &[is-facebook='true'] {
-      background-color: #1877f2;
-    }
-
     &[is-google='true'] {
       background-color: #fff;
       color: black;
@@ -57,11 +53,6 @@ function LoginBody() {
       </h1>
 
       <div css={buttonsContainerCss}>
-        <div data-testid='facebook-button' css={buttonCss} is-facebook='true'>
-          <img src={facebookLogo} alt='Facebook SVG' />
-          <p>Continue with Facebook</p>
-        </div>
-
         <div data-testid='google-button' css={buttonCss} is-google='true'>
           <img src={googleLogo} alt='Google SVG' />
           <p>Continue with Google</p>
