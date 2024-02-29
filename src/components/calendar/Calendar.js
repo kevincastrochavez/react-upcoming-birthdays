@@ -13,7 +13,7 @@ function Calendar() {
   const calendarRef = useRef(null);
   const matcapTexture = useMatcapTexture('045C5C_0DBDBD_049393_04A4A4', 256);
   useFrame((state, delta) => {
-    // calendarRef.current.rotation.y += delta;
+    calendarRef.current.rotation.y += delta;
   });
 
   const { nodes } = useGLTF('./model/calendar.glb');
