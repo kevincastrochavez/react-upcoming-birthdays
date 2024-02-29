@@ -3,6 +3,10 @@ import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
 import Calendar from './Calendar';
 
+/**
+ * Displays the Canvas component which allows 3D object rendering
+ * @returns {JSX.Element}
+ */
 function CanvasComponent() {
   const cameraSettings = {
     fov: 75,

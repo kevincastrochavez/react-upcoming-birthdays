@@ -9,9 +9,15 @@ import {
   useTexture,
 } from '@react-three/drei';
 
+/**
+ * Displays the Calendar component, a Blender model with baked textures
+ * @returns {JSX.Element}
+ */
 function Calendar() {
   const calendarRef = useRef(null);
   const matcapTexture = useMatcapTexture('045C5C_0DBDBD_049393_04A4A4', 256);
+
+  // Rotate the calendar. Delta is the time passed between renders. Using it standarizes the animation on all different monitors or screens
   useFrame((state, delta) => {
     calendarRef.current.rotation.y += delta;
   });

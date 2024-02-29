@@ -8,6 +8,10 @@ import { auth, provider } from '../../firebase';
 import googleLogo from './../../assets/google.svg';
 import guestLogo from './../../assets/guest.svg';
 
+/**
+ * Displays heading and login buttons for the Login component
+ * @returns {JSX.Element}
+ */
 function LoginBody() {
   const loginHeadingCss = css`
     margin-top: 30px;
