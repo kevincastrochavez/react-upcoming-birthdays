@@ -1,11 +1,19 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF, useTexture, Center } from '@react-three/drei';
+import {
+  OrbitControls,
+  useGLTF,
+  useMatcapTexture,
+  Center,
+  Text3D,
+  useTexture,
+} from '@react-three/drei';
 
 function Calendar() {
   const calendarRef = useRef(null);
+  const matcapTexture = useMatcapTexture('045C5C_0DBDBD_049393_04A4A4', 256);
   useFrame((state, delta) => {
-    calendarRef.current.rotation.y += delta;
+    // calendarRef.current.rotation.y += delta;
   });
 
   const { nodes } = useGLTF('./model/calendar.glb');
@@ -28,6 +36,17 @@ function Calendar() {
           <mesh position-y={1} geometry={calendarTop}>
             <meshBasicMaterial map={bakedTexture} />
           </mesh>
+
+          <Text3D
+            scale={0.7}
+            position-z={0.1}
+            position-x={-0.5}
+            position-y={-0.3}
+            font={'./fonts/Roboto_Regular.json'}
+          >
+            23
+            <meshMatcapMaterial matcap={matcapTexture} />
+          </Text3D>
         </group>
       </Center>
     </>

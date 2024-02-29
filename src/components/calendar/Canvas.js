@@ -8,7 +8,7 @@ function CanvasComponent() {
     fov: 75,
     near: 0.1,
     far: 100,
-    position: [1, 1, 2],
+    position: [1, 1, 3],
   };
 
   return (
