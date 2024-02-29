@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { css } from '@emotion/react';
+import Canvas from '../../components/calendar/Canvas';
 
 function Login() {
   const loginContainerCSS = css`
@@ -10,7 +11,6 @@ function Login() {
   const loginImgCss = css`
     width: 100%;
     height: 200px;
-    object-fit: cover;
     margin-top: 30px;
   `;
 
@@ -22,7 +22,9 @@ function Login() {
 
   return (
     <main css={loginContainerCSS}>
-      <img css={loginImgCss} src='https://via.placeholder.com/300' alt='' />
+      <div css={loginImgCss}>
+        <Canvas />
+      </div>
 
       <h1 css={loginHeadingCss}>
         The WebApp that will make your friends remember you because you remember

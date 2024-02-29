@@ -1,8 +1,6 @@
 import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Navigation from './components/Navigation';
-
 /**
  * This will retry failed chunks up to 5 times
  * @param {Function} lazyComponent - lazy component import function
@@ -30,6 +28,9 @@ function componentLoader(lazyComponent, attemptsLeft = 5) {
 }
 
 // IMPORTS
+const Navigation = lazy(() =>
+  componentLoader(() => import('./components/navigation/Navigation'))
+);
 const LoginPage = lazy(() =>
   componentLoader(() => import('./pages/login/Login'))
 );
