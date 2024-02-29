@@ -2,6 +2,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { signInWithPopup } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 import { auth, provider } from '../../firebase';
 
@@ -51,9 +52,12 @@ function LoginBody() {
     }
   `;
 
+  const navigate = useNavigate();
+
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider).then((response) => {
       console.log(response);
+      navigate('/');
     });
   };
 
