@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { css } from '@emotion/react';
+import { signInWithPopup } from 'firebase/auth';
+
+import { auth, provider } from '../../firebase';
 
 import facebookLogo from './../../assets/facebook.svg';
 import googleLogo from './../../assets/google.svg';
@@ -45,6 +48,12 @@ function LoginBody() {
     }
   `;
 
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, provider).then((response) => {
+      console.log(response);
+    });
+  };
+
   return (
     <>
       <h1 css={loginHeadingCss}>
@@ -53,7 +62,12 @@ function LoginBody() {
       </h1>
 
       <div css={buttonsContainerCss}>
-        <div data-testid='google-button' css={buttonCss} is-google='true'>
+        <div
+          data-testid='google-button'
+          css={buttonCss}
+          is-google='true'
+          onClick={handleGoogleLogin}
+        >
           <img src={googleLogo} alt='Google SVG' />
           <p>Continue with Google</p>
         </div>
