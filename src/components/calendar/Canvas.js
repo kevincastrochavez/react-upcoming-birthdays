@@ -20,6 +20,7 @@ function CanvasComponent() {
         outputColorSpace: THREE.SRGBColorSpace,
       }}
       camera={cameraSettings}
+      data-testid='canvas'
     >
       <color attach='background' args={['#ebebeb']} />
       <Calendar />
