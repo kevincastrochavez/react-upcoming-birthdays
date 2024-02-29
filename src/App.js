@@ -42,7 +42,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route index element={<LoginPage />} />
+          <Route path='/login' element={<LoginPage />} />
           {/* <Route path='about' element={<About />} /> */}
 
           {/* Using path="*"" means "match anything", so this route
