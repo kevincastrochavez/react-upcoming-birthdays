@@ -5,7 +5,6 @@ import { signInWithPopup } from 'firebase/auth';
 
 import { auth, provider } from '../../firebase';
 
-import facebookLogo from './../../assets/facebook.svg';
 import googleLogo from './../../assets/google.svg';
 import guestLogo from './../../assets/guest.svg';
 

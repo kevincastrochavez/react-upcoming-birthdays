@@ -27,12 +27,15 @@ function componentLoader(lazyComponent, attemptsLeft = 5) {
   });
 }
 
-// IMPORTS
+// Lazy load imports
 const Navigation = lazy(() =>
   componentLoader(() => import('./components/navigation/Navigation'))
 );
 const LoginPage = lazy(() =>
   componentLoader(() => import('./pages/login/Login'))
+);
+const DashboardPage = lazy(() =>
+  componentLoader(() => import('./pages/dashboard/Dashboard'))
 );
 
 function App() {
@@ -43,7 +46,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<LoginPage />} />
-          {/* <Route path='about' element={<About />} /> */}
+          <Route index element={<DashboardPage />} />
 
           {/* Using path="*"" means "match anything", so this route
           acts like a catch-all for URLs that we don't have explicit
