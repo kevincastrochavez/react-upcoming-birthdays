@@ -5,6 +5,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 import { auth, provider } from '../../firebase';
+import { useSetUserUid } from '../../components/BirthdayProvider';
 
 import googleLogo from './../../assets/google.svg';
 import guestLogo from './../../assets/guest.svg';
@@ -53,10 +54,12 @@ function LoginBody() {
   `;
 
   const navigate = useNavigate();
+  const { setUserUid } = useSetUserUid();
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider).then((response) => {
-      console.log(response);
+      const uid = response.user.uid;
+      setUserUid(uid);
       navigate('/');
     });
   };

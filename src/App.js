@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import BirthdayProvider from './components/BirthdayProvider';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -40,7 +41,7 @@ const DashboardPage = lazy(() =>
 
 function App() {
   return (
-    <>
+    <BirthdayProvider>
       <Navigation />
 
       <BrowserRouter>
@@ -54,7 +55,7 @@ function App() {
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Routes>
       </BrowserRouter>
-    </>
+    </BirthdayProvider>
   );
 }
 
