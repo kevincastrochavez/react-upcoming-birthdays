@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
-import { useUserUid } from './components/BirthdayProvider';
+import { useUserUid } from '../components/BirthdayProvider';
 
 /**
  * Protects routes from unauthorized users, and redirects to login page if user is not logged in

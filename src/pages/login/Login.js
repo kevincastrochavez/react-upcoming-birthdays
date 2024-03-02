@@ -4,21 +4,21 @@ import Canvas from '../../components/calendar/Canvas';
 
 import LoginBody from './LoginBody';
 
+const loginContainerCSS = css`
+  padding: 0 24px;
+`;
+
+const loginCanvasCss = css`
+  width: 100%;
+  height: 200px;
+  margin-top: 24px;
+`;
+
 /**
  * Displays the Login component
  * @returns {JSX.Element}
  */
 function Login() {
-  const loginContainerCSS = css`
-    padding: 0 24px;
-  `;
-
-  const loginCanvasCss = css`
-    width: 100%;
-    height: 200px;
-    margin-top: 24px;
-  `;
-
   return (
     <main css={loginContainerCSS}>
       <div css={loginCanvasCss}>

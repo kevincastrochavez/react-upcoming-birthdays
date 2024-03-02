@@ -10,58 +10,62 @@ import { useSetUserUid } from '../../components/BirthdayProvider';
 import googleLogo from './../../assets/google.svg';
 import guestLogo from './../../assets/guest.svg';
 
+const loginHeadingCss = css`
+  margin-top: 30px;
+  font-size: 24px;
+  max-width: 270px;
+  font-weight: 400;
+`;
+
+const buttonsContainerCss = css`
+  margin-top: 80px;
+  display: grid;
+  gap: 12px;
+`;
+
+const buttonCss = css`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: #1877f2;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+
+  & p {
+    font-size: 20px;
+  }
+
+  &[is-google='true'] {
+    background-color: #fff;
+    color: black;
+  }
+
+  &[is-guest='true'] {
+    background-color: orange;
+    color: black;
+  }
+`;
+
 /**
  * Displays heading and login buttons for the Login component
  * @returns {JSX.Element}
  */
 function LoginBody() {
-  const loginHeadingCss = css`
-    margin-top: 30px;
-    font-size: 24px;
-    max-width: 270px;
-    font-weight: 400;
-  `;
-
-  const buttonsContainerCss = css`
-    margin-top: 80px;
-    display: grid;
-    gap: 12px;
-  `;
-
-  const buttonCss = css`
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px;
-    background-color: #1877f2;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-
-    & p {
-      font-size: 20px;
-    }
-
-    &[is-google='true'] {
-      background-color: #fff;
-      color: black;
-    }
-
-    &[is-guest='true'] {
-      background-color: orange;
-      color: black;
-    }
-  `;
-
   const navigate = useNavigate();
   const { setUserUid } = useSetUserUid();
 
   const handleGoogleLogin = () => {
-    signInWithPopup(auth, provider).then((response) => {
-      const uid = response.user.uid;
-      setUserUid(uid);
-      navigate('/');
-    });
+    signInWithPopup(auth, provider)
+      .then((response) => {
+        const uid = response.user.uid;
+        setUserUid(uid);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

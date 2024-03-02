@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import BirthdayProvider from './components/BirthdayProvider';
-import PrivateRoutes from './PrivateRoutes';
+import PrivateRoutes from './helper/PrivateRoutes';
 
 /**
  * This will retry failed chunks up to 5 times
