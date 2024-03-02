@@ -1,6 +1,8 @@
 import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import BirthdayProvider from './components/BirthdayProvider';
+import PrivateRoutes from './PrivateRoutes';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -47,12 +49,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<LoginPage />} />
-          <Route index element={<DashboardPage />} />
 
-          {/* Using path="*"" means "match anything", so this route
-          acts like a catch-all for URLs that we don't have explicit
-          routes for. */}
-          {/* <Route path="*" element={<NoMatch />} /> */}
+          <Route element={<PrivateRoutes />}>
+            <Route index path='/' element={<DashboardPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </BirthdayProvider>

@@ -2,10 +2,11 @@ import React from 'react';
 
 import { useUserUid } from '../../components/BirthdayProvider';
 
+/**
+ * Displays the Dashboard component, main part of application
+ * @returns {JSX.Element}
+ */
 function Dashboard() {
-  const { userUid } = useUserUid();
-  console.log(userUid);
-
   return <div>Dashboard</div>;
 }
 
