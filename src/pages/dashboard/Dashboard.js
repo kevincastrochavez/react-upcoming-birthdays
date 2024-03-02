@@ -2,6 +2,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
+import Breadcrumbs from './../../components/breadcrumbs/Breadcrumbs';
+
 const mainContainerCss = css`
   padding: 24px;
 `;
@@ -11,7 +13,11 @@ const mainContainerCss = css`
  * @returns {JSX.Element}
  */
 function Dashboard() {
-  return <main css={mainContainerCss}>Dashboard</main>;
+  return (
+    <main css={mainContainerCss}>
+      <Breadcrumbs />
+    </main>
+  );
 }
 
 export default Dashboard;
