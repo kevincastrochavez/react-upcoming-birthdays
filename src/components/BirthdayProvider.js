@@ -10,7 +10,7 @@ const BirthdayUpdateContext = createContext({});
  * @returns {JSX.Element}
  */
 export default function BirthdayProvider({ children }) {
-  const [userUid, setUserUid] = useState('');
+  const [userUid, setUserUid] = useState(null);
 
   return (
     <BirthdayUpdateContext.Provider
