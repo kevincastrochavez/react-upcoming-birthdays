@@ -20,6 +20,10 @@ const breadcrumbsCSS = css`
     text-decoration: none;
     color: black;
   }
+
+  & a:not(.active) {
+    color: blue;
+  }
 `;
 
 /**
