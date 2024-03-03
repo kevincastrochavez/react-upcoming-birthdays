@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import { useUserUid } from '../components/BirthdayProvider';
 
@@ -8,9 +8,14 @@ import { useUserUid } from '../components/BirthdayProvider';
  */
 const PrivateRoutes = () => {
   const { userUid } = useUserUid();
+  const location = useLocation();
   const auth = { token: !!userUid };
 
-  return auth.token ? <Outlet /> : <Navigate to='/login' />;
+  return auth.token ? (
+    <Outlet />
+  ) : (
+    <Navigate to='/login' state={{ from: location }} replace={true} />
+  );
 };
 
 export default PrivateRoutes;

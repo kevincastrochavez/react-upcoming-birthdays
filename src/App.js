@@ -40,6 +40,12 @@ const LoginPage = lazy(() =>
 const DashboardPage = lazy(() =>
   componentLoader(() => import('./pages/dashboard/Dashboard'))
 );
+const AllFriendsPage = lazy(() =>
+  componentLoader(() => import('./pages/allFriends/AllFriends'))
+);
+const ShareImportPage = lazy(() =>
+  componentLoader(() => import('./pages/shareImport/ShareImport'))
+);
 
 function App() {
   return (
@@ -50,9 +56,12 @@ function App() {
         <Routes>
           <Route path='/login' element={<LoginPage />} />
 
-          <Route element={<PrivateRoutes />}>
-            <Route index path='/' element={<DashboardPage />} />
+          {/* <Route element={<PrivateRoutes />}> */}
+          <Route path='/dashboard' element={<DashboardPage />}>
+            <Route index path='allFriends' element={<AllFriendsPage />} />
+            <Route index path='shareImport' element={<ShareImportPage />} />
           </Route>
+          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </BirthdayProvider>

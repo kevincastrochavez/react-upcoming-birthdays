@@ -2,7 +2,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { signInWithPopup } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { auth, provider } from '../../firebase';
 import { useSetUserUid } from '../../components/BirthdayProvider';
@@ -54,14 +54,16 @@ const buttonCss = css`
  */
 function LoginBody() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { setUserUid } = useSetUserUid();
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
       .then((response) => {
+        const { from } = location.state || { from: { pathname: '/dashboard' } };
         const uid = response.user.uid;
         setUserUid(uid);
-        navigate('/');
+        navigate(from);
       })
       .catch((error) => {
         console.log(error);

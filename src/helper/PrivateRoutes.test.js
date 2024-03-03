@@ -12,10 +12,14 @@ describe('Private Routes', () => {
     useUserUid.mockReturnValue({ userUid: 'exampleUserId' });
 
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/dashboard']}>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route index path='/' element={<div>Dashboard Page</div>} />
+            <Route
+              index
+              path='/dashboard'
+              element={<div>Dashboard Page</div>}
+            />
           </Route>
         </Routes>
       </MemoryRouter>
@@ -28,9 +32,9 @@ describe('Private Routes', () => {
     useUserUid.mockReturnValue({ userUid: null });
 
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/dashboard']}>
         <Routes>
-          <Route path='/' element={<PrivateRoutes />} />
+          <Route path='/dashboard' element={<PrivateRoutes />} />
           <Route path='/login' element={<div>Login Page</div>} />
         </Routes>
       </MemoryRouter>

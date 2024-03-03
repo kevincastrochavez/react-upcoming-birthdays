@@ -1,20 +1,29 @@
-import { Breadcrumbs, Anchor } from '@mantine/core';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import { Link, useLocation } from 'react-router-dom';
 
-const items = [
-  { title: 'Dashboard', href: '/' },
-  { title: 'Mantine hooks', href: '#' },
-].map((item, index) => (
-  <Anchor href={item.href} key={index}>
-    {item.title}
-  </Anchor>
-));
+const breadcrumbsContainerCss = css`
+  display: flex;
+`;
 
 /**
  * Displays the breadcrumbs according to the page you are in
  * @returns {JSX.Element}
  */
 function BreadcrumbsComponent() {
-  return <Breadcrumbs>{items}</Breadcrumbs>;
+  const { pathname } = useLocation();
+  const urlFragments = pathname
+    .split('/')
+    .filter((fragment) => fragment !== '');
+
+  console.log(pathname);
+  console.log(urlFragments);
+
+  return (
+    <div css={breadcrumbsContainerCss}>
+      <Link href='/'>Dashboard</Link>
+    </div>
+  );
 }
 
 export default BreadcrumbsComponent;
