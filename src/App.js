@@ -57,7 +57,7 @@ function App() {
           <Route path='/login' element={<LoginPage />} />
 
           {/* <Route element={<PrivateRoutes />}> */}
-          <Route path='/dashboard' element={<DashboardPage />}>
+          <Route path='/' element={<DashboardPage />}>
             <Route index path='allFriends' element={<AllFriendsPage />} />
             <Route index path='shareImport' element={<ShareImportPage />} />
           </Route>

@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
 import { css } from '@emotion/react';
 import { signInWithPopup } from 'firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -60,7 +59,7 @@ function LoginBody() {
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
       .then((response) => {
-        const { from } = location.state || { from: { pathname: '/dashboard' } };
+        const { from } = location.state || { from: { pathname: '/' } };
         const uid = response.user.uid;
         setUserUid(uid);
         navigate(from);
