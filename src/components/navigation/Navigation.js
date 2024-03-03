@@ -53,15 +53,13 @@ function Navigation() {
   };
 
   return (
-    <header>
-      <nav css={navigationCSS}>
-        <div css={navigationLogoCSS}>
-          <img src='http://via.placeholder.com/200' alt='' />
-          <p>Happy B!</p>
-        </div>
+    <header css={navigationCSS}>
+      <div css={navigationLogoCSS}>
+        <img src='http://via.placeholder.com/200' alt='' />
+        <p>Happy B!</p>
+      </div>
 
-        <Logout onClick={handleSignout} />
-      </nav>
+      <Logout onClick={handleSignout} />
     </header>
   );
 }
