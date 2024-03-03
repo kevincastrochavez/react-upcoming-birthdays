@@ -3,6 +3,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import Breadcrumbs from './../../components/breadcrumbs/Breadcrumbs';
+import SearchFriend from '../../components/searchFriend/SearchFriend';
 
 const mainContainerCss = css`
   padding: 24px;
@@ -16,6 +17,7 @@ function Dashboard() {
   return (
     <main css={mainContainerCss}>
       <Breadcrumbs />
+      <SearchFriend />
     </main>
   );
 }
