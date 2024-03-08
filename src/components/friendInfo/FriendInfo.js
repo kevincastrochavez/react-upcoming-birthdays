@@ -59,7 +59,7 @@ const friendBirthdateCss = css`
 /**
  * Displays the FriendInfo component which shows your friend's name and birthday, along with a picture, favorite color, if likes to celebrate and their tooth taste
  * @param {Boolean} isSpotlight - true if friend is in spotlight on Dashboard
- * @param {String} fullName - full name of the friend
+ * @param {String} formattedFullName - full name of the friend formatted
  * @param {String} imageUrl - image url for such friend
  * @param {String} favoriteColor - favorite color of the friend
  * @param {Boolean} likesToCelebrate - true if friend likes to celebrate

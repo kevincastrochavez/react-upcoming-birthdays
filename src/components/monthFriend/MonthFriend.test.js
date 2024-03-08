@@ -6,13 +6,13 @@ import MonthFriend from './MonthFriend';
 describe('MonthFriend component', () => {
   test('renders correctly with provided props', () => {
     const imageUrl = 'https://example.com/image.jpg';
-    const fullName = 'Kevin Castro';
+    const formattedFullName = 'Kevin Castro';
     const birthdateFormatted = 'May 15';
 
     const { getByText } = render(
       <MonthFriend
         imageUrl={imageUrl}
-        fullName={fullName}
+        formattedFullName={formattedFullName}
         birthdateFormatted={birthdateFormatted}
       />
     );

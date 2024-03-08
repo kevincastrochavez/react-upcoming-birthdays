@@ -45,15 +45,15 @@ const friendDateCss = css`
 /**
  * Displays the Moth Friend component, which displays their image, name and birthday
  * @param {String} imageUrl - image url for such friend
- * @param {String} fullName - full name of the friend
+ * @param {String} formattedFullName - full name of the friend
  * @param {String} birthdateFormatted - formatted birthdate
  * @returns {JSX.Element}
  */
-function MonthFriend({ imageUrl, fullName, birthdateFormatted }) {
+function MonthFriend({ imageUrl, formattedFullName, birthdateFormatted }) {
   return (
     <div css={friendContainerCss}>
       <img src={imageUrl} alt='' css={friendImgCss} />
-      <p css={friendNameCss}>{fullName}</p>
+      <p css={friendNameCss}>{formattedFullName}</p>
 
       <div css={friendDateCss}>
         <img src={cakeIcon} alt='' />

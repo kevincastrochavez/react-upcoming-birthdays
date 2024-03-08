@@ -27,10 +27,6 @@ export default function BirthdayProvider({ children }) {
     (birthdate, index) => (friendsList[index].birthdateFormatted = birthdate)
   );
 
-  const friendsFilteredBySearch = friendsList?.filter((friend) =>
-    friend.fullName?.toLowerCase().includes(searchText)
-  );
-
   // Format full name and attach it to each friend, along with first name
   const fullNamesList = friendsList?.map((friend) => friend?.fullName);
   const fullNamesListConverted = fullNamesList?.map((fullName) =>
@@ -40,6 +36,11 @@ export default function BirthdayProvider({ children }) {
     friendsList[index].firstName = firstName;
     friendsList[index].formattedFullName = formattedFullName;
   });
+
+  // Search logic for friends
+  const friendsFilteredBySearch = friendsList?.filter((friend) =>
+    friend.formattedFullName?.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   const sortedBirthdays = sortBirthdaysByClosest(friendsList);
   const spotlightFriend = getSpotlightFriend(sortedBirthdays);
