@@ -2,7 +2,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { useIsSearching } from '../../components/BirthdayProvider';
+import { useSearch } from '../../components/BirthdayProvider';
 
 import Breadcrumbs from './../../components/breadcrumbs/Breadcrumbs';
 import SearchFriend from '../../components/searchFriend/SearchFriend';
@@ -17,7 +17,7 @@ const mainContainerCss = css`
  * @returns {JSX.Element}
  */
 function Dashboard() {
-  const { isSearching } = useIsSearching();
+  const { isSearching } = useSearch();
 
   return (
     <main css={mainContainerCss}>

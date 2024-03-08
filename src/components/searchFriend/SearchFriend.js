@@ -2,9 +2,8 @@ import React from 'react';
 import { TextInput } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useSearchParams } from 'react-router-dom';
-import { useDebouncedState } from '@mantine/hooks';
 
-import { useSetIsSearching } from '../BirthdayProvider';
+import { useSetSearch } from '../BirthdayProvider';
 
 /**
  * Displays the search friend component
@@ -12,8 +11,7 @@ import { useSetIsSearching } from '../BirthdayProvider';
  */
 function SearchFriend() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [value, setValue] = useDebouncedState('', 300);
-  const { setIsSearching } = useSetIsSearching();
+  const { setIsSearching, setSearchText } = useSetSearch();
   const searchIcon = <IconSearch />;
 
   // console.log(value);
@@ -41,7 +39,7 @@ function SearchFriend() {
       radius={10}
       onFocus={onSearchInputFocus}
       onBlur={onSearchInputBlur}
-      onChange={(event) => setValue(event.currentTarget.value)}
+      onChange={(event) => setSearchText(event.currentTarget.value)}
     />
   );
 }

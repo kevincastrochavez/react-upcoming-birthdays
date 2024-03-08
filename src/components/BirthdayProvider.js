@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { useDebouncedState } from '@mantine/hooks';
 
 import fakeData from '../data/fakeData';
 
@@ -14,15 +15,20 @@ const BirthdayUpdateContext = createContext({});
 export default function BirthdayProvider({ children }) {
   const [userUid, setUserUid] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
+  const [searchText, setSearchText] = useDebouncedState('', 300);
   const friendsList = fakeData;
 
   // Format birthdate and attach it to each friend
-  const birthdatesList = friendsList.map((friend) => friend?.birthdate);
-  const birthdatesListConverted = birthdatesList.map((birthdate) =>
+  const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
+  const birthdatesListConverted = birthdatesList?.map((birthdate) =>
     formatBirthdate(birthdate)
   );
-  birthdatesListConverted.map(
+  birthdatesListConverted?.map(
     (birthdate, index) => (friendsList[index].birthdateFormatted = birthdate)
+  );
+
+  const friendsFilteredBySearch = friendsList?.filter((friend) =>
+    friend.fullName?.toLowerCase().includes(searchText)
   );
 
   return (
@@ -30,9 +36,18 @@ export default function BirthdayProvider({ children }) {
       value={{
         setUserUid,
         setIsSearching,
+        setSearchText,
       }}
     >
-      <BirthdayContext.Provider value={{ userUid, friendsList, isSearching }}>
+      <BirthdayContext.Provider
+        value={{
+          userUid,
+          friendsList,
+          isSearching,
+          searchText,
+          friendsFilteredBySearch,
+        }}
+      >
         {children}
       </BirthdayContext.Provider>
     </BirthdayUpdateContext.Provider>
@@ -50,13 +65,14 @@ export function useFriends() {
 }
 
 /**
- * Returns the state for the isSearching
+ * Returns the state for the isSearching, the search value, and the filtered list of friends by search
  *
- * @returns { isSearching }
+ * @returns { isSearching, searchText }
  */
-export function useIsSearching() {
-  const { isSearching } = useBirthdayProvider('useIsSearching');
-  return { isSearching };
+export function useSearch() {
+  const { isSearching, searchText, friendsFilteredBySearch } =
+    useBirthdayProvider('useSearch');
+  return { isSearching, searchText, friendsFilteredBySearch };
 }
 
 /**
@@ -70,13 +86,14 @@ export function useUserUid() {
 }
 
 /**
- * Updates the searching state for the params
+ * Updates the searching state for the params, the searching value for the filtering
  *
- * @returns { setIsSearching }
+ * @returns { setIsSearching, setSearchText }
  */
-export function useSetIsSearching() {
-  const { setIsSearching } = useSetBirthdayProvider('useSetIsSearching');
-  return { setIsSearching };
+export function useSetSearch() {
+  const { setIsSearching, setSearchText } =
+    useSetBirthdayProvider('useSetSearch');
+  return { setIsSearching, setSearchText };
 }
 
 /**

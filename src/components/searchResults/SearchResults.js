@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-import { useFriends } from '../BirthdayProvider';
+import { useSearch } from '../BirthdayProvider';
 import MonthFriend from '../monthFriend/MonthFriend';
 
 const headingResultsCss = css`
@@ -12,13 +12,13 @@ const headingResultsCss = css`
 `;
 
 function ShareResults() {
-  const { friendsList } = useFriends();
+  const { friendsFilteredBySearch } = useSearch();
 
   return (
     <>
       <h1 css={headingResultsCss}>Friends Results</h1>
 
-      {friendsList.map((friend) => (
+      {friendsFilteredBySearch?.map((friend) => (
         <MonthFriend {...friend} key={friend.birthdate} />
       ))}
     </>

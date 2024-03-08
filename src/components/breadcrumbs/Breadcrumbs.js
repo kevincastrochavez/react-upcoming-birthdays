@@ -35,7 +35,7 @@ const Breadcrumbs = () => {
 
   return (
     <nav css={breadcrumbsCSS}>
-      {breadcrumbs.map(({ match, breadcrumb }, index) => (
+      {breadcrumbs?.map(({ match, breadcrumb }, index) => (
         <React.Fragment key={match.pathname}>
           <NavLink to={match.pathname} data-testid={match.pathname}>
             {breadcrumb}
