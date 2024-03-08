@@ -18,7 +18,7 @@ export default function BirthdayProvider({ children }) {
   const [searchText, setSearchText] = useDebouncedState('', 300);
   const friendsList = fakeData;
 
-  // Format birthdate and attach it to each friend
+  // Format birth date and attach it to each friend
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
   const birthdatesListConverted = birthdatesList?.map((birthdate) =>
     formatBirthdate(birthdate)
@@ -30,6 +30,16 @@ export default function BirthdayProvider({ children }) {
   const friendsFilteredBySearch = friendsList?.filter((friend) =>
     friend.fullName?.toLowerCase().includes(searchText)
   );
+
+  // Format full name and attach it to each friend, along with first name
+  const fullNamesList = friendsList?.map((friend) => friend?.fullName);
+  const fullNamesListConverted = fullNamesList?.map((fullName) =>
+    formatFullName(fullName)
+  );
+  fullNamesListConverted?.map(({ firstName, formattedFullName }, index) => {
+    friendsList[index].firstName = firstName;
+    friendsList[index].formattedFullName = formattedFullName;
+  });
 
   const sortedBirthdays = sortBirthdaysByClosest(friendsList);
   const spotlightFriend = getSpotlightFriend(sortedBirthdays);
@@ -161,6 +171,23 @@ function formatBirthdate(birthdate) {
 
   // Return the formatted birthdate string
   return `${shortMonthName} ${parseInt(day)}`;
+}
+
+/**
+ * Returns the formatted name of the friend, in case friend has middle name or many names, and the first name
+ * @param {String} fullName - full name of the friend
+ * @returns {{String, String}} formatted full name and first name
+ */
+function formatFullName(fullName) {
+  if (!fullName) return;
+
+  const [firstName, lastName] = fullName?.split(' ');
+  const formattedFullName = `${firstName} ${lastName}`;
+
+  return {
+    formattedFullName,
+    firstName,
+  };
 }
 
 /**
