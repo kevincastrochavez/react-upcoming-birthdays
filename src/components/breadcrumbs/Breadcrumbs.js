@@ -14,7 +14,7 @@ const routes = [
 const breadcrumbsCSS = css`
   display: flex;
   gap: 8px;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
 
   & a {
     text-decoration: none;
