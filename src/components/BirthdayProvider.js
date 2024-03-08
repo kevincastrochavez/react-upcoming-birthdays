@@ -164,20 +164,20 @@ function formatBirthdate(birthdate) {
 }
 
 /**
- * Gets the next 5 closest birthdays
+ * Gets the friend with the closest birthday
  * @param {[Object]} birthdays - list of birth dates
- * @returns {[Object]} friends with the next 5 closest birthdays besides the spotlight friend
+ * @returns {Object} friend with the closest birthday
  */
 function getSpotlightFriend(birthdate) {
   if (!birthdate) return;
 
-  return birthdate[0];
+  return birthdate[0].friend;
 }
 
 /**
- * Gets the friend with the closest birthday
+ * Gets the next 5 closest birthdays
  * @param {[Object]} birthdays - list of birth dates
- * @returns {Object} friend with the closest birthday
+ * @returns {[Object]} friends with the next 5 closest birthdays besides the spotlight friend
  */
 function getNextFiveFriends(birthdate) {
   if (!birthdate) return;
@@ -215,10 +215,9 @@ function sortBirthdaysByClosest(friends) {
   // Calculate next closest birthday for each friend
   const closestBirthdays = friends.map((friend) => {
     // Passing birth dates in the format "2020-05-15" and converting them to objects so the Date constructor converts them to local time and not UTC
-    const birthdateArray = friend.birthdate.split('-');
-    const birthdateYear = Number(birthdateArray[0]);
-    const birthdateMonth = Number(birthdateArray[1]);
-    const birthdateDay = Number(birthdateArray[2]);
+    const [birthdateYear, birthdateMonth, birthdateDay] = friend?.birthdate
+      ?.split('-')
+      .map(Number);
     const birthdate = new Date(birthdateYear, birthdateMonth - 1, birthdateDay);
 
     const nextBirthdayThisYear = new Date(
