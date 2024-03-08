@@ -31,6 +31,10 @@ export default function BirthdayProvider({ children }) {
     friend.fullName?.toLowerCase().includes(searchText)
   );
 
+  const sortedBirthdays = sortBirthdaysByClosest(friendsList);
+  const spotlightFriend = getSpotlightFriend(sortedBirthdays);
+  const nextFiveFriends = getNextFiveFriends(sortedBirthdays);
+
   return (
     <BirthdayUpdateContext.Provider
       value={{
@@ -46,6 +50,8 @@ export default function BirthdayProvider({ children }) {
           isSearching,
           searchText,
           friendsFilteredBySearch,
+          spotlightFriend,
+          nextFiveFriends,
         }}
       >
         {children}
@@ -55,13 +61,14 @@ export default function BirthdayProvider({ children }) {
 }
 
 /**
- * Returns the list of friends on your account
+ * Returns the list of friends on your account, the spotlight friend, and the next 5 closest friends
  *
- * @returns { friendsList }
+ * @returns { friendsList, spotlightFriend, nextFiveFriends }
  */
 export function useFriends() {
-  const { friendsList } = useBirthdayProvider('useFriends');
-  return { friendsList };
+  const { friendsList, spotlightFriend, nextFiveFriends } =
+    useBirthdayProvider('useFriends');
+  return { friendsList, spotlightFriend, nextFiveFriends };
 }
 
 /**
@@ -120,21 +127,7 @@ function useBirthdayProvider(functionName) {
   return data;
 }
 
-/**
- * Enables making changes to the BirthdayContext (using the BirthdayUpdateContext)
- * @param {String} functionName - just for using in error reporting
- * @returns {{}}
- */
-function useSetBirthdayProvider(functionName) {
-  const data = useContext(BirthdayUpdateContext);
-  if (!data)
-    throw new Error(
-      `${functionName} must be used within a component wrapped by BirthdayProvider.`
-    );
-  return data;
-}
-
-// Private Functions
+// PRIVATE FUNCTIONS
 
 /**
  * Enables making changes to the BirthdayContext (using the BirthdayUpdateContext)
@@ -168,4 +161,89 @@ function formatBirthdate(birthdate) {
 
   // Return the formatted birthdate string
   return `${shortMonthName} ${parseInt(day)}`;
+}
+
+/**
+ * Gets the next 5 closest birthdays
+ * @param {[Object]} birthdays - list of birth dates
+ * @returns {[Object]} friends with the next 5 closest birthdays besides the spotlight friend
+ */
+function getSpotlightFriend(birthdate) {
+  if (!birthdate) return;
+
+  return birthdate[0];
+}
+
+/**
+ * Gets the friend with the closest birthday
+ * @param {[Object]} birthdays - list of birth dates
+ * @returns {Object} friend with the closest birthday
+ */
+function getNextFiveFriends(birthdate) {
+  if (!birthdate) return;
+
+  return birthdate.slice(1, 6);
+}
+
+/**
+ * Enables making changes to the BirthdayContext (using the BirthdayUpdateContext)
+ * @param {String} functionName - just for using in error reporting
+ * @returns {{}}
+ */
+function useSetBirthdayProvider(functionName) {
+  const data = useContext(BirthdayUpdateContext);
+  if (!data)
+    throw new Error(
+      `${functionName} must be used within a component wrapped by BirthdayProvider.`
+    );
+  return data;
+}
+
+/**
+ * Gets the friend with the closest birthday
+ * @param {[Object]} friends - list of friends
+ * @returns {Object} friend with the closest birthday
+ */
+function sortBirthdaysByClosest(friends) {
+  const today = new Date();
+  const todayYear = today.getFullYear();
+  const todayMonth = today.getMonth();
+  const todayDay = today.getDate();
+  const todayObj = new Date(todayYear, todayMonth, todayDay);
+  const currentYear = today.getFullYear();
+
+  // Calculate next closest birthday for each friend
+  const closestBirthdays = friends.map((friend) => {
+    // Passing birth dates in the format "2020-05-15" and converting them to objects so the Date constructor converts them to local time and not UTC
+    const birthdateArray = friend.birthdate.split('-');
+    const birthdateYear = Number(birthdateArray[0]);
+    const birthdateMonth = Number(birthdateArray[1]);
+    const birthdateDay = Number(birthdateArray[2]);
+    const birthdate = new Date(birthdateYear, birthdateMonth - 1, birthdateDay);
+
+    const nextBirthdayThisYear = new Date(
+      currentYear,
+      birthdate.getMonth(),
+      birthdate.getDate()
+    );
+    const nextBirthdayNextYear = new Date(
+      currentYear + 1,
+      birthdate.getMonth(),
+      birthdate.getDate()
+    );
+    const nextClosestBirthday =
+      todayObj > nextBirthdayThisYear
+        ? nextBirthdayNextYear
+        : nextBirthdayThisYear;
+
+    return { friend, nextClosestBirthday };
+  });
+
+  // Sort closestBirthdays by nextClosestBirthday
+  closestBirthdays.sort(
+    (a, b) => a.nextClosestBirthday - b.nextClosestBirthday
+  );
+
+  // Return the friend with the closest birthday
+  return closestBirthdays;
 }
