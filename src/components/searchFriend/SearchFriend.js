@@ -16,7 +16,7 @@ function SearchFriend() {
   const { setIsSearching } = useSetIsSearching();
   const searchIcon = <IconSearch />;
 
-  console.log(value);
+  // console.log(value);
 
   const onSearchInputFocus = () => {
     setSearchParams({ searching: 'true' });

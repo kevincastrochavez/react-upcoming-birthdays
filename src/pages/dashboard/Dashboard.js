@@ -6,7 +6,7 @@ import { useIsSearching } from '../../components/BirthdayProvider';
 
 import Breadcrumbs from './../../components/breadcrumbs/Breadcrumbs';
 import SearchFriend from '../../components/searchFriend/SearchFriend';
-import ShareResults from '../../components/searchResults/ShareResults';
+import SearchResults from '../../components/searchResults/SearchResults';
 
 const mainContainerCss = css`
   padding: 24px;
@@ -23,8 +23,8 @@ function Dashboard() {
     <main css={mainContainerCss}>
       <Breadcrumbs />
       <SearchFriend />
-      {/* {isSearching && <ShareResults />} */}
-      <ShareResults />
+      {/* {isSearching && <SearchResults />} */}
+      <SearchResults />
     </main>
   );
 }
