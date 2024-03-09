@@ -23,6 +23,8 @@ const friendContainerCss = css`
     0px 2.6px 5.0375px rgba(12, 20, 33, 0.02),
     0px 1.37109px 2.99707px rgba(12, 20, 33, 0.016875),
     0px 0.56875px 1.79219px rgba(12, 20, 33, 0.013), inset 0px 2px 1px #ffffff;
+  max-width: 400px;
+  margin: 0 auto;
 `;
 
 const friendImgCss = css`
