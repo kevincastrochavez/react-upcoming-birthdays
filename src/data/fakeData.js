@@ -26,7 +26,7 @@ const fakeData = [
   {
     fullName: 'Aaron James',
     imageUrl: 'https://via.placeholder.com/200',
-    birthdate: '1990-03-08',
+    birthdate: '1990-03-09',
     favoriteColor: 'Blue',
     likesToCelebrate: true,
     candyPreference: 'Sour',
