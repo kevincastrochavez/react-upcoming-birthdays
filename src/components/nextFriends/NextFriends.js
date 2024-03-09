@@ -5,7 +5,7 @@ import { useFriends } from '../../components/BirthdayProvider';
 import NextFriend from './NextFriend';
 
 const nextFiveContainerCss = css`
-  margin-top: 90px;
+  margin-top: 60px;
 
   & > p {
     text-align: right;

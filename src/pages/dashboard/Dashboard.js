@@ -13,6 +13,7 @@ import NextFriends from '../../components/nextFriends/NextFriends';
 
 const mainContainerCss = css`
   padding: 24px;
+  margin-bottom: 60px;
 `;
 
 /**

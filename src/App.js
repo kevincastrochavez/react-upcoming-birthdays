@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import BirthdayProvider from './components/BirthdayProvider';
+import BottomNav from './components/bottomNav/BottomNav';
 import PrivateRoutes from './helper/PrivateRoutes';
 
 /**
@@ -63,6 +64,7 @@ function App() {
           </Route>
           {/* </Route> */}
         </Routes>
+        <BottomNav />
       </BrowserRouter>
     </BirthdayProvider>
   );
