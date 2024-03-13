@@ -18,13 +18,21 @@ export default function BirthdayProvider({ children }) {
   const [searchText, setSearchText] = useDebouncedState('', 300);
   const friendsList = fakeData;
 
-  // Format birth date and attach it to each friend
+  // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
   const birthdatesListConverted = birthdatesList?.map((birthdate) =>
     formatBirthdate(birthdate)
   );
+  const shortenedBirthdatesListConverted = birthdatesList?.map((birthdate) =>
+    getShortenedBirthdate(birthdate)
+  );
+
   birthdatesListConverted?.map(
     (birthdate, index) => (friendsList[index].birthdateFormatted = birthdate)
+  );
+  shortenedBirthdatesListConverted?.map(
+    (birthdate, index) =>
+      (friendsList[index].shortenedBirthdateFormatted = birthdate)
   );
 
   // Format full name and attach it to each friend, along with first name
@@ -46,6 +54,8 @@ export default function BirthdayProvider({ children }) {
   const spotlightFriend = getSpotlightFriend(sortedBirthdays);
   const nextFiveFriends = getNextFiveFriends(sortedBirthdays);
 
+  const sortedBirthdaysByMonth = getBirthdaysByMonth(friendsList);
+
   return (
     <BirthdayUpdateContext.Provider
       value={{
@@ -63,6 +73,7 @@ export default function BirthdayProvider({ children }) {
           friendsFilteredBySearch,
           spotlightFriend,
           nextFiveFriends,
+          sortedBirthdaysByMonth,
         }}
       >
         {children}
@@ -71,15 +82,40 @@ export default function BirthdayProvider({ children }) {
   );
 }
 
+// Create an array of month names
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 /**
- * Returns the list of friends on your account, the spotlight friend, and the next 5 closest friends
+ * Returns the list of friends on your account, the spotlight friend, the next 5 closest friends, and the list of friends sorted by month
  *
- * @returns { friendsList, spotlightFriend, nextFiveFriends }
+ * @returns { friendsList, spotlightFriend, nextFiveFriends, sortedBirthdaysByMonth }
  */
 export function useFriends() {
-  const { friendsList, spotlightFriend, nextFiveFriends } =
-    useBirthdayProvider('useFriends');
-  return { friendsList, spotlightFriend, nextFiveFriends };
+  const {
+    friendsList,
+    spotlightFriend,
+    nextFiveFriends,
+    sortedBirthdaysByMonth,
+  } = useBirthdayProvider('useFriends');
+  return {
+    friendsList,
+    spotlightFriend,
+    nextFiveFriends,
+    sortedBirthdaysByMonth,
+  };
 }
 
 /**
@@ -141,7 +177,7 @@ function useBirthdayProvider(functionName) {
 // PRIVATE FUNCTIONS
 
 /**
- * Enables making changes to the BirthdayContext (using the BirthdayUpdateContext)
+ * Formats the birthdate in the format "2020-05-15" to "May 15"
  * @param {String} birthdate - birth date in the format "2020-05-15"
  * @returns {String} formatted birth date in the format "month day (May 15)"
  */
@@ -150,28 +186,11 @@ function formatBirthdate(birthdate) {
 
   const [year, month, day] = birthdate.split('-');
 
-  // Create an array of month names
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
   // Get the month name based on the month number (subtract 1 since months are zero-indexed)
   const monthName = monthNames[parseInt(month) - 1];
-  const shortMonthName = monthName.slice(0, 3);
 
   // Return the formatted birthdate string
-  return `${shortMonthName} ${parseInt(day)}`;
+  return `${monthName} ${parseInt(day)}`;
 }
 
 /**
@@ -189,6 +208,52 @@ function formatFullName(fullName) {
     formattedFullName,
     firstName,
   };
+}
+
+/**
+ * Gets all the birthdays for each friend sorted by month
+ * @param {[Object]} friends - list of friends
+ * @returns {[Object]} friends sorted by month
+ */
+function getBirthdaysByMonth(friends) {
+  if (!friends) return [];
+
+  const birthdaysGroupedByMonth = [];
+
+  // Loop through each month to group the friends by month
+  monthNames.forEach((month) => {
+    const filteredFriendsByMonth = friends.filter((friend) => {
+      const friendBirthdayMonth = Number(friend.birthdate.split('-')[1]);
+      const friendBirthdayMonthName = monthNames[friendBirthdayMonth - 1];
+
+      return friendBirthdayMonthName === month;
+    });
+
+    birthdaysGroupedByMonth.push({
+      month: month,
+      friends: filteredFriendsByMonth,
+    });
+  });
+
+  return birthdaysGroupedByMonth;
+}
+
+/**
+ * Returns the shortened birthdate in the format "Jan 15"
+ * @param {String} birthdate - birth date in the format "January 15"
+ * @returns {String} formatted birth date in the format "Jan 15"
+ */
+function getShortenedBirthdate(birthdate) {
+  if (!birthdate) return;
+
+  const fullBirthdate = formatBirthdate(birthdate);
+
+  const [month, day] = fullBirthdate.split(' ');
+
+  const shortMonthName = month.slice(0, 3);
+
+  // // Return the formatted birthdate string
+  return `${shortMonthName} ${parseInt(day)}`;
 }
 
 /**
