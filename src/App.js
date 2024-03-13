@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import BirthdayProvider from './components/BirthdayProvider';
@@ -58,10 +58,33 @@ function App() {
           <Route path='/login' element={<LoginPage />} />
 
           {/* <Route element={<PrivateRoutes />}> */}
-          <Route path='/' element={<DashboardPage />}>
-            <Route index path='allFriends' element={<AllFriendsPage />} />
-            <Route index path='shareImport' element={<ShareImportPage />} />
-          </Route>
+          <Route
+            index
+            path='/'
+            element={
+              <Suspense fallback={<div>Loading Dashboard...</div>}>
+                <DashboardPage />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path='/allFriends'
+            element={
+              <Suspense fallback={<div>Loading All Friends...</div>}>
+                <AllFriendsPage />{' '}
+              </Suspense>
+            }
+          />
+
+          <Route
+            path='/shareImport'
+            element={
+              <Suspense fallback={<div>Loading Share...</div>}>
+                <ShareImportPage />
+              </Suspense>
+            }
+          />
           {/* </Route> */}
         </Routes>
         <BottomNav />
