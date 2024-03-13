@@ -45,7 +45,7 @@ const friendDateCss = css`
 `;
 
 /**
- * Displays the Moth Friend component, which displays their image, name and birthday
+ * Displays the Month Friend component, which displays their image, name and birthday
  * @param {String} imageUrl - image url for such friend
  * @param {String} formattedFullName - full name of the friend
  * @param {String} shortenedBirthdateFormatted - shortened formatted birth date
