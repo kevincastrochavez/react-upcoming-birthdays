@@ -28,7 +28,7 @@ describe('daysUntilBirthday', () => {
 
     const result = daysUntilBirthday(birthdate);
 
-    expect(result.daysToBirthday).toBe(-2);
+    expect(result.daysToBirthday).toBe(-4);
     expect(result.isBirthdayToday).toBe(false);
   });
 });

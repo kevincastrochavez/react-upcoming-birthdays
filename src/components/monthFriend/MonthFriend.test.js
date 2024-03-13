@@ -7,13 +7,13 @@ describe('MonthFriend component', () => {
   test('renders correctly with provided props', () => {
     const imageUrl = 'https://example.com/image.jpg';
     const formattedFullName = 'Kevin Castro';
-    const birthdateFormatted = 'May 15';
+    const shortenedBirthdateFormatted = 'May 15';
 
     const { getByText } = render(
       <MonthFriend
         imageUrl={imageUrl}
         formattedFullName={formattedFullName}
-        birthdateFormatted={birthdateFormatted}
+        shortenedBirthdateFormatted={shortenedBirthdateFormatted}
       />
     );
 

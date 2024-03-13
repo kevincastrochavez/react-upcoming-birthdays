@@ -27,7 +27,6 @@ const nextFiveInnerContainerCss = css`
 
 function NextFriends() {
   const { nextFiveFriends } = useFriends();
-  console.log(nextFiveFriends);
 
   return (
     <div css={nextFiveContainerCss}>
