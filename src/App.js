@@ -55,7 +55,14 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path='/login' element={<LoginPage />} />
+          <Route
+            path='/login'
+            element={
+              <Suspense fallback={<div>Loading Login...</div>}>
+                <LoginPage />
+              </Suspense>
+            }
+          />
 
           {/* <Route element={<PrivateRoutes />}> */}
           <Route
