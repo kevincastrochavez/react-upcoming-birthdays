@@ -79,14 +79,14 @@ const fakeData = [
     likesToCelebrate: true,
     candyPreference: 'Sweet',
   },
-  {
-    fullName: 'Olivia Anderson',
-    imageUrl: 'https://via.placeholder.com/200',
-    birthdate: '1996-04-05',
-    favoriteColor: 'Turquoise',
-    likesToCelebrate: false,
-    candyPreference: 'Sweet',
-  },
+  // {
+  //   fullName: 'Olivia Anderson',
+  //   imageUrl: 'https://via.placeholder.com/200',
+  //   birthdate: '1996-04-05',
+  //   favoriteColor: 'Turquoise',
+  //   likesToCelebrate: false,
+  //   candyPreference: 'Sweet',
+  // },
   {
     fullName: 'James Garcia',
     imageUrl: 'https://via.placeholder.com/200',

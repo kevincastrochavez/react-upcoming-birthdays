@@ -24,6 +24,11 @@ const breadcrumbsCSS = css`
   & a:not(.active) {
     color: blue;
   }
+
+  & span {
+    font-size: 12px;
+    display: flex;
+  }
 `;
 
 /**
@@ -40,7 +45,7 @@ const Breadcrumbs = () => {
           <NavLink to={match.pathname} data-testid={match.pathname}>
             {breadcrumb}
           </NavLink>
-          {index !== breadcrumbs.length - 1 && '/'}
+          {index !== breadcrumbs.length - 1 && <span>/</span>}
         </React.Fragment>
       ))}
     </nav>

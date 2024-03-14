@@ -16,6 +16,10 @@ const mainContainerCss = css`
   margin-bottom: 100px;
 `;
 
+const tabsContainerCss = css`
+  margin-top: 30px;
+`;
+
 /**
  * Displays the ShareImport component page
  * @returns {JSX.Element}
@@ -24,7 +28,7 @@ function ShareImport() {
   return (
     <main css={mainContainerCss}>
       <Breadcrumbs />
-      <Tabs defaultValue='share' className=''>
+      <Tabs css={tabsContainerCss} defaultValue='share' className=''>
         <TabsList className='grid w-full grid-cols-2'>
           <TabsTrigger value='share'>Share my List</TabsTrigger>
           <TabsTrigger value='import'>Import a List</TabsTrigger>

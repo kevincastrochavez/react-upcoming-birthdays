@@ -16,11 +16,18 @@ import { useSetUserInfo, useUserInfo } from '../BirthdayProvider';
 import { Button } from '../../componentsShadcn/ui/button';
 import Copy from './Copy';
 
+const shareContainerCss = css`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 16px;
+`;
+
 const qrContainerCss = css`
   margin-top: 24px;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  padding: 24px;
+  padding: 12px;
 
   & > svg {
     width: 200px;
@@ -32,22 +39,23 @@ const qrContainerCss = css`
   }
 
   & button {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     justify-self: end;
     align-self: center;
 
     & svg {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
     }
   }
 `;
 
 const idContainerCss = css`
   & > p {
-    padding: 0 0 8px 12px;
-    margin-top: 60px;
+    padding: 0 0 8px 4px;
+    margin-top: 40px;
+    font-size: 14px;
   }
 `;
 
@@ -90,9 +98,9 @@ function Share() {
   });
 
   return (
-    <>
+    <div css={shareContainerCss}>
       <Form {...form}>
-        <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm mt-8 bg-slate-50 gap-4'>
+        <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm  bg-slate-50 gap-4'>
           <div className='space-y-0.5'>
             <FormLabel>Do you want your Friends list to be sharable?</FormLabel>
             <FormDescription>
@@ -126,7 +134,7 @@ function Share() {
           <Copy disabled={!isUserSharingList} listUrlToShare={listUrlToShare} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

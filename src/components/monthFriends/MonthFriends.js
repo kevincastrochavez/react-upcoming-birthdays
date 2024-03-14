@@ -23,15 +23,19 @@ function MonthFriends({ monthObj }) {
   return (
     <div css={monthContainerCss}>
       <h2>{monthObj.month}</h2>
-      {friends.map(
-        ({ imageUrl, formattedFullName, birthdateFormatted }, index) => (
-          <MonthFriend
-            key={index}
-            imageUrl={imageUrl}
-            formattedFullName={formattedFullName}
-            shortenedBirthdateFormatted={birthdateFormatted}
-          />
+      {friends.length > 0 ? (
+        friends.map(
+          ({ imageUrl, formattedFullName, birthdateFormatted }, index) => (
+            <MonthFriend
+              key={index}
+              imageUrl={imageUrl}
+              formattedFullName={formattedFullName}
+              shortenedBirthdateFormatted={birthdateFormatted}
+            />
+          )
         )
+      ) : (
+        <p>No friends this month</p>
       )}
     </div>
   );
