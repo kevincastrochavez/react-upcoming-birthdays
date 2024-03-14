@@ -39,7 +39,7 @@
     );
   }
 
-  &[data-active] {
+  &[is-tab-active='true'] {
     z-index: 1;
     background-color: var(--mantine-color-blue-filled);
     border-color: var(--mantine-color-blue-filled);

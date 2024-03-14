@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Tabs, rem } from '@mantine/core';
-import { IconUsersGroup, IconQrcode } from '@tabler/icons-react';
-import { useNavigate } from 'react-router-dom';
+import { IconUsersGroup, IconQrcode, IconHome } from '@tabler/icons-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import classes from './BottomNav.module.css';
 
@@ -41,6 +41,8 @@ const bottomNavTabCss = css`
  */
 function BottomNav() {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
 
   return (
     <Tabs
@@ -52,19 +54,32 @@ function BottomNav() {
       <Tabs.List grow>
         <Tabs.Tab
           css={bottomNavTabCss}
-          value='All Friends'
-          leftSection={<IconUsersGroup />}
-          onClick={() => navigate('/allFriends')}
+          value='Dashboard'
+          leftSection={<IconHome />}
+          onClick={() => navigate('/')}
+          is-tab-active={location.pathname === '/' ? 'true' : 'false'}
         >
-          All Friends
+          Dashboard
         </Tabs.Tab>
         <Tabs.Tab
           css={bottomNavTabCss}
           value='Share/Import'
           leftSection={<IconQrcode />}
           onClick={() => navigate('/shareImport')}
+          is-tab-active={
+            location.pathname === '/shareImport' ? 'true' : 'false'
+          }
         >
           Share/Import
+        </Tabs.Tab>
+        <Tabs.Tab
+          css={bottomNavTabCss}
+          value='All Friends'
+          leftSection={<IconUsersGroup />}
+          onClick={() => navigate('/allFriends')}
+          is-tab-active={location.pathname === '/allFriends' ? 'true' : 'false'}
+        >
+          All Friends
         </Tabs.Tab>
       </Tabs.List>
     </Tabs>
