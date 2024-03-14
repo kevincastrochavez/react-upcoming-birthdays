@@ -13,6 +13,7 @@ import Import from '../../components/import/Import';
 
 const mainContainerCss = css`
   padding: 12px 24px 24px 24px;
+  margin-bottom: 100px;
 `;
 
 /**
