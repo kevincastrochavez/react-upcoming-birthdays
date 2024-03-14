@@ -14,6 +14,8 @@ const friendInfoCss = css`
 `;
 
 const friendPreferenceCss = css`
+  display: flex;
+
   & span {
     color: #f4bfbf;
     margin-right: 4px;
