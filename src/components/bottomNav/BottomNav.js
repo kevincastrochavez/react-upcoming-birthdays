@@ -63,6 +63,15 @@ function BottomNav() {
         </Tabs.Tab>
         <Tabs.Tab
           css={bottomNavTabCss}
+          value='All Friends'
+          leftSection={<IconUsersGroup />}
+          onClick={() => navigate('/allFriends')}
+          is-tab-active={location.pathname === '/allFriends' ? 'true' : 'false'}
+        >
+          All Friends
+        </Tabs.Tab>
+        <Tabs.Tab
+          css={bottomNavTabCss}
           value='Share/Import'
           leftSection={<IconQrcode />}
           onClick={() => navigate('/shareImport')}
@@ -71,15 +80,6 @@ function BottomNav() {
           }
         >
           Share/Import
-        </Tabs.Tab>
-        <Tabs.Tab
-          css={bottomNavTabCss}
-          value='All Friends'
-          leftSection={<IconUsersGroup />}
-          onClick={() => navigate('/allFriends')}
-          is-tab-active={location.pathname === '/allFriends' ? 'true' : 'false'}
-        >
-          All Friends
         </Tabs.Tab>
       </Tabs.List>
     </Tabs>

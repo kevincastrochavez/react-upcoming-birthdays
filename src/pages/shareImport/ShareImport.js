@@ -12,7 +12,7 @@ import Share from '../../components/share/Share';
 import Import from '../../components/import/Import';
 
 const mainContainerCss = css`
-  padding: 24px;
+  padding: 12px 24px 24px 24px;
 `;
 
 /**

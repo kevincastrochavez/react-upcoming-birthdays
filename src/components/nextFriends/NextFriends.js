@@ -9,7 +9,7 @@ const nextFiveContainerCss = css`
 
   & > p {
     text-align: right;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 `;
 

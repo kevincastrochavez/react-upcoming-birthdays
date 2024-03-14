@@ -12,7 +12,7 @@ import { useFriends } from '../../components/BirthdayProvider';
 import NextFriends from '../../components/nextFriends/NextFriends';
 
 const mainContainerCss = css`
-  padding: 24px;
+  padding: 12px 24px 24px 24px;
   margin-bottom: 60px;
 `;
 

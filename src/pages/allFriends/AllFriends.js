@@ -8,7 +8,7 @@ import { useFriends, useSearch } from '../../components/BirthdayProvider';
 import MonthFriends from '../../components/monthFriends/MonthFriends';
 
 const mainContainerCss = css`
-  padding: 24px;
+  padding: 12px 24px 24px 24px;
   margin-bottom: 60px;
 
   & > h1 {

@@ -5,8 +5,8 @@ import FriendPreferences from './FriendPreferences';
 import { daysUntilBirthday } from '../../helper/utils';
 
 const spotlightHeadingCss = css`
-  margin-top: 60px;
-  margin-bottom: 12px;
+  margin-top: 40px;
+  margin-bottom: 8px;
   text-align: right;
 `;
 
