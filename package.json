@@ -25,6 +25,7 @@
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "firebase": "^10.8.1",
+    "html5-qrcode": "^2.3.8",
     "postcss": "^8.4.35",
     "postcss-preset-mantine": "^1.13.0",
     "postcss-simple-vars": "^7.0.1",

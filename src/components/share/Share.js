@@ -32,10 +32,6 @@ const qrContainerCss = css`
   & > svg {
     width: 200px;
     height: 200px;
-
-    & path:first-of-type {
-      fill: #ebebeb;
-    }
   }
 
   & button {
@@ -72,7 +68,7 @@ const idWrapperCss = css`
   }
 
   & p {
-    padding: 12px;
+    padding: 8px;
     overflow: hidden;
   }
 
