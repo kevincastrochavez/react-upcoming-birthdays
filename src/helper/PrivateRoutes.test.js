@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 
 import PrivateRoutes from './PrivateRoutes';
-import { useUserUid } from './../components/BirthdayProvider';
+import { useUserInfo } from './../components/BirthdayProvider';
 
 jest.mock('./../components/BirthdayProvider');
 
 describe('Private Routes', () => {
   test('Renders Dashboard Page if user is authenticated', () => {
-    useUserUid.mockReturnValue({ userUid: 'exampleUserId' });
+    useUserInfo.mockReturnValue({ userUid: 'exampleUserId' });
 
     render(
       <MemoryRouter initialEntries={['/']}>
@@ -25,7 +25,7 @@ describe('Private Routes', () => {
   });
 
   test('Renders All Friends Page if user is authenticated', () => {
-    useUserUid.mockReturnValue({ userUid: 'exampleUserId' });
+    useUserInfo.mockReturnValue({ userUid: 'exampleUserId' });
 
     render(
       <MemoryRouter initialEntries={['/allFriends']}>
@@ -45,7 +45,7 @@ describe('Private Routes', () => {
   });
 
   test('Redirects to login page if user is not authenticated', () => {
-    useUserUid.mockReturnValue({ userUid: null });
+    useUserInfo.mockReturnValue({ userUid: null });
 
     render(
       <MemoryRouter initialEntries={['/']}>

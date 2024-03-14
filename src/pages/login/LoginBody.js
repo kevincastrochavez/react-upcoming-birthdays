@@ -4,7 +4,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { auth, provider } from '../../firebase';
-import { useSetUserUid } from '../../components/BirthdayProvider';
+import { useSetUserInfo } from '../../components/BirthdayProvider';
 
 import googleLogo from './../../assets/google.svg';
 import guestLogo from './../../assets/guest.svg';
@@ -54,7 +54,7 @@ const buttonCss = css`
 function LoginBody() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { setUserUid } = useSetUserUid();
+  const { setUserUid } = useSetUserInfo();
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)

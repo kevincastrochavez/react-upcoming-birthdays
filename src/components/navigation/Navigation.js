@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { signOut } from 'firebase/auth';
 
 import { auth } from '../../firebase';
-import { useSetUserUid } from '../BirthdayProvider';
+import { useSetUserInfo } from '../BirthdayProvider';
 import Logout from './Logout';
 
 const navigationCSS = css`
@@ -40,7 +40,7 @@ const navigationLogoCSS = css`
  * @returns {JSX.Element}
  */
 function Navigation() {
-  const { setUserUid } = useSetUserUid();
+  const { setUserUid } = useSetUserInfo();
 
   const handleSignout = () => {
     signOut(auth)

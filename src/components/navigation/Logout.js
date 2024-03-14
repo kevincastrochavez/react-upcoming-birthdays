@@ -2,7 +2,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { useUserUid } from '../BirthdayProvider';
+import { useUserInfo } from '../BirthdayProvider';
 import logout from '../../assets/logout.svg';
 
 const navigationLogoutCSS = css`
@@ -23,7 +23,7 @@ const navigationLogoutCSS = css`
  * @returns {JSX.Element}
  */
 function Logout({ onClick }) {
-  const { userUid } = useUserUid();
+  const { userUid } = useUserInfo();
 
   const logoutComponent = !!userUid ? (
     <div onClick={onClick} css={navigationLogoutCSS}>

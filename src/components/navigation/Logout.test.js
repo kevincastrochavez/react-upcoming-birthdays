@@ -1,17 +1,17 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import Logout from './Logout';
-import { useUserUid } from '../BirthdayProvider';
+import { useUserInfo } from '../BirthdayProvider';
 
-// Mock useUserUid hook
+// Mock useUserInfo hook
 jest.mock('../BirthdayProvider', () => ({
-  useUserUid: jest.fn(),
+  useUserInfo: jest.fn(),
 }));
 
 describe('Logout', () => {
   test('renders logout button when user is logged in', () => {
     // Mock userUid to simulate logged-in state
-    useUserUid.mockReturnValue({ userUid: 'exampleUserId' });
+    useUserInfo.mockReturnValue({ userUid: 'exampleUserId' });
 
     const { getByText, getByAltText } = render(<Logout />);
 
@@ -24,7 +24,7 @@ describe('Logout', () => {
 
   test('does not render logout button when user is logged out', () => {
     // Mock userUid to simulate logged-out state
-    useUserUid.mockReturnValue({ userUid: null });
+    useUserInfo.mockReturnValue({ userUid: null });
 
     const { queryByText, queryByAltText } = render(<Logout />);
 
@@ -37,7 +37,7 @@ describe('Logout', () => {
 
   test('calls onClick handler when logout button is clicked', () => {
     // Mock userUid to simulate logged-in state
-    useUserUid.mockReturnValue({ userUid: 'exampleUserId' });
+    useUserInfo.mockReturnValue({ userUid: 'exampleUserId' });
 
     const onClick = jest.fn();
     const { getByText } = render(<Logout onClick={onClick} />);
