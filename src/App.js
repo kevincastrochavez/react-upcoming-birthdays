@@ -71,6 +71,7 @@ function App() {
             element={
               <Suspense fallback={<div>Loading Dashboard...</div>}>
                 <DashboardPage />
+                <BottomNav />
               </Suspense>
             }
           />
@@ -79,7 +80,8 @@ function App() {
             path='/allFriends'
             element={
               <Suspense fallback={<div>Loading All Friends...</div>}>
-                <AllFriendsPage />{' '}
+                <AllFriendsPage />
+                <BottomNav />
               </Suspense>
             }
           />
@@ -89,12 +91,12 @@ function App() {
             element={
               <Suspense fallback={<div>Loading Share...</div>}>
                 <ShareImportPage />
+                <BottomNav />
               </Suspense>
             }
           />
           {/* </Route> */}
         </Routes>
-        <BottomNav />
       </BrowserRouter>
     </BirthdayProvider>
   );
