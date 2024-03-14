@@ -16,6 +16,7 @@ export default function BirthdayProvider({ children }) {
   const [userUid, setUserUid] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
   const [searchText, setSearchText] = useDebouncedState('', 300);
+  const [isUserSharingList, setIsUserSharingList] = useState(true);
   const friendsList = fakeData;
 
   // Format birth date and attach it to each friend, in the long format and shortened format
@@ -62,6 +63,7 @@ export default function BirthdayProvider({ children }) {
         setUserUid,
         setIsSearching,
         setSearchText,
+        setIsUserSharingList,
       }}
     >
       <BirthdayContext.Provider
@@ -74,6 +76,7 @@ export default function BirthdayProvider({ children }) {
           spotlightFriend,
           nextFiveFriends,
           sortedBirthdaysByMonth,
+          isUserSharingList,
         }}
       >
         {children}
@@ -130,13 +133,13 @@ export function useSearch() {
 }
 
 /**
- * Returns the user uid
+ * Returns the user uid, if user is sharing list
  *
- * @returns { userUid }
+ * @returns { userUid, isUserSharingList }
  */
-export function useUserUid() {
-  const { userUid } = useBirthdayProvider('useUserUid');
-  return { userUid };
+export function useUserInfo() {
+  const { userUid, isUserSharingList } = useBirthdayProvider('useUserInfo');
+  return { userUid, isUserSharingList };
 }
 
 /**
@@ -151,13 +154,14 @@ export function useSetSearch() {
 }
 
 /**
- * Updates the user uid
+ * Updates the user uid, and if user is sharing list
  *
- * @returns { setUserUid }
+ * @returns { setUserUid, setIsUserSharingList }
  */
-export function useSetUserUid() {
-  const { setUserUid } = useSetBirthdayProvider('useSetUserUid');
-  return { setUserUid };
+export function useSetUserInfo() {
+  const { setUserUid, setIsUserSharingList } =
+    useSetBirthdayProvider('useSetUserInfo');
+  return { setUserUid, setIsUserSharingList };
 }
 
 /**
