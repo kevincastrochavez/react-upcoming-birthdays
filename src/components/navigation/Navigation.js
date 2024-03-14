@@ -10,7 +10,7 @@ const navigationCSS = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px;
+  padding: 16px 24px;
   background: #f9f9fa;
   /* box-shadow: 0px 13px 31px rgba(12, 20, 33, 0.04),
   0px 9.45547px 20.8947px rgba(12, 20, 33, 0.032375),
@@ -27,11 +27,11 @@ const navigationLogoCSS = css`
   gap: 20px;
 
   & img {
-    width: 48px;
+    width: 40px;
   }
 
   & p {
-    font-size: 24px;
+    font-size: 20px;
   }
 `;
 

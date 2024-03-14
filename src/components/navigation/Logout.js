@@ -10,11 +10,12 @@ const navigationLogoutCSS = css`
   gap: 8px;
 
   & img {
-    width: 30px;
+    width: 24px;
   }
 
   & p {
-    font-size: 20px;
+    font-size: 14px;
+    margin-top: 1px;
   }
 `;
 
