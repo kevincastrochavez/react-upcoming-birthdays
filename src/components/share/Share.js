@@ -69,6 +69,7 @@ const idWrapperCss = css`
 
   & p {
     padding: 8px;
+    font-size: 14px;
     overflow: hidden;
   }
 
