@@ -82,6 +82,10 @@ const idWrapperCss = css`
   }
 `;
 
+/**
+ * Displays the Share component
+ * @returns {JSX.Element}
+ */
 function Share() {
   const { isUserSharingList, userUid } = useUserInfo();
   const { setIsUserSharingList } = useSetUserInfo();
