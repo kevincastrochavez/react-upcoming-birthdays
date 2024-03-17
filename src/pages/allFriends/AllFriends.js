@@ -4,7 +4,11 @@ import { css } from '@emotion/react';
 import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import SearchFriend from '../../components/searchFriend/SearchFriend';
 import SearchResults from '../../components/searchResults/SearchResults';
-import { useFriends, useSearch } from '../../components/BirthdayProvider';
+import {
+  useFriends,
+  useSearch,
+  useSetSearch,
+} from '../../components/BirthdayProvider';
 import MonthFriends from '../../components/monthFriends/MonthFriends';
 
 const mainContainerCss = css`
@@ -25,12 +29,16 @@ const mainContainerCss = css`
  */
 function AllFriends() {
   const { isSearching } = useSearch();
+  const { setIsSearching } = useSetSearch();
   const { sortedBirthdaysByMonth } = useFriends();
 
   return (
     <main css={mainContainerCss}>
       <Breadcrumbs />
-      <SearchFriend />
+      <SearchFriend
+        onClick={() => setIsSearching(true)}
+        placeholder='Search for a Friend'
+      />
 
       {isSearching ? (
         <SearchResults />
