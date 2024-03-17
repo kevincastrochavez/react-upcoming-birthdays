@@ -17,6 +17,7 @@ export default function BirthdayProvider({ children }) {
   const [isSearching, setIsSearching] = useState(false);
   const [isIdSearching, setIsIdSearching] = useState(false);
   const [searchText, setSearchText] = useDebouncedState('', 300);
+  const [searchIdText, setSearchIdText] = useState('');
   const [isUserSharingList, setIsUserSharingList] = useState(true);
   const friendsList = fakeData;
 
@@ -67,6 +68,7 @@ export default function BirthdayProvider({ children }) {
         setSearchText,
         setIsUserSharingList,
         setIsIdSearching,
+        setSearchIdText,
       }}
     >
       <BirthdayContext.Provider
@@ -81,6 +83,7 @@ export default function BirthdayProvider({ children }) {
           sortedBirthdaysByMonth,
           isUserSharingList,
           isIdSearching,
+          searchIdText,
         }}
       >
         {children}
@@ -126,14 +129,25 @@ export function useFriends() {
 }
 
 /**
- * Returns the state for the isSearching, the search value, the filtered list of friends by search, and the isIdSearching state
+ * Returns the state for the isSearching, the search value, the filtered list of friends by search, the isIdSearching state, and the searchIdText for looking up a friend's list
  *
- * @returns { isSearching, searchText, isIdSearching }
+ * @returns { isSearching, searchText, isIdSearching, searchIdText }
  */
 export function useSearch() {
-  const { isSearching, searchText, friendsFilteredBySearch, isIdSearching } =
-    useBirthdayProvider('useSearch');
-  return { isSearching, searchText, friendsFilteredBySearch, isIdSearching };
+  const {
+    isSearching,
+    searchText,
+    friendsFilteredBySearch,
+    isIdSearching,
+    searchIdText,
+  } = useBirthdayProvider('useSearch');
+  return {
+    isSearching,
+    searchText,
+    friendsFilteredBySearch,
+    isIdSearching,
+    searchIdText,
+  };
 }
 
 /**
@@ -147,14 +161,14 @@ export function useUserInfo() {
 }
 
 /**
- * Updates the searching state for the params, the searching value for the filtering, and the id searching state
+ * Updates the searching state for the params, the searching value for the filtering, the id searching state, and the id search value for looking up a friend's list
  *
- * @returns { setIsSearching, setSearchText, setIsIdSearching }
+ * @returns { setIsSearching, setSearchText, setIsIdSearching, setSearchIdText }
  */
 export function useSetSearch() {
-  const { setIsSearching, setSearchText, setIsIdSearching } =
+  const { setIsSearching, setSearchText, setIsIdSearching, setSearchIdText } =
     useSetBirthdayProvider('useSetSearch');
-  return { setIsSearching, setSearchText, setIsIdSearching };
+  return { setIsSearching, setSearchText, setIsIdSearching, setSearchIdText };
 }
 
 /**
