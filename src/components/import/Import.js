@@ -3,7 +3,9 @@ import { css } from '@emotion/react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { useEffect, useState } from 'react';
 import { IconSearch } from '@tabler/icons-react';
-import { TextInput } from '@mantine/core';
+
+import SearchFriend from '../searchFriend/SearchFriend';
+import { useSetSearch } from '../BirthdayProvider';
 
 const shareContainerCss = css`
   background-color: #fff;
@@ -35,23 +37,13 @@ const idContainerCss = css`
   }
 `;
 
-const idWrapperCss = css`
-  & input {
-    padding-left: 16px;
-    font-size: 14px;
-  }
-
-  & svg {
-    margin-right: 16px;
-  }
-`;
-
 /**
  * Displays the Import component
  * @returns {JSX.Element}
  */
 function Import() {
   const [qrCodeData, setQrCodeData] = useState(null);
+  const { setIsIdSearching } = useSetSearch();
   const searchIcon = <IconSearch />;
   let scanner;
 
@@ -85,15 +77,12 @@ function Import() {
 
       <div css={idContainerCss}>
         <p>Or look up your friend’s list by the unique ID</p>
-        <div css={idWrapperCss}>
-          <TextInput
-            size={'sm'}
-            rightSection={searchIcon}
-            placeholder='KN998HQ8EHD8HDSDASH'
-            radius={30}
-          />
-          <img src={IconSearch} alt='' />
-        </div>
+
+        <SearchFriend
+          onClick={() => setIsIdSearching(true)}
+          placeholder='KN998HQ8EHD8HDSDASH'
+          icon={searchIcon}
+        />
       </div>
     </div>
   );
