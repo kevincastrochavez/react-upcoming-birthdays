@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
 import { useFriends } from '../../components/BirthdayProvider';
 import NextFriend from './NextFriend';
@@ -34,7 +35,9 @@ function NextFriends() {
 
       <div css={nextFiveInnerContainerCss}>
         {nextFiveFriends.map(({ friend }) => (
-          <NextFriend key={friend.birthdate} friend={friend} />
+          <Link key={friend.id} to={`/allFriends/${friend.id}`}>
+            <NextFriend friend={friend} />
+          </Link>
         ))}
       </div>
     </div>
