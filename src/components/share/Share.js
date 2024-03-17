@@ -14,6 +14,7 @@ import {
 import { Switch } from '../../componentsShadcn/ui/switch';
 import { useSetUserInfo, useUserInfo } from '../BirthdayProvider';
 import { Button } from '../../componentsShadcn/ui/button';
+import SearchFriend from '../searchFriend/SearchFriend';
 import Copy from './Copy';
 
 const shareContainerCss = css`
@@ -52,34 +53,6 @@ const idContainerCss = css`
     padding: 0 0 8px 4px;
     margin-top: 40px;
     font-size: 14px;
-  }
-`;
-
-const idWrapperCss = css`
-  background: #ffffff;
-  border-radius: 50px;
-  padding: 0 12px;
-  display: grid;
-  grid-template-columns: 80% 20%;
-  border: 1px solid lightgray;
-
-  &[is-disabled='true'] {
-    background-color: #f1f3f5;
-  }
-
-  & p {
-    padding: 8px;
-    font-size: 14px;
-    overflow: hidden;
-  }
-
-  & button {
-    align-self: center;
-    justify-self: center;
-
-    & svg {
-      width: 24px !important;
-    }
   }
 `;
 
@@ -127,13 +100,17 @@ function Share() {
 
       <div css={idContainerCss}>
         <p>Or share your unique ID:</p>
-        <div
-          css={idWrapperCss}
-          is-disabled={!isUserSharingList ? 'true' : 'false'}
-        >
-          <p>{listUrlToShare}</p>
-          <Copy disabled={!isUserSharingList} listUrlToShare={listUrlToShare} />
-        </div>
+
+        <SearchFriend
+          value={listUrlToShare}
+          disabled={!isUserSharingList}
+          icon={
+            <Copy
+              disabled={!isUserSharingList}
+              listUrlToShare={listUrlToShare}
+            />
+          }
+        />
       </div>
     </div>
   );
