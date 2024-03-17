@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { css } from '@emotion/react';
+import { IconSearch } from '@tabler/icons-react';
 
 import { useSetSearch } from '../../components/BirthdayProvider';
 
@@ -32,6 +33,7 @@ function Dashboard() {
     birthdate,
     firstName,
   } = spotlightFriend;
+  const searchIcon = <IconSearch />;
 
   return (
     <main css={mainContainerCss}>
@@ -39,6 +41,7 @@ function Dashboard() {
       <SearchFriend
         onClick={() => setIsSearching(true)}
         placeholder='Search for a Friend'
+        icon={searchIcon}
       />
       <SearchResults />
       <FriendInfo

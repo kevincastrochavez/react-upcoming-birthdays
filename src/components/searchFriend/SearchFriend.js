@@ -2,7 +2,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { TextInput } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
 
 const searchInputRightCss = css`
   & svg {
@@ -12,18 +11,17 @@ const searchInputRightCss = css`
 
 /**
  * Displays the search friend component
- * @param {Function} placeholder - text to display in search input
  * @param {String} onClick - function to call when search button is clicked
+ * @param {Function} placeholder - text to display in search input
+ * @param {Component} icon - icon to display in search input
  * @returns {JSX.Element}
  */
-function SearchFriend({ onClick, placeholder }) {
-  const searchIcon = <IconSearch />;
-
+function SearchFriend({ onClick, placeholder, icon }) {
   return (
     <TextInput
       css={searchInputRightCss}
       size={'md'}
-      rightSection={searchIcon}
+      rightSection={icon}
       placeholder={placeholder}
       radius={10}
       onClick={onClick}

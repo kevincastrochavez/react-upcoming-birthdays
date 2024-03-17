@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { IconSearch } from '@tabler/icons-react';
 
 import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import SearchFriend from '../../components/searchFriend/SearchFriend';
@@ -16,7 +17,7 @@ const mainContainerCss = css`
   margin-bottom: 60px;
 
   & > h1 {
-    margin-top: 60px;
+    margin-top: 40px;
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: 400;
@@ -31,6 +32,7 @@ function AllFriends() {
   const { isSearching } = useSearch();
   const { setIsSearching } = useSetSearch();
   const { sortedBirthdaysByMonth } = useFriends();
+  const searchIcon = <IconSearch />;
 
   return (
     <main css={mainContainerCss}>
@@ -38,6 +40,7 @@ function AllFriends() {
       <SearchFriend
         onClick={() => setIsSearching(true)}
         placeholder='Search for a Friend'
+        icon={searchIcon}
       />
 
       {isSearching ? (
