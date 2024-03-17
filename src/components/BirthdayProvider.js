@@ -15,6 +15,7 @@ const BirthdayUpdateContext = createContext({});
 export default function BirthdayProvider({ children }) {
   const [userUid, setUserUid] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
+  const [isIdSearching, setIsIdSearching] = useState(false);
   const [searchText, setSearchText] = useDebouncedState('', 300);
   const [isUserSharingList, setIsUserSharingList] = useState(true);
   const friendsList = fakeData;
@@ -65,6 +66,7 @@ export default function BirthdayProvider({ children }) {
         setIsSearching,
         setSearchText,
         setIsUserSharingList,
+        setIsIdSearching,
       }}
     >
       <BirthdayContext.Provider
@@ -78,6 +80,7 @@ export default function BirthdayProvider({ children }) {
           nextFiveFriends,
           sortedBirthdaysByMonth,
           isUserSharingList,
+          isIdSearching,
         }}
       >
         {children}
@@ -123,14 +126,14 @@ export function useFriends() {
 }
 
 /**
- * Returns the state for the isSearching, the search value, and the filtered list of friends by search
+ * Returns the state for the isSearching, the search value, the filtered list of friends by search, and the isIdSearching state
  *
- * @returns { isSearching, searchText }
+ * @returns { isSearching, searchText, isIdSearching }
  */
 export function useSearch() {
-  const { isSearching, searchText, friendsFilteredBySearch } =
+  const { isSearching, searchText, friendsFilteredBySearch, isIdSearching } =
     useBirthdayProvider('useSearch');
-  return { isSearching, searchText, friendsFilteredBySearch };
+  return { isSearching, searchText, friendsFilteredBySearch, isIdSearching };
 }
 
 /**
@@ -144,14 +147,14 @@ export function useUserInfo() {
 }
 
 /**
- * Updates the searching state for the params, the searching value for the filtering
+ * Updates the searching state for the params, the searching value for the filtering, and the id searching state
  *
- * @returns { setIsSearching, setSearchText }
+ * @returns { setIsSearching, setSearchText, setIsIdSearching }
  */
 export function useSetSearch() {
-  const { setIsSearching, setSearchText } =
+  const { setIsSearching, setSearchText, setIsIdSearching } =
     useSetBirthdayProvider('useSetSearch');
-  return { setIsSearching, setSearchText };
+  return { setIsSearching, setSearchText, setIsIdSearching };
 }
 
 /**
