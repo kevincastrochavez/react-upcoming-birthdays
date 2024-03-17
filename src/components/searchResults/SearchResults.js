@@ -1,27 +1,46 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { useSearch, useSetSearch } from '../BirthdayProvider';
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '../../componentsShadcn/ui/command';
+import { Link } from 'react-router-dom';
 
-import { useSearch } from '../BirthdayProvider';
-import MonthFriend from '../monthFriend/MonthFriend';
-
-const headingResultsCss = css`
-  margin-top: 60px;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: 400;
-`;
-
+/**
+ * Displays the ShareResults component, which displays the list of all friends according to user's search
+ * @returns {JSX.Element}
+ */
 function ShareResults() {
   const { friendsFilteredBySearch } = useSearch();
+  const { setIsSearching } = useSetSearch();
+  const { isSearching } = useSearch();
 
   return (
-    <>
-      <h1 css={headingResultsCss}>Friends Results</h1>
-
-      {friendsFilteredBySearch?.map((friend) => (
-        <MonthFriend {...friend} key={friend.birthdate} />
-      ))}
-    </>
+    <CommandDialog open={isSearching} onOpenChange={setIsSearching}>
+      <CommandInput placeholder="Type your friend's name..." />
+      <CommandList>
+        <CommandEmpty>No friends found.</CommandEmpty>
+        <CommandGroup heading='Results'>
+          {friendsFilteredBySearch?.map(
+            ({ imageUrl, formattedFullName, id }) => (
+              <Link to={`/allFriends/${id}`} key={id}>
+                <CommandItem>
+                  <img
+                    src={imageUrl}
+                    className='w-8 h-8 rounded-full mr-2'
+                    alt=''
+                  />
+                  <span>{formattedFullName}</span>
+                </CommandItem>
+              </Link>
+            )
+          )}
+        </CommandGroup>
+      </CommandList>
+    </CommandDialog>
   );
 }
 

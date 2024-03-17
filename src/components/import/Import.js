@@ -91,9 +91,6 @@ function Import() {
             rightSection={searchIcon}
             placeholder='KN998HQ8EHD8HDSDASH'
             radius={30}
-            // onFocus={onSearchInputFocus}
-            // onBlur={onSearchInputBlur}
-            // onChange={(event) => setSearchText(event.currentTarget.value)}
           />
           <img src={IconSearch} alt='' />
         </div>

@@ -1,25 +1,32 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
+import { css } from '@emotion/react';
 import { TextInput } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 
-import { useSetSearch } from '../BirthdayProvider';
+const searchInputRightCss = css`
+  & svg {
+    margin-right: 12px;
+  }
+`;
 
 /**
  * Displays the search friend component
+ * @param {Function} placeholder - text to display in search input
+ * @param {String} onClick - function to call when search button is clicked
  * @returns {JSX.Element}
  */
-function SearchFriend() {
-  const { setIsSearching } = useSetSearch();
+function SearchFriend({ onClick, placeholder }) {
   const searchIcon = <IconSearch />;
 
   return (
     <TextInput
+      css={searchInputRightCss}
       size={'md'}
-      leftSectionPointerEvents='none'
-      leftSection={searchIcon}
-      placeholder='Search for a Friend'
+      rightSection={searchIcon}
+      placeholder={placeholder}
       radius={10}
-      onClick={() => setIsSearching(true)}
+      onClick={onClick}
     />
   );
 }

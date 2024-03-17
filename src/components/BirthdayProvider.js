@@ -46,6 +46,7 @@ export default function BirthdayProvider({ children }) {
     friendsList[index].formattedFullName = formattedFullName;
   });
 
+  // TODO: Check if this is needed
   // Search logic for friends
   const friendsFilteredBySearch = friendsList?.filter((friend) =>
     friend.formattedFullName?.toLowerCase().includes(searchText.toLowerCase())

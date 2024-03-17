@@ -2,7 +2,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { useSearch } from '../../components/BirthdayProvider';
+import { useSetSearch } from '../../components/BirthdayProvider';
 
 import Breadcrumbs from './../../components/breadcrumbs/Breadcrumbs';
 import SearchFriend from '../../components/searchFriend/SearchFriend';
@@ -21,8 +21,8 @@ const mainContainerCss = css`
  * @returns {JSX.Element}
  */
 function Dashboard() {
-  const { isSearching } = useSearch();
   const { spotlightFriend } = useFriends();
+  const { setIsSearching } = useSetSearch();
   const {
     formattedFullName,
     imageUrl,
@@ -36,25 +36,23 @@ function Dashboard() {
   return (
     <main css={mainContainerCss}>
       <Breadcrumbs />
-      <SearchFriend />
-      {isSearching ? (
-        <SearchResults />
-      ) : (
-        <>
-          <FriendInfo
-            isSpotlight
-            firstName={firstName}
-            formattedFullName={formattedFullName}
-            imageUrl={imageUrl}
-            likesToCelebrate={likesToCelebrate}
-            favoriteColor={favoriteColor}
-            candyPreference={candyPreference}
-            birthdate={birthdate}
-          />
+      <SearchFriend
+        onClick={() => setIsSearching(true)}
+        placeholder='Search for a Friend'
+      />
+      <SearchResults />
+      <FriendInfo
+        isSpotlight
+        firstName={firstName}
+        formattedFullName={formattedFullName}
+        imageUrl={imageUrl}
+        likesToCelebrate={likesToCelebrate}
+        favoriteColor={favoriteColor}
+        candyPreference={candyPreference}
+        birthdate={birthdate}
+      />
 
-          <NextFriends />
-        </>
-      )}
+      <NextFriends />
     </main>
   );
 }

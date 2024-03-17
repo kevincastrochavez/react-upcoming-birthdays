@@ -6,6 +6,7 @@ const fakeData = [
     favoriteColor: 'Blue',
     likesToCelebrate: true,
     candyPreference: 'Sour',
+    id: 1,
   },
   {
     fullName: 'Johnathan Webber',
@@ -14,6 +15,7 @@ const fakeData = [
     favoriteColor: 'Blue',
     likesToCelebrate: true,
     candyPreference: 'Sour',
+    id: 2,
   },
   {
     fullName: 'Ryan James',
@@ -22,6 +24,7 @@ const fakeData = [
     favoriteColor: 'Blue',
     likesToCelebrate: true,
     candyPreference: 'Sour',
+    id: 3,
   },
   {
     fullName: 'Aaron James',
@@ -30,6 +33,7 @@ const fakeData = [
     favoriteColor: 'Blue',
     likesToCelebrate: true,
     candyPreference: 'Sour',
+    id: 4,
   },
   {
     fullName: 'Jane Smith',
@@ -38,6 +42,7 @@ const fakeData = [
     favoriteColor: 'Pink',
     likesToCelebrate: true,
     candyPreference: 'Sour',
+    id: 5,
   },
   {
     fullName: 'Michael Johnson',
@@ -46,6 +51,7 @@ const fakeData = [
     favoriteColor: 'Green',
     likesToCelebrate: false,
     candyPreference: 'Sour',
+    id: 6,
   },
   {
     fullName: 'Emily Brown',
@@ -54,6 +60,7 @@ const fakeData = [
     favoriteColor: 'Purple',
     likesToCelebrate: true,
     candyPreference: 'Sour',
+    id: 7,
   },
   {
     fullName: 'David Wilson',
@@ -62,6 +69,7 @@ const fakeData = [
     favoriteColor: 'Red',
     likesToCelebrate: true,
     candyPreference: 'Sour',
+    id: 8,
   },
   {
     fullName: 'Sophia Martinez',
@@ -70,6 +78,7 @@ const fakeData = [
     favoriteColor: 'Yellow',
     likesToCelebrate: false,
     candyPreference: 'Sour',
+    id: 9,
   },
   {
     fullName: 'William Taylor',
@@ -78,15 +87,17 @@ const fakeData = [
     favoriteColor: 'Orange',
     likesToCelebrate: true,
     candyPreference: 'Sweet',
+    id: 10,
   },
-  // {
-  //   fullName: 'Olivia Anderson',
-  //   imageUrl: 'https://via.placeholder.com/200',
-  //   birthdate: '1996-04-05',
-  //   favoriteColor: 'Turquoise',
-  //   likesToCelebrate: false,
-  //   candyPreference: 'Sweet',
-  // },
+  {
+    fullName: 'Olivia Anderson',
+    imageUrl: 'https://via.placeholder.com/200',
+    birthdate: '1996-04-05',
+    favoriteColor: 'Turquoise',
+    likesToCelebrate: false,
+    candyPreference: 'Sweet',
+    id: 11,
+  },
   {
     fullName: 'James Garcia',
     imageUrl: 'https://via.placeholder.com/200',
@@ -94,6 +105,7 @@ const fakeData = [
     favoriteColor: 'Black',
     likesToCelebrate: true,
     candyPreference: 'Sweet',
+    id: 12,
   },
   {
     fullName: 'Emma Hernandez',
@@ -102,6 +114,7 @@ const fakeData = [
     favoriteColor: 'White',
     likesToCelebrate: false,
     candyPreference: 'Sweet',
+    id: 13,
   },
   {
     fullName: 'Benjamin Walker',
@@ -110,6 +123,7 @@ const fakeData = [
     favoriteColor: 'Brown',
     likesToCelebrate: true,
     candyPreference: 'Sweet',
+    id: 14,
   },
   {
     fullName: 'Ava Perez',
@@ -118,6 +132,7 @@ const fakeData = [
     favoriteColor: 'Silver',
     likesToCelebrate: true,
     candyPreference: 'Sweet',
+    id: 15,
   },
   {
     fullName: 'Mason Lopez',
@@ -126,6 +141,7 @@ const fakeData = [
     favoriteColor: 'Gold',
     likesToCelebrate: false,
     candyPreference: 'Sweet',
+    id: 16,
   },
   {
     fullName: 'Chloe Hill',
@@ -134,6 +150,7 @@ const fakeData = [
     favoriteColor: 'Cyan',
     likesToCelebrate: true,
     candyPreference: 'Sweet',
+    id: 17,
   },
   {
     fullName: 'Ethan Scott',
@@ -142,6 +159,7 @@ const fakeData = [
     favoriteColor: 'Indigo',
     likesToCelebrate: false,
     candyPreference: 'Sweet',
+    id: 18,
   },
   {
     fullName: 'Isabella Green',
@@ -150,6 +168,7 @@ const fakeData = [
     favoriteColor: 'Magenta',
     likesToCelebrate: true,
     candyPreference: 'Sweet',
+    id: 19,
   },
   {
     fullName: 'Alexander King',
@@ -158,6 +177,7 @@ const fakeData = [
     favoriteColor: 'Maroon',
     likesToCelebrate: true,
     candyPreference: 'Sweet',
+    id: 20,
   },
   {
     fullName: 'Madison Baker',
@@ -166,6 +186,7 @@ const fakeData = [
     favoriteColor: 'Lavender',
     likesToCelebrate: false,
     candyPreference: 'Sweet',
+    id: 21,
   },
   {
     fullName: 'Liam Adams',
@@ -174,6 +195,7 @@ const fakeData = [
     favoriteColor: 'Teal',
     likesToCelebrate: true,
     candyPreference: 'Sweet',
+    id: 22,
   },
   {
     fullName: 'Charlotte Evans',
@@ -182,6 +204,7 @@ const fakeData = [
     favoriteColor: 'Violet',
     likesToCelebrate: false,
     candyPreference: 'Sweet',
+    id: 23,
   },
 ];
 
