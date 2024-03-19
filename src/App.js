@@ -8,6 +8,7 @@ import AddFriend from './components/addFriend/AddFriend';
 import PrivateRoutes from './helper/PrivateRoutes';
 import { Toaster } from './componentsShadcn/ui/toaster';
 import { db } from './firebase';
+import LoginSkeleton from './pages/login/LoginSkeleton';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -80,7 +81,7 @@ function App() {
           <Route
             path='/login'
             element={
-              <Suspense fallback={<div>Loading Login...</div>}>
+              <Suspense fallback={<LoginSkeleton />}>
                 <LoginPage />
               </Suspense>
             }

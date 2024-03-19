@@ -11,13 +11,11 @@ import guestLogo from './../../assets/guest.svg';
 
 const loginHeadingCss = css`
   margin-top: 30px;
-  font-size: 24px;
-  max-width: 270px;
-  font-weight: 400;
+  font-size: 20px;
 `;
 
 const buttonsContainerCss = css`
-  margin-top: 80px;
+  margin-top: 60px;
   display: grid;
   gap: 12px;
 `;
@@ -26,15 +24,11 @@ const buttonCss = css`
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px;
+  padding: 12px 16px;
   background-color: #1877f2;
   color: white;
   border-radius: 10px;
   cursor: pointer;
-
-  & p {
-    font-size: 20px;
-  }
 
   &[is-google='true'] {
     background-color: #fff;
