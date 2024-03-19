@@ -9,6 +9,7 @@ import PrivateRoutes from './helper/PrivateRoutes';
 import { Toaster } from './componentsShadcn/ui/toaster';
 import { db } from './firebase';
 import LoginSkeleton from './pages/login/LoginSkeleton';
+import DashboardSkeleton from './pages/dashboard/DashboardSkeleton';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -92,7 +93,7 @@ function App() {
             index
             path='/'
             element={
-              <Suspense fallback={<div>Loading Dashboard...</div>}>
+              <Suspense fallback={<DashboardSkeleton />}>
                 <DashboardPage />
                 <BottomNav />
               </Suspense>

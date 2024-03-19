@@ -29,7 +29,7 @@ const bottomNavContainerCss = css`
 `;
 
 const bottomNavTabCss = css`
-  padding: 16px;
+  padding: 12px;
   display: grid;
   gap: 8px;
 
