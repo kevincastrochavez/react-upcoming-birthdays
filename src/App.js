@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import BirthdayProvider from './components/BirthdayProvider';
 import BottomNav from './components/bottomNav/BottomNav';
+import AddFriend from './components/addFriend/AddFriend';
 import PrivateRoutes from './helper/PrivateRoutes';
+import { Toaster } from './componentsShadcn/ui/toaster';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -52,6 +54,8 @@ function App() {
   return (
     <BirthdayProvider>
       <Navigation />
+      <Toaster />
+      <AddFriend />
 
       <BrowserRouter>
         <Routes>
