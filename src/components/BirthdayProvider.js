@@ -20,6 +20,7 @@ export default function BirthdayProvider({ children }) {
   const [searchIdText, setSearchIdText] = useState('');
   const [isUserSharingList, setIsUserSharingList] = useState(true);
   const [isAddingFriend, setIsAddingFriend] = useState(false);
+  // const [friendsList, setFriendsList] = useState([]);
   const friendsList = fakeData;
 
   // Format birth date and attach it to each friend, in the long format and shortened format
@@ -65,6 +66,7 @@ export default function BirthdayProvider({ children }) {
     <BirthdayUpdateContext.Provider
       value={{
         setUserUid,
+        // setFriendsList,
         setIsSearching,
         setSearchText,
         setIsUserSharingList,
@@ -186,6 +188,18 @@ export function useSetAddingFriends() {
     setIsAddingFriend,
   };
 }
+
+// /**
+//  * Updates the state of the friends list
+//  *
+//  * @returns { setFriendsList }
+//  */
+// export function useSetFriends() {
+//   const { setFriendsList } = useSetBirthdayProvider('useSetAddingFriends');
+//   return {
+//     setFriendsList,
+//   };
+// }
 
 /**
  * Updates the searching state for the params, the searching value for the filtering, the id searching state, and the id search value for looking up a friend's list
@@ -313,7 +327,7 @@ function getShortenedBirthdate(birthdate) {
 function getSpotlightFriend(birthdate) {
   if (!birthdate) return;
 
-  return birthdate[0].friend;
+  return birthdate[0]?.friend || null;
 }
 
 /**

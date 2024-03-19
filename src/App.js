@@ -1,11 +1,13 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
 
-import BirthdayProvider from './components/BirthdayProvider';
+import { useSetFriends, useUserInfo } from './components/BirthdayProvider';
 import BottomNav from './components/bottomNav/BottomNav';
 import AddFriend from './components/addFriend/AddFriend';
 import PrivateRoutes from './helper/PrivateRoutes';
 import { Toaster } from './componentsShadcn/ui/toaster';
+import { db } from './firebase';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -51,8 +53,24 @@ const ShareImportPage = lazy(() =>
 );
 
 function App() {
+  // const { userUid } = useUserInfo();
+  // const { setFriendsList } = useSetFriends();
+
+  // const getFriendslist = async (userUid) => {
+  //   const friendsList = [];
+  //   const querySnapshot = await getDocs(collection(db, userUid));
+  //   querySnapshot.forEach((doc) => {
+  //     friendsList.push(doc.data());
+  //   });
+  //   setFriendsList(friendsList);
+  // };
+
+  // if (userUid) {
+  //   getFriendslist(userUid);
+  // }
+
   return (
-    <BirthdayProvider>
+    <>
       <Navigation />
       <Toaster />
       <AddFriend />
@@ -102,7 +120,7 @@ function App() {
           {/* </Route> */}
         </Routes>
       </BrowserRouter>
-    </BirthdayProvider>
+    </>
   );
 }
 
