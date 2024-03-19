@@ -10,6 +10,7 @@ import { Toaster } from './componentsShadcn/ui/toaster';
 import { db } from './firebase';
 import LoginSkeleton from './pages/login/LoginSkeleton';
 import DashboardSkeleton from './pages/dashboard/DashboardSkeleton';
+import AllFriendsSkeleton from './pages/allFriends/AllFriendsSkeleton';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -94,8 +95,7 @@ function App() {
             path='/'
             element={
               <Suspense fallback={<DashboardSkeleton />}>
-                {/* <DashboardPage /> */}
-                <DashboardSkeleton />
+                <DashboardPage />
                 <BottomNav />
               </Suspense>
             }
@@ -104,7 +104,7 @@ function App() {
           <Route
             path='/allFriends'
             element={
-              <Suspense fallback={<div>Loading All Friends...</div>}>
+              <Suspense fallback={<AllFriendsSkeleton />}>
                 <AllFriendsPage />
                 <BottomNav />
               </Suspense>
