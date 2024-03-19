@@ -43,13 +43,11 @@ function DialogImport() {
           </DialogDescription>
         </DialogHeader>
         <div className='grid gap-4 py-4'>
-          <div className='grid grid-cols-6 items-center gap-4'>
-            <Label htmlFor='friendId' className='text-right'>
-              ID
-            </Label>
+          <div className='grid grid-rows-2 items-center'>
+            <Label htmlFor='friendId'>Friend's ID</Label>
             <Input
               id='friendId'
-              className='col-span-5'
+              className='row-span-1'
               onChange={(e) => setSearchIdText(e.target.value)}
             />
           </div>
