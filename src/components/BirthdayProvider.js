@@ -19,6 +19,7 @@ export default function BirthdayProvider({ children }) {
   const [searchText, setSearchText] = useDebouncedState('', 300);
   const [searchIdText, setSearchIdText] = useState('');
   const [isUserSharingList, setIsUserSharingList] = useState(true);
+  const [isAddingFriend, setIsAddingFriend] = useState(false);
   const friendsList = fakeData;
 
   // Format birth date and attach it to each friend, in the long format and shortened format
@@ -69,6 +70,7 @@ export default function BirthdayProvider({ children }) {
         setIsUserSharingList,
         setIsIdSearching,
         setSearchIdText,
+        setIsAddingFriend,
       }}
     >
       <BirthdayContext.Provider
@@ -84,6 +86,7 @@ export default function BirthdayProvider({ children }) {
           isUserSharingList,
           isIdSearching,
           searchIdText,
+          isAddingFriend,
         }}
       >
         {children}
@@ -107,6 +110,18 @@ const monthNames = [
   'November',
   'December',
 ];
+
+/**
+ * Returns the state of if the user is adding a friend
+ *
+ * @returns { isAddingFriend }
+ */
+export function useAddingFriends() {
+  const { isAddingFriend } = useBirthdayProvider('useAddingFriends');
+  return {
+    isAddingFriend,
+  };
+}
 
 /**
  * Returns the list of friends on your account, the spotlight friend, the next 5 closest friends, and the list of friends sorted by month
@@ -158,6 +173,18 @@ export function useSearch() {
 export function useUserInfo() {
   const { userUid, isUserSharingList } = useBirthdayProvider('useUserInfo');
   return { userUid, isUserSharingList };
+}
+
+/**
+ * Updates the state of if the user is adding a friend
+ *
+ * @returns { setIsAddingFriend }
+ */
+export function useSetAddingFriends() {
+  const { setIsAddingFriend } = useSetBirthdayProvider('useSetAddingFriends');
+  return {
+    setIsAddingFriend,
+  };
 }
 
 /**
