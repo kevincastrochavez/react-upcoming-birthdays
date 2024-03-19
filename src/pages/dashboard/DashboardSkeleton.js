@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { Skeleton, Space } from '@mantine/core';
 
 import FriendInfoSkeleton from '../../components/friendInfo/FriendInfoSkeleton';
+import TopSearchSkeleton from './TopSearchSkeleton';
 
 const skeletonContainerCss = css`
   padding: 0 24px 24px 24px;
@@ -36,9 +37,7 @@ function DashboardSkeleton() {
 
   return (
     <div css={skeletonContainerCss}>
-      <Skeleton width={60} height={18} mb='md' />
-      <Skeleton height={42} mb='xl' />
-      <Space h='xl' />
+      <TopSearchSkeleton />
       <FriendInfoSkeleton isSpotlight={true} />
       <Space h='xl' />
       <Skeleton

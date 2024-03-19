@@ -94,7 +94,8 @@ function App() {
             path='/'
             element={
               <Suspense fallback={<DashboardSkeleton />}>
-                <DashboardPage />
+                {/* <DashboardPage /> */}
+                <DashboardSkeleton />
                 <BottomNav />
               </Suspense>
             }
