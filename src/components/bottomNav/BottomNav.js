@@ -1,10 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Tabs, rem } from '@mantine/core';
-import { IconUsersGroup, IconQrcode, IconHome } from '@tabler/icons-react';
+import {
+  IconUsersGroup,
+  IconQrcode,
+  IconHome,
+  IconUserPlus,
+} from '@tabler/icons-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ActionIcon } from '@mantine/core';
 
 import classes from './BottomNav.module.css';
+import { useSetAddingFriends } from '../BirthdayProvider';
 
 const bottomNavContainerCss = css`
   position: fixed;
@@ -35,6 +42,12 @@ const bottomNavTabCss = css`
   }
 `;
 
+const addFriendCss = css`
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+`;
+
 /**
  * Displays the BottomNav component
  * @returns {JSX.Element}
@@ -42,46 +55,62 @@ const bottomNavTabCss = css`
 function BottomNav() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { setIsAddingFriend } = useSetAddingFriends();
 
   return (
-    <Tabs
-      variant='unstyled'
-      defaultValue='settings'
-      css={bottomNavContainerCss}
-      classNames={classes}
-    >
-      <Tabs.List grow>
-        <Tabs.Tab
-          css={bottomNavTabCss}
-          value='Dashboard'
-          leftSection={<IconHome />}
-          onClick={() => navigate('/')}
-          is-tab-active={location.pathname === '/' ? 'true' : 'false'}
-        >
-          Dashboard
-        </Tabs.Tab>
-        <Tabs.Tab
-          css={bottomNavTabCss}
-          value='All Friends'
-          leftSection={<IconUsersGroup />}
-          onClick={() => navigate('/allFriends')}
-          is-tab-active={location.pathname === '/allFriends' ? 'true' : 'false'}
-        >
-          All Friends
-        </Tabs.Tab>
-        <Tabs.Tab
-          css={bottomNavTabCss}
-          value='Share/Import'
-          leftSection={<IconQrcode />}
-          onClick={() => navigate('/shareImport')}
-          is-tab-active={
-            location.pathname === '/shareImport' ? 'true' : 'false'
-          }
-        >
-          Share/Import
-        </Tabs.Tab>
-      </Tabs.List>
-    </Tabs>
+    <>
+      <Tabs
+        variant='unstyled'
+        defaultValue='settings'
+        css={bottomNavContainerCss}
+        classNames={classes}
+      >
+        <Tabs.List grow>
+          <Tabs.Tab
+            css={bottomNavTabCss}
+            value='Dashboard'
+            leftSection={<IconHome />}
+            onClick={() => navigate('/')}
+            is-tab-active={location.pathname === '/' ? 'true' : 'false'}
+          >
+            Dashboard
+          </Tabs.Tab>
+          <Tabs.Tab
+            css={bottomNavTabCss}
+            value='All Friends'
+            leftSection={<IconUsersGroup />}
+            onClick={() => navigate('/allFriends')}
+            is-tab-active={
+              location.pathname === '/allFriends' ? 'true' : 'false'
+            }
+          >
+            All Friends
+          </Tabs.Tab>
+          <Tabs.Tab
+            css={bottomNavTabCss}
+            value='Share/Import'
+            leftSection={<IconQrcode />}
+            onClick={() => navigate('/shareImport')}
+            is-tab-active={
+              location.pathname === '/shareImport' ? 'true' : 'false'
+            }
+          >
+            Share/Import
+          </Tabs.Tab>
+        </Tabs.List>
+      </Tabs>
+
+      <ActionIcon
+        css={addFriendCss}
+        variant='filled'
+        size='xl'
+        radius='xl'
+        aria-label='Settings'
+        onClick={() => setIsAddingFriend(true)}
+      >
+        <IconUserPlus style={{ width: '70%', height: '70%' }} stroke={1.5} />
+      </ActionIcon>
+    </>
   );
 }
 
