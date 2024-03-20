@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { useFriends } from '../../components/BirthdayProvider';
 import NextFriend from './NextFriend';
+import NextFriendEmpty from './NextFriendEmpty';
 
 const nextFiveContainerCss = css`
   margin-top: 60px;
@@ -26,8 +27,15 @@ const nextFiveInnerContainerCss = css`
   }
 `;
 
+/**
+ * Displays the NextFriends component, which displays the next 5 friends in the list
+ * @returns {JSX.Element}
+ */
 function NextFriends() {
   const { nextFiveFriends } = useFriends();
+  const maximumNextFiveFriends = 5;
+  const emptyNextFriendSlots = maximumNextFiveFriends - nextFiveFriends.length;
+  const emptyNextFriendSlotsArray = Array(emptyNextFriendSlots).fill(1);
 
   return (
     <div css={nextFiveContainerCss}>
@@ -38,6 +46,9 @@ function NextFriends() {
           <Link key={friend.id} to={`/allFriends/${friend.id}`}>
             <NextFriend friend={friend} />
           </Link>
+        ))}
+        {emptyNextFriendSlotsArray.map(() => (
+          <NextFriendEmpty />
         ))}
       </div>
     </div>
