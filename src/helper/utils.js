@@ -4,6 +4,8 @@
  * @returns {{Object, Boolean}} - number of days until the friend's birthday and whether the friend's birthday is today
  */
 function daysUntilBirthday(birthdate) {
+  if (!birthdate) return {};
+
   // Split the birthdate into year, month, and day components
   const [year, month, day] = birthdate?.split('-').map(Number);
 
