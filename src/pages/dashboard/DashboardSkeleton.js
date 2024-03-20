@@ -50,7 +50,7 @@ function DashboardSkeleton() {
 
       <div css={skeletonNextFiveWrapperCss}>
         {friendsCount?.map((friend) => (
-          <Skeleton width={160} height={80} />
+          <Skeleton key={friend} width={160} height={80} />
         ))}
       </div>
     </div>
