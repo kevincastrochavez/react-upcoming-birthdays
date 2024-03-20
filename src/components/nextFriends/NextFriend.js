@@ -41,6 +41,13 @@ const nextFriendBottomCss = css`
   }
 `;
 
+/**
+ * Displays the NextFriend component which shows your friend's name and birthday, along with a picture
+ * @param {{String}} firstName - first name of the friend
+ * @param {{String}} imageUrl - image url for such friend
+ * @param {{String}} birthdate - birthdate of the friend
+ * @returns {JSX} the NextFriend component
+ */
 function NextFriend({ friend: { firstName, imageUrl, birthdate } }) {
   const { daysToBirthday } = daysUntilBirthday(birthdate);
 
