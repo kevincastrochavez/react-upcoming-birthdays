@@ -11,6 +11,7 @@ import { db } from './firebase';
 import LoginSkeleton from './pages/login/LoginSkeleton';
 import DashboardSkeleton from './pages/dashboard/DashboardSkeleton';
 import AllFriendsSkeleton from './pages/allFriends/AllFriendsSkeleton';
+import ShareImportSkeleton from './pages/shareImport/ShareImportSkeleton';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -114,7 +115,7 @@ function App() {
           <Route
             path='/shareImport'
             element={
-              <Suspense fallback={<div>Loading Share...</div>}>
+              <Suspense fallback={<ShareImportSkeleton />}>
                 <ShareImportPage />
                 <BottomNav />
               </Suspense>

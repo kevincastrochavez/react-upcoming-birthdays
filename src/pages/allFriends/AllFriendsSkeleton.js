@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Skeleton, Space } from '@mantine/core';
+import { Skeleton } from '@mantine/core';
 
 import TopSearchSkeleton from '../dashboard/TopSearchSkeleton';
 
