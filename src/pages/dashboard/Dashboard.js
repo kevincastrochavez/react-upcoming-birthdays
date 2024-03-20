@@ -24,15 +24,6 @@ const mainContainerCss = css`
 function Dashboard() {
   const { spotlightFriend } = useFriends();
   const { setIsSearching } = useSetSearch();
-  const {
-    formattedFullName,
-    imageUrl,
-    likesToCelebrate,
-    favoriteColor,
-    candyPreference,
-    birthdate,
-    firstName,
-  } = spotlightFriend;
   const searchIcon = <IconSearch />;
 
   return (
@@ -44,16 +35,7 @@ function Dashboard() {
         icon={searchIcon}
       />
       <SearchResults />
-      <FriendInfo
-        isSpotlight
-        firstName={firstName}
-        formattedFullName={formattedFullName}
-        imageUrl={imageUrl}
-        likesToCelebrate={likesToCelebrate}
-        favoriteColor={favoriteColor}
-        candyPreference={candyPreference}
-        birthdate={birthdate}
-      />
+      <FriendInfo isSpotlight {...spotlightFriend} />
 
       <NextFriends />
     </main>
