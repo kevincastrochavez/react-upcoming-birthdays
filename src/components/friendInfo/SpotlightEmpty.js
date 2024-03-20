@@ -27,7 +27,7 @@ const friendContainerCss = css`
     grid-row: 2;
     width: fit-content;
     justify-self: end;
-    margin-top: 20px;
+    margin-top: 40px;
   }
 `;
 
@@ -45,7 +45,7 @@ function SpotlightEmpty() {
         onClick={() => setIsAddingFriend(true)}
         className='col-span-1 col-start-3'
       >
-        <PlusIcon className='mr-2 h-5 w-5' /> Add Friend
+        <PlusIcon className='mr-2 h-5 w-5' /> Add your first Friend
       </Button>
     </div>
   );
