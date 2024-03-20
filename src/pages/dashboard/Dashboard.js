@@ -11,6 +11,7 @@ import SearchResults from '../../components/searchResults/SearchResults';
 import { FriendInfo } from '../../components/friendInfo/FriendInfo';
 import { useFriends } from '../../components/BirthdayProvider';
 import NextFriends from '../../components/nextFriends/NextFriends';
+import SpotlightEmpty from '../../components/friendInfo/SpotlightEmpty';
 
 const mainContainerCss = css`
   padding: 12px 24px 24px 24px;
@@ -35,7 +36,11 @@ function Dashboard() {
         icon={searchIcon}
       />
       <SearchResults />
-      <FriendInfo isSpotlight {...spotlightFriend} />
+      {spotlightFriend.fullName ? (
+        <FriendInfo isSpotlight {...spotlightFriend} />
+      ) : (
+        <SpotlightEmpty />
+      )}
 
       <NextFriends />
     </main>
