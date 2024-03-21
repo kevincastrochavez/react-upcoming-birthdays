@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '@mantine/dates/styles.css';
 
 * {
   margin: 0;
