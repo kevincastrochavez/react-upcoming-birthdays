@@ -92,38 +92,38 @@ function App() {
             }
           />
 
-          {/* <Route element={<PrivateRoutes />}> */}
-          <Route
-            index
-            path='/'
-            element={
-              <Suspense fallback={<DashboardSkeleton />}>
-                <DashboardPage />
-                <BottomNav />
-              </Suspense>
-            }
-          />
+          <Route element={<PrivateRoutes />}>
+            <Route
+              index
+              path='/'
+              element={
+                <Suspense fallback={<DashboardSkeleton />}>
+                  <DashboardPage />
+                  <BottomNav />
+                </Suspense>
+              }
+            />
 
-          <Route
-            path='/allFriends'
-            element={
-              <Suspense fallback={<AllFriendsSkeleton />}>
-                <AllFriendsPage />
-                <BottomNav />
-              </Suspense>
-            }
-          />
+            <Route
+              path='/allFriends'
+              element={
+                <Suspense fallback={<AllFriendsSkeleton />}>
+                  <AllFriendsPage />
+                  <BottomNav />
+                </Suspense>
+              }
+            />
 
-          <Route
-            path='/shareImport'
-            element={
-              <Suspense fallback={<ShareImportSkeleton />}>
-                <ShareImportPage />
-                <BottomNav />
-              </Suspense>
-            }
-          />
-          {/* </Route> */}
+            <Route
+              path='/shareImport'
+              element={
+                <Suspense fallback={<ShareImportSkeleton />}>
+                  <ShareImportPage />
+                  <BottomNav />
+                </Suspense>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
