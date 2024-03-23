@@ -8,7 +8,6 @@ const BirthdayUpdateContext = createContext({});
 
 /**
  *  Provides whole application with information about the user
- *
  * @param {[React.ReactNode]|React.ReactNode} children - React children
  * @returns {JSX.Element}
  */
@@ -20,8 +19,7 @@ export default function BirthdayProvider({ children }) {
   const [searchIdText, setSearchIdText] = useState('');
   const [isUserSharingList, setIsUserSharingList] = useState(true);
   const [isAddingFriend, setIsAddingFriend] = useState(false);
-  // const [friendsList, setFriendsList] = useState([]);
-  const friendsList = fakeData;
+  const [friendsList, setFriendsList] = useState([]);
 
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
@@ -66,7 +64,7 @@ export default function BirthdayProvider({ children }) {
     <BirthdayUpdateContext.Provider
       value={{
         setUserUid,
-        // setFriendsList,
+        setFriendsList,
         setIsSearching,
         setSearchText,
         setIsUserSharingList,
@@ -189,17 +187,17 @@ export function useSetAddingFriends() {
   };
 }
 
-// /**
-//  * Updates the state of the friends list
-//  *
-//  * @returns { setFriendsList }
-//  */
-// export function useSetFriends() {
-//   const { setFriendsList } = useSetBirthdayProvider('useSetAddingFriends');
-//   return {
-//     setFriendsList,
-//   };
-// }
+/**
+ * Updates the state of the friends list
+ *
+ * @returns { setFriendsList }
+ */
+export function useSetFriends() {
+  const { setFriendsList } = useSetBirthdayProvider('useSetAddingFriends');
+  return {
+    setFriendsList,
+  };
+}
 
 /**
  * Updates the searching state for the params, the searching value for the filtering, the id searching state, and the id search value for looking up a friend's list
@@ -230,6 +228,20 @@ export function useSetUserInfo() {
  */
 function useBirthdayProvider(functionName) {
   const data = useContext(BirthdayContext);
+  if (!data)
+    throw new Error(
+      `${functionName} must be used within a component wrapped by BirthdayProvider.`
+    );
+  return data;
+}
+
+/**
+ * Enables making changes to the BirthdayContext (using the BirthdayUpdateContext)
+ * @param {String} functionName - just for using in error reporting
+ * @returns {{}}
+ */
+function useSetBirthdayProvider(functionName) {
+  const data = useContext(BirthdayUpdateContext);
   if (!data)
     throw new Error(
       `${functionName} must be used within a component wrapped by BirthdayProvider.`
@@ -325,7 +337,7 @@ function getShortenedBirthdate(birthdate) {
  * @returns {Object} friend with the closest birthday
  */
 function getSpotlightFriend(birthdate) {
-  if (!birthdate) return;
+  if (!birthdate) return {};
 
   return birthdate[0]?.friend || null;
 }
@@ -336,23 +348,9 @@ function getSpotlightFriend(birthdate) {
  * @returns {[Object]} friends with the next 5 closest birthdays besides the spotlight friend
  */
 function getNextFiveFriends(birthdate) {
-  if (!birthdate) return;
+  if (!birthdate) return [];
 
   return birthdate.slice(1, 6);
-}
-
-/**
- * Enables making changes to the BirthdayContext (using the BirthdayUpdateContext)
- * @param {String} functionName - just for using in error reporting
- * @returns {{}}
- */
-function useSetBirthdayProvider(functionName) {
-  const data = useContext(BirthdayUpdateContext);
-  if (!data)
-    throw new Error(
-      `${functionName} must be used within a component wrapped by BirthdayProvider.`
-    );
-  return data;
 }
 
 /**
@@ -361,6 +359,8 @@ function useSetBirthdayProvider(functionName) {
  * @returns {Object} friend with the closest birthday
  */
 function sortBirthdaysByClosest(friends) {
+  if (!friends) return {};
+
   const today = new Date();
   const todayYear = today.getFullYear();
   const todayMonth = today.getMonth();
