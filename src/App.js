@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 
@@ -57,21 +57,23 @@ const ShareImportPage = lazy(() =>
 );
 
 function App() {
-  // const { userUid } = useUserInfo();
-  // const { setFriendsList } = useSetFriends();
+  const { userUid } = useUserInfo();
+  const { setFriendsList } = useSetFriends();
 
-  // const getFriendslist = async (userUid) => {
-  //   const friendsList = [];
-  //   const querySnapshot = await getDocs(collection(db, userUid));
-  //   querySnapshot.forEach((doc) => {
-  //     friendsList.push(doc.data());
-  //   });
-  //   setFriendsList(friendsList);
-  // };
+  const getFriendslist = async (userUid) => {
+    const friendsList = [];
+    const querySnapshot = await getDocs(collection(db, userUid));
+    querySnapshot.forEach((doc) => {
+      friendsList.push(doc.data());
+    });
+    setFriendsList(friendsList);
+  };
 
-  // if (userUid) {
-  //   getFriendslist(userUid);
-  // }
+  useEffect(() => {
+    if (userUid) {
+      getFriendslist(userUid);
+    }
+  }, [userUid]);
 
   return (
     <>
