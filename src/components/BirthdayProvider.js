@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { useDebouncedState } from '@mantine/hooks';
 
-import fakeData from '../data/fakeData';
+import { getUserUid } from '../helper/utils';
 
 const BirthdayContext = createContext({});
 const BirthdayUpdateContext = createContext({});
@@ -12,7 +12,8 @@ const BirthdayUpdateContext = createContext({});
  * @returns {JSX.Element}
  */
 export default function BirthdayProvider({ children }) {
-  const [userUid, setUserUid] = useState(null);
+  const existentUserUid = getUserUid('userUid');
+  const [userUid, setUserUid] = useState(existentUserUid);
   const [isSearching, setIsSearching] = useState(false);
   const [isIdSearching, setIsIdSearching] = useState(false);
   const [searchText, setSearchText] = useDebouncedState('', 300);

@@ -8,6 +8,7 @@ import { useSetUserInfo } from '../../components/BirthdayProvider';
 
 import googleLogo from './../../assets/google.svg';
 import guestLogo from './../../assets/guest.svg';
+import { saveUserUid } from '../../helper/utils';
 
 const loginHeadingCss = css`
   margin-top: 30px;
@@ -56,6 +57,7 @@ function LoginBody() {
         const { from } = location.state || { from: { pathname: '/' } };
         const uid = response.user.uid;
         setUserUid(uid);
+        saveUserUid('userUid', uid);
         navigate(from);
       })
       .catch((error) => {

@@ -31,4 +31,32 @@ function daysUntilBirthday(birthdate) {
   };
 }
 
-export { daysUntilBirthday };
+/**
+ * Gets the user ID in localStorage, if any
+ * @param {String} key - The key used to retrieve the existing uid from localStorage, if any
+ * @return {String} - User ID
+ */
+function getUserUid(key) {
+  return localStorage.getItem(key);
+}
+
+/**
+ * Removes the user ID in localStorage
+ * @param {String} key - The key used to retrieve the existing uid from localStorage, if any
+ * @return {void} - This function does not return a value.
+ */
+function removeUserUid(key) {
+  return localStorage.removeItem(key);
+}
+
+/**
+ * Sets the user ID in localStorage
+ * @param {String} key - The key used to retrieve the existing uid from localStorage, if any
+ * @param {String} udi - User ID
+ * @return {void} - This function does not return a value.
+ */
+function saveUserUid(key, udi) {
+  return localStorage.setItem(key, udi);
+}
+
+export { daysUntilBirthday, getUserUid, removeUserUid, saveUserUid };

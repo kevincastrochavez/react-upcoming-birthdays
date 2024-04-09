@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { useSetUserInfo } from '../BirthdayProvider';
 import Logout from './Logout';
+import { removeUserUid } from '../../helper/utils';
 
 const navigationCSS = css`
   display: flex;
@@ -46,6 +47,7 @@ function Navigation() {
     signOut(auth)
       .then(() => {
         setUserUid(null);
+        removeUserUid('userUid');
       })
       .catch((error) => {
         console.log(error);
