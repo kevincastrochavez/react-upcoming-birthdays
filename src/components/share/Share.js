@@ -91,12 +91,14 @@ function Share() {
         </FormItem>
       </Form>
 
-      <div css={qrContainerCss}>
-        {userUid && <QRCodeSVG value={userUid} />}
-        <Button className='rounded-full' variant='outline' size='icon'>
-          <Share2Icon className='h-4 w-4' />
-        </Button>
-      </div>
+      {isUserSharingList && (
+        <div css={qrContainerCss}>
+          {userUid && <QRCodeSVG value={userUid} />}
+          <Button className='rounded-full' variant='outline' size='icon'>
+            <Share2Icon className='h-4 w-4' />
+          </Button>
+        </div>
+      )}
 
       <div css={idContainerCss}>
         <p>Or share your unique ID:</p>
