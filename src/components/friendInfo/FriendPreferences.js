@@ -11,6 +11,10 @@ const friendInfoCss = css`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+
+  & p {
+    text-transform: capitalize;
+  }
 `;
 
 const friendPreferenceCss = css`

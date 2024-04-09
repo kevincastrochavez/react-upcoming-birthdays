@@ -42,12 +42,14 @@ function AddForm() {
   const [isUploading, setIsUploading] = useState(false);
   const { setIsAddingFriend } = useSetAddingFriends();
   const pictureRef = ref(storage, uniqueId);
+  const placeHolderImage =
+    'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=228a8258-d775-45bd-acd2-a77d1577143a';
 
   // Regex functions for validations
   const fullNameRegex = /^[a-zA-Z]{3,20}\s[a-zA-Z]{3,20}$/;
   const colorRegex = /^[a-zA-Z]{3,12}$/;
-  const likesToCelebrateRegex = /^(yes|no)$/;
-  const candyRegex = /^(sweet|sour)$/;
+  const likesToCelebrateRegex = /^(Yes|No)$/;
+  const candyRegex = /^(Sweet|Sour)$/;
 
   const form = useForm({
     initialValues: {
@@ -87,30 +89,34 @@ function AddForm() {
     const birthdayFull = `${birthdayYear}-${birthdayMonth + 1}-${birthdayDay}`;
     setIsUploading(true);
     let pictureUrl = '';
-    // Upload picture to firebase and get url to attach it to friend
-    await uploadBytes(pictureRef, pictureFile)
-      .then(async (snapshot) => {
-        await getDownloadURL(ref(storage, uniqueId))
-          .then((url) => {
-            console.log('Image uploaded');
-            pictureUrl = url;
-          })
-          .catch((error) => {
-            console.log(error);
-            throw new Error(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-        throw new Error(error);
-      });
+
+    if (pictureFile) {
+      // Upload picture to firebase and get url to attach it to friend
+      await uploadBytes(pictureRef, pictureFile)
+        .then(async (snapshot) => {
+          await getDownloadURL(ref(storage, uniqueId))
+            .then((url) => {
+              console.log('Image uploaded');
+              pictureUrl = url;
+            })
+            .catch((error) => {
+              console.log(error);
+              throw new Error(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(error);
+        });
+    }
+
     // Add friend to firestore collection for the user
     await setDoc(doc(db, userUid, uniqueId), {
       fullName,
       favoriteColor: favoriteColor.toLowerCase(),
       likesToCelebrate,
       candyPreference,
-      imageUrl: pictureUrl,
+      imageUrl: pictureUrl || placeHolderImage,
       birthdate: birthdayFull,
     })
       .then((result) => {
