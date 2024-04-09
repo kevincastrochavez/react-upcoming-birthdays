@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import FriendPreferences from './FriendPreferences';
 import { daysUntilBirthday } from '../../helper/utils';
@@ -27,14 +29,17 @@ const friendContainerCss = css`
     0px 0.56875px 1.79219px rgba(12, 20, 33, 0.013), inset 0px 2px 1px #ffffff;
   max-width: 400px;
   margin: 0 auto;
-`;
 
-const friendImgCss = css`
-  width: 100%;
-  border-radius: 50%;
-  grid-column: 1/3;
-  grid-row: 1/2;
-  transform: translateY(calc(-50% - 20px));
+  & > span {
+    grid-column: 1/3;
+    grid-row: 1/2;
+
+    & img {
+      width: 100%;
+      border-radius: 50%;
+      transform: translateY(calc(-50% - 20px));
+    }
+  }
 `;
 
 const friendNameCss = css`
@@ -87,7 +92,8 @@ function FriendInfo({
     <>
       {isSpotlight && <p css={spotlightHeadingCss}>Closest Birthday </p>}
       <div css={friendContainerCss}>
-        <img src={imageUrl} alt='' css={friendImgCss} />
+        <LazyLoadImage src={imageUrl} alt={''} width={'100%'} effect='blur' />
+        {/* <img src={imageUrl} alt=''  /> */}
         <h2 css={friendNameCss}>{formattedFullName}</h2>
         {isBirthdayToday ? (
           <h1 css={friendBirthdateCss}>
