@@ -17,13 +17,23 @@ function daysUntilBirthday(birthdate) {
   const todayObj = new Date(todayYear, todayMonth, todayDay);
 
   // Create a Date object for the birthdate
-  const birthdayDate = new Date(todayYear, month - 1, day);
+  const birthdayDateThisYear = new Date(todayYear, month - 1, day);
+  const birthdayDateNextYear = new Date(todayYear + 1, month - 1, day);
 
   // Calculate the difference in milliseconds between today and the next birthday
-  const difference = birthdayDate.getTime() - todayObj.getTime();
-  // Convert milliseconds to days
-  const daysToBirthday = Math.ceil(difference / (1000 * 60 * 60 * 24));
-  const isBirthdayToday = daysToBirthday === 0;
+  let difference;
+  let daysToBirthday;
+  let isBirthdayToday;
+
+  if (todayObj > birthdayDateThisYear) {
+    difference = birthdayDateNextYear.getTime() - todayObj.getTime();
+    daysToBirthday = Math.ceil(difference / (1000 * 60 * 60 * 24));
+    isBirthdayToday = daysToBirthday === 0;
+  } else {
+    difference = birthdayDateThisYear.getTime() - todayObj.getTime();
+    daysToBirthday = Math.ceil(difference / (1000 * 60 * 60 * 24));
+    isBirthdayToday = daysToBirthday === 0;
+  }
 
   return {
     daysToBirthday,
