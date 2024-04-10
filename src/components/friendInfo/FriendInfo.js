@@ -38,6 +38,7 @@ const friendContainerCss = css`
       width: 100%;
       border-radius: 50%;
       transform: translateY(calc(-50% - 20px));
+      object-fit: cover;
     }
   }
 `;

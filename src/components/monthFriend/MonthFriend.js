@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import cakeIcon from '../../assets/cake.svg';
 
@@ -17,19 +19,17 @@ const friendContainerCss = css`
     0px 2.6px 5.0375px rgba(12, 20, 33, 0.02),
     0px 1.37109px 2.99707px rgba(12, 20, 33, 0.016875),
     0px 0.56875px 1.79219px rgba(12, 20, 33, 0.013), inset 0px 2px 1px #ffffff;
-`;
 
-const friendImgCss = css`
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-right: 24px;
+  & img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
 `;
 
 const friendNameCss = css`
   flex: 1;
   font-size: 14px;
+  margin-left: 24px;
 `;
 
 const friendDateCss = css`
@@ -58,7 +58,13 @@ function MonthFriend({
 }) {
   return (
     <div css={friendContainerCss}>
-      <img src={imageUrl} alt='' css={friendImgCss} />
+      <LazyLoadImage
+        src={imageUrl}
+        alt={''}
+        width={50}
+        height={50}
+        effect='blur'
+      />
       <p css={friendNameCss}>{formattedFullName}</p>
 
       <div css={friendDateCss}>

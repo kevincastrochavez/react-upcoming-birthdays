@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { daysUntilBirthday } from '../../helper/utils';
 
@@ -21,18 +23,19 @@ const nextFriendContainerCss = css`
   grid-template-rows: auto auto;
   column-gap: 12px;
   width: fit-content;
-`;
 
-const nextFriendImgCss = css`
-  width: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  align-self: center;
-  grid-column: 1/2;
-  grid-row: 1/3;
-`;
+  & > span {
+    align-self: center;
+    grid-column: 1/2;
+    grid-row: 1/3;
 
-const nextFriendTopCss = css``;
+    & img {
+      width: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+`;
 
 const nextFriendBottomCss = css`
   & span {
@@ -53,8 +56,8 @@ function NextFriend({ friend: { firstName, imageUrl, birthdate } }) {
 
   return (
     <div css={nextFriendContainerCss}>
-      <img css={nextFriendImgCss} src={imageUrl} alt='' />
-      <p css={nextFriendTopCss}>{firstName}'s in</p>
+      <LazyLoadImage src={imageUrl} alt={''} width={'100%'} effect='blur' />
+      <p>{firstName}'s in</p>
       <p css={nextFriendBottomCss}>
         <span>{daysToBirthday}</span> days
       </p>
