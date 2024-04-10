@@ -79,6 +79,7 @@ function AddForm() {
   });
 
   async function onSubmit() {
+    setIsUploading(true);
     const { candyPreference, likesToCelebrate, fullName, favoriteColor } =
       form.values;
 
@@ -87,7 +88,6 @@ function AddForm() {
     const birthdayMonth = birthdateValue.getMonth();
     const birthdayDay = birthdateValue.getDate();
     const birthdayFull = `${birthdayYear}-${birthdayMonth + 1}-${birthdayDay}`;
-    setIsUploading(true);
     let pictureUrl = '';
 
     if (pictureFile) {
@@ -125,6 +125,7 @@ function AddForm() {
         console.log('Friend added');
       })
       .catch((error) => {
+        setIsUploading(false);
         console.log(error);
         throw new Error(error);
       });
@@ -206,7 +207,13 @@ function AddForm() {
       </Radio.Group>
 
       <Group justify='flex-end' mt='md'>
-        <Button type='submit'>Submit</Button>
+        <Button
+          loading={isUploading}
+          loaderProps={{ type: 'dots' }}
+          type='submit'
+        >
+          Submit
+        </Button>
       </Group>
     </form>
   );
