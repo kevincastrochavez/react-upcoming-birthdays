@@ -21,6 +21,7 @@ export default function BirthdayProvider({ children }) {
   const [isUserSharingList, setIsUserSharingList] = useState(true);
   const [isAddingFriend, setIsAddingFriend] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
+  const [friendWasAdded, setFriendWasAdded] = useState(false);
 
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
@@ -72,6 +73,7 @@ export default function BirthdayProvider({ children }) {
         setIsIdSearching,
         setSearchIdText,
         setIsAddingFriend,
+        setFriendWasAdded,
       }}
     >
       <BirthdayContext.Provider
@@ -88,6 +90,7 @@ export default function BirthdayProvider({ children }) {
           isIdSearching,
           searchIdText,
           isAddingFriend,
+          friendWasAdded,
         }}
       >
         {children}
@@ -113,14 +116,16 @@ const monthNames = [
 ];
 
 /**
- * Returns the state of if the user is adding a friend
+ * Returns the state of if the user is adding a friend, and if the friend was added
  *
- * @returns { isAddingFriend }
+ * @returns { isAddingFriend, friendWasAdded }
  */
 export function useAddingFriends() {
-  const { isAddingFriend } = useBirthdayProvider('useAddingFriends');
+  const { isAddingFriend, friendWasAdded } =
+    useBirthdayProvider('useAddingFriends');
   return {
     isAddingFriend,
+    friendWasAdded,
   };
 }
 
@@ -177,14 +182,17 @@ export function useUserInfo() {
 }
 
 /**
- * Updates the state of if the user is adding a friend
+ * Updates the state of if the user is adding a friend, and if the friend was added
  *
- * @returns { setIsAddingFriend }
+ * @returns { setIsAddingFriend, setFriendWasAdded }
  */
 export function useSetAddingFriends() {
-  const { setIsAddingFriend } = useSetBirthdayProvider('useSetAddingFriends');
+  const { setIsAddingFriend, setFriendWasAdded } = useSetBirthdayProvider(
+    'useSetAddingFriends'
+  );
   return {
     setIsAddingFriend,
+    setFriendWasAdded,
   };
 }
 

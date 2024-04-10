@@ -40,7 +40,7 @@ function AddForm() {
   const uniqueId = uid.rnd();
   const storage = getStorage();
   const [isUploading, setIsUploading] = useState(false);
-  const { setIsAddingFriend } = useSetAddingFriends();
+  const { setIsAddingFriend, setFriendWasAdded } = useSetAddingFriends();
   const pictureRef = ref(storage, uniqueId);
   const placeHolderImage =
     'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=228a8258-d775-45bd-acd2-a77d1577143a';
@@ -121,6 +121,7 @@ function AddForm() {
     })
       .then((result) => {
         setIsUploading(false);
+        setFriendWasAdded(true);
         setIsAddingFriend(false);
         console.log('Friend added');
       })
