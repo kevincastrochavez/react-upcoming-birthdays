@@ -26,6 +26,7 @@ function AddForm() {
   const [candyPreferenceValue, setCandyPreferenceValue] = useState('');
   const [likesToCelebrateValue, setLikesToCelebrateValue] = useState('');
   const [pictureFile, setPictureFile] = useState(null);
+  const [isCompressingPicture, setIsCompressingPicture] = useState(false);
 
   const fullNameIcon = <IconAbc stroke={1.5} />;
   const pictureIcon = <IconPhoto stroke={1.5} />;
@@ -42,8 +43,6 @@ function AddForm() {
   const placeHolderImage =
     'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=228a8258-d775-45bd-acd2-a77d1577143a';
 
-  console.log(pictureFile);
-
   // Regex functions for validations
   const fullNameRegex = /^[a-zA-Z]{3,20}\s[a-zA-Z]{3,20}$/;
   const colorRegex = /^[a-zA-Z]{3,12}$/;
@@ -51,6 +50,7 @@ function AddForm() {
   const candyRegex = /^(Sweet|Sour)$/;
 
   const handleCompressImage = (imageFile) => {
+    setIsCompressingPicture(true);
     new Compressor(imageFile, {
       width: 300,
       height: 300,
@@ -59,10 +59,12 @@ function AddForm() {
       convertTypes: ['image/png', 'image/webp', 'image/jpeg', 'image/jpg'],
       success: (compressedResult) => {
         setPictureFile(compressedResult);
+        setIsCompressingPicture(false);
       },
       error(err) {
         console.log(err);
         console.log('Image compression failed');
+        setIsCompressingPicture(false);
       },
     });
   };
@@ -228,6 +230,7 @@ function AddForm() {
           loading={isUploading}
           loaderProps={{ type: 'dots' }}
           type='submit'
+          disabled={isCompressingPicture}
         >
           Submit
         </Button>
