@@ -41,7 +41,7 @@ function AddForm() {
   const { setIsAddingFriend, setFriendWasAdded } = useSetAddingFriends();
   const pictureRef = ref(storage, uniqueId);
   const placeHolderImage =
-    'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=228a8258-d775-45bd-acd2-a77d1577143a';
+    'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=db5411aa-be64-49a1-89d4-b293d202ee7d';
 
   // Regex functions for validations
   const fullNameRegex = /^[a-zA-Z]{3,20}\s[a-zA-Z]{3,20}$/;
@@ -225,14 +225,17 @@ function AddForm() {
         </Group>
       </Radio.Group>
 
-      <Group justify='flex-end' mt='md'>
+      <Group justify='flex-end' mt='xl'>
+        <Button onClick={() => setIsAddingFriend(false)} variant='default'>
+          Cancel
+        </Button>
         <Button
           loading={isUploading}
           loaderProps={{ type: 'dots' }}
           type='submit'
           disabled={isCompressingPicture}
         >
-          Submit
+          Save Friend
         </Button>
       </Group>
     </form>
