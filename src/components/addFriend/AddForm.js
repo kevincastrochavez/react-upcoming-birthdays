@@ -15,13 +15,10 @@ import {
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IconAbc, IconColorFilter, IconPhoto } from '@tabler/icons-react';
+import Compressor from 'compressorjs';
 
 import { useSetAddingFriends, useUserInfo } from '../BirthdayProvider';
 import { db } from '../../firebase';
-
-const radioItemCss = css`
-  margin-top: 0 !important;
-`;
 
 // TODO: Compress image before uploading
 function AddForm() {
@@ -45,11 +42,30 @@ function AddForm() {
   const placeHolderImage =
     'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=228a8258-d775-45bd-acd2-a77d1577143a';
 
+  console.log(pictureFile);
+
   // Regex functions for validations
   const fullNameRegex = /^[a-zA-Z]{3,20}\s[a-zA-Z]{3,20}$/;
   const colorRegex = /^[a-zA-Z]{3,12}$/;
   const likesToCelebrateRegex = /^(Yes|No)$/;
   const candyRegex = /^(Sweet|Sour)$/;
+
+  const handleCompressImage = (imageFile) => {
+    new Compressor(imageFile, {
+      width: 300,
+      height: 300,
+      resize: 'cover',
+      quality: 0.3,
+      convertTypes: ['image/png', 'image/webp', 'image/jpeg', 'image/jpg'],
+      success: (compressedResult) => {
+        setPictureFile(compressedResult);
+      },
+      error(err) {
+        console.log(err);
+        console.log('Image compression failed');
+      },
+    });
+  };
 
   const form = useForm({
     initialValues: {
@@ -162,7 +178,7 @@ function AddForm() {
         placeholder='Choose picture'
         clearable
         leftSection={pictureIcon}
-        onChange={(imageFile) => setPictureFile(imageFile)}
+        onChange={handleCompressImage}
       />
 
       <Space h='md' />
