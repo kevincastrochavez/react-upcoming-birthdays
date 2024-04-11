@@ -1,8 +1,18 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
 import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
+import { Notification } from '@mantine/core';
+import { IconCheck } from '@tabler/icons-react';
 
-import { useSetFriends, useUserInfo } from './components/BirthdayProvider';
+import {
+  useAddingFriends,
+  useSetAddingFriends,
+  useSetFriends,
+  useUserInfo,
+} from './components/BirthdayProvider';
 import BottomNav from './components/bottomNav/BottomNav';
 import AddFriend from './components/addFriend/AddFriend';
 import PrivateRoutes from './helper/PrivateRoutes';
@@ -12,6 +22,14 @@ import LoginSkeleton from './pages/login/LoginSkeleton';
 import DashboardSkeleton from './pages/dashboard/DashboardSkeleton';
 import AllFriendsSkeleton from './pages/allFriends/AllFriendsSkeleton';
 import ShareImportSkeleton from './pages/shareImport/ShareImportSkeleton';
+
+const addedNotificationCss = css`
+  position: fixed;
+  bottom: 90px;
+  left: 24px;
+  right: 24px;
+  z-index: 10;
+`;
 
 /**
  * This will retry failed chunks up to 5 times
@@ -59,6 +77,9 @@ const ShareImportPage = lazy(() =>
 function App() {
   const { userUid } = useUserInfo();
   const { setFriendsList } = useSetFriends();
+  const { friendWasAdded } = useAddingFriends();
+  const { setFriendWasAdded } = useSetAddingFriends();
+  const checkIcon = <IconCheck />;
 
   const getFriendslist = async (userUid) => {
     const friendsList = [];
@@ -75,11 +96,27 @@ function App() {
     }
   }, [userUid]);
 
+  if (friendWasAdded) {
+    setTimeout(() => {
+      setFriendWasAdded(false);
+    }, 3000);
+  }
+
   return (
     <>
       <Navigation />
       <Toaster />
       <AddFriend />
+      {friendWasAdded && (
+        <Notification
+          css={addedNotificationCss}
+          icon={checkIcon}
+          color='teal'
+          title='Your friend was successfully added'
+          withBorder
+          onClose={() => setFriendWasAdded(false)}
+        />
+      )}
 
       <BrowserRouter>
         <Routes>
