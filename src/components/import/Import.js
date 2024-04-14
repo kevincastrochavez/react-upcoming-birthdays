@@ -40,7 +40,6 @@ const idContainerCss = css`
  * @returns {JSX.Element}
  */
 function Import() {
-  // TODO: Check if QR code belongs to app
   const [qrCodeData, setQrCodeData] = useState(null);
   let scanner;
 

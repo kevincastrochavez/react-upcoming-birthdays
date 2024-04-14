@@ -74,6 +74,17 @@ const ShareImportPage = lazy(() =>
   componentLoader(() => import('./pages/shareImport/ShareImport'))
 );
 
+// TODOS FOR APP
+// Link for Spotlight to go to details page
+// Link for logo to go to Homepage
+// Figure out color for links
+// Share functionality for the QR code
+// When having the url/shareImport/id, load the import
+// Check if QR code belongs to app
+// Implement the import functionality, along with uploading of separate images
+// Friends details page, with Edit and Delete buttons and forms, and notifications
+// Improve 3D object
+
 function App() {
   const { userUid } = useUserInfo();
   const { setFriendsList } = useSetFriends();

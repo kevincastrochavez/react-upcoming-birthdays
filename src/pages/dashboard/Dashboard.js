@@ -23,7 +23,6 @@ const mainContainerCss = css`
  * @returns {JSX.Element}
  */
 function Dashboard() {
-  // TODO: fix spotlight when birthday is in the past, as well as next 5 friends
   const { spotlightFriend } = useFriends();
   const { setIsSearching } = useSetSearch();
   const searchIcon = <IconSearch />;

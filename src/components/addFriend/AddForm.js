@@ -20,7 +20,6 @@ import Compressor from 'compressorjs';
 import { useSetAddingFriends, useUserInfo } from '../BirthdayProvider';
 import { db } from '../../firebase';
 
-// TODO: Compress image before uploading
 function AddForm() {
   const [birthdateValue, setBirthdateValue] = useState(new Date());
   const [candyPreferenceValue, setCandyPreferenceValue] = useState('');
