@@ -94,7 +94,6 @@ function FriendInfo({
       {isSpotlight && <p css={spotlightHeadingCss}>Closest Birthday </p>}
       <div css={friendContainerCss}>
         <LazyLoadImage src={imageUrl} alt={''} width={'100%'} effect='blur' />
-        {/* <img src={imageUrl} alt=''  /> */}
         <h2 css={friendNameCss}>{formattedFullName}</h2>
         {isBirthdayToday ? (
           <h1 css={friendBirthdateCss}>

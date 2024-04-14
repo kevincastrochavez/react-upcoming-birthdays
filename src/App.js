@@ -81,11 +81,10 @@ function App() {
   const { setFriendWasAdded } = useSetAddingFriends();
   const checkIcon = <IconCheck />;
 
-  const getFriendslist = async (userUid) => {
+  const getFriendslist = (userUid) => {
     const friendsList = [];
     // Listening for realtime updates
-    setFriendsList([]);
-    await onSnapshot(collection(db, userUid), (snapshot) => {
+    onSnapshot(collection(db, userUid), (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
           friendsList.push(change.doc.data());
