@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+
+import { useSetAddingFriends } from '../BirthdayProvider';
 import MonthFriend from '../monthFriend/MonthFriend';
 
 const monthContainerCss = css`
@@ -10,6 +12,10 @@ const monthContainerCss = css`
     font-weight: 400;
     margin-bottom: 8px;
   }
+
+  & > span:last-of-type {
+    color: #228be6;
+  }
 `;
 
 /**
@@ -18,6 +24,7 @@ const monthContainerCss = css`
  * @returns {JSX.Element}
  */
 function MonthFriends({ monthObj }) {
+  const { setIsAddingFriend } = useSetAddingFriends();
   const { friends } = monthObj;
 
   return (
@@ -35,7 +42,10 @@ function MonthFriends({ monthObj }) {
           )
         )
       ) : (
-        <p>No friends this month</p>
+        <>
+          <span>No friends this month yet. </span>
+          <span onClick={() => setIsAddingFriend(true)}>Add your first!</span>
+        </>
       )}
     </div>
   );
