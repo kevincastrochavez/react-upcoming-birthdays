@@ -52,15 +52,23 @@ const nextFriendBottomCss = css`
  * @returns {JSX} the NextFriend component
  */
 function NextFriend({ friend: { firstName, imageUrl, birthdate } }) {
-  const { daysToBirthday } = daysUntilBirthday(birthdate);
+  const { daysToBirthday, isBirthdayToday } = daysUntilBirthday(birthdate);
 
   return (
     <div css={nextFriendContainerCss}>
       <LazyLoadImage src={imageUrl} alt={''} width={'100%'} effect='blur' />
-      <p>{firstName}'s in</p>
-      <p css={nextFriendBottomCss}>
-        <span>{daysToBirthday}</span> days
+      <p>
+        {firstName}'s {isBirthdayToday ? 'is' : 'in'}
       </p>
+      {isBirthdayToday ? (
+        <p css={nextFriendBottomCss}>
+          <span>Today!</span>
+        </p>
+      ) : (
+        <p css={nextFriendBottomCss}>
+          <span>{daysToBirthday}</span> days
+        </p>
+      )}
     </div>
   );
 }
