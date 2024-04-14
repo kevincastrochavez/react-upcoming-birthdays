@@ -137,11 +137,10 @@ function AddForm() {
       imageUrl: pictureUrl || placeHolderImage,
       birthdate: birthdayFull,
     })
-      .then((result) => {
+      .then(() => {
         setIsUploading(false);
         setFriendWasAdded(true);
         setIsAddingFriend(false);
-        console.log('Friend added');
       })
       .catch((error) => {
         setIsUploading(false);

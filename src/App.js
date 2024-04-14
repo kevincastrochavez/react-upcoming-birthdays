@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { Notification } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
 
@@ -83,11 +83,17 @@ function App() {
 
   const getFriendslist = async (userUid) => {
     const friendsList = [];
-    const querySnapshot = await getDocs(collection(db, userUid));
-    querySnapshot.forEach((doc) => {
-      friendsList.push(doc.data());
+    // Listening for realtime updates
+    setFriendsList([]);
+    await onSnapshot(collection(db, userUid), (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === 'added') {
+          friendsList.push(change.doc.data());
+        }
+      });
+
+      setFriendsList(friendsList);
     });
-    setFriendsList(friendsList);
   };
 
   useEffect(() => {
