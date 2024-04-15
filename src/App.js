@@ -79,6 +79,8 @@ const FriendDetailsPage = lazy(() =>
 
 // TODOS FOR APP
 // Friends details page, with Edit and Delete buttons and forms, and notifications
+// Delete image when friend is deleted
+// Delete image when friend is edited
 // Friend details skeleton
 // Make switch for sharing list work
 // Check if QR code belongs to app
