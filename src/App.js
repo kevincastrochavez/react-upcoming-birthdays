@@ -82,6 +82,8 @@ const ShareImportPage = lazy(() =>
 // Implement the import functionality, along with uploading of separate images
 // Friends details page, with Edit and Delete buttons and forms, and notifications
 // Improve 3D object
+// Improve space next friends related shadows
+// Make switch for sharing list work
 
 function App() {
   const { userUid } = useUserInfo();

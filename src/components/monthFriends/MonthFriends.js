@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
 import { useSetAddingFriends } from '../BirthdayProvider';
 import MonthFriend from '../monthFriend/MonthFriend';
@@ -32,13 +33,14 @@ function MonthFriends({ monthObj }) {
       <h2>{monthObj.month}</h2>
       {friends.length > 0 ? (
         friends.map(
-          ({ imageUrl, formattedFullName, birthdateFormatted }, index) => (
-            <MonthFriend
-              key={index}
-              imageUrl={imageUrl}
-              formattedFullName={formattedFullName}
-              shortenedBirthdateFormatted={birthdateFormatted}
-            />
+          ({ imageUrl, formattedFullName, birthdateFormatted, id }) => (
+            <Link key={id} to={`/allFriends/${id}`}>
+              <MonthFriend
+                imageUrl={imageUrl}
+                formattedFullName={formattedFullName}
+                shortenedBirthdateFormatted={birthdateFormatted}
+              />
+            </Link>
           )
         )
       ) : (
