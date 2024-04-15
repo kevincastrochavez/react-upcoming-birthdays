@@ -123,10 +123,9 @@ const monthNames = [
  *
  * @returns { isAddingFriend, friendWasAdded, friendWasDeleted }
  */
-// TODO: Rename this hook and the set one
-export function useAddingFriends() {
+export function useActionFriends() {
   const { isAddingFriend, friendWasAdded, friendWasDeleted } =
-    useBirthdayProvider('useAddingFriends');
+    useBirthdayProvider('useActionFriends');
   return {
     isAddingFriend,
     friendWasAdded,

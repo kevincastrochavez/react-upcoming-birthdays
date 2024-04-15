@@ -1,10 +1,10 @@
 import { Modal } from '@mantine/core';
 
-import { useAddingFriends, useSetAddingFriends } from '../BirthdayProvider';
+import { useActionFriends, useSetAddingFriends } from '../BirthdayProvider';
 import AddForm from './AddForm';
 
 function AddFriend() {
-  const { isAddingFriend } = useAddingFriends();
+  const { isAddingFriend } = useActionFriends();
   const { setIsAddingFriend } = useSetAddingFriends();
 
   return (

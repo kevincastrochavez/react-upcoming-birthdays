@@ -8,7 +8,7 @@ import { Notification } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
 
 import {
-  useAddingFriends,
+  useActionFriends,
   useSetAddingFriends,
   useSetFriends,
   useUserInfo,
@@ -94,7 +94,7 @@ const FriendDetailsPage = lazy(() =>
 function App() {
   const { userUid } = useUserInfo();
   const { setFriendsList } = useSetFriends();
-  const { friendWasAdded, friendWasDeleted } = useAddingFriends();
+  const { friendWasAdded, friendWasDeleted } = useActionFriends();
   const { setFriendWasAdded, setFriendWasDeleted } = useSetAddingFriends();
   const checkIcon = <IconCheck />;
 
