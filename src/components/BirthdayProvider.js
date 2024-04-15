@@ -19,9 +19,10 @@ export default function BirthdayProvider({ children }) {
   const [searchText, setSearchText] = useDebouncedState('', 300);
   const [searchIdText, setSearchIdText] = useState('');
   const [isUserSharingList, setIsUserSharingList] = useState(true);
-  const [isAddingFriend, setIsAddingFriend] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
+  const [isAddingFriend, setIsAddingFriend] = useState(false);
   const [friendWasAdded, setFriendWasAdded] = useState(false);
+  const [friendWasDeleted, setFriendWasDeleted] = useState(false);
 
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
@@ -74,6 +75,7 @@ export default function BirthdayProvider({ children }) {
         setSearchIdText,
         setIsAddingFriend,
         setFriendWasAdded,
+        setFriendWasDeleted,
       }}
     >
       <BirthdayContext.Provider
@@ -91,6 +93,7 @@ export default function BirthdayProvider({ children }) {
           searchIdText,
           isAddingFriend,
           friendWasAdded,
+          friendWasDeleted,
         }}
       >
         {children}
@@ -118,14 +121,16 @@ const monthNames = [
 /**
  * Returns the state of if the user is adding a friend, and if the friend was added
  *
- * @returns { isAddingFriend, friendWasAdded }
+ * @returns { isAddingFriend, friendWasAdded, friendWasDeleted }
  */
+// TODO: Rename this hook and the set one
 export function useAddingFriends() {
-  const { isAddingFriend, friendWasAdded } =
+  const { isAddingFriend, friendWasAdded, friendWasDeleted } =
     useBirthdayProvider('useAddingFriends');
   return {
     isAddingFriend,
     friendWasAdded,
+    friendWasDeleted,
   };
 }
 
@@ -184,15 +189,15 @@ export function useUserInfo() {
 /**
  * Updates the state of if the user is adding a friend, and if the friend was added
  *
- * @returns { setIsAddingFriend, setFriendWasAdded }
+ * @returns { setIsAddingFriend, setFriendWasAdded, setFriendWasDeleted }
  */
 export function useSetAddingFriends() {
-  const { setIsAddingFriend, setFriendWasAdded } = useSetBirthdayProvider(
-    'useSetAddingFriends'
-  );
+  const { setIsAddingFriend, setFriendWasAdded, setFriendWasDeleted } =
+    useSetBirthdayProvider('useSetAddingFriends');
   return {
     setIsAddingFriend,
     setFriendWasAdded,
+    setFriendWasDeleted,
   };
 }
 

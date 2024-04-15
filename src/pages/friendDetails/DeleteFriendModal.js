@@ -1,7 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import { Button, Group, Modal } from '@mantine/core';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+
+import {
+  useSetAddingFriends,
+  useUserInfo,
+} from '../../components/BirthdayProvider';
+import { db } from '../../firebase';
 
 const buttonsContainerCss = css`
   flex-direction: row;
@@ -17,8 +26,25 @@ const buttonsContainerCss = css`
  * @returns {JSX.Element}
  */
 function DeleteFriendModal({ isDeleting, setIsDeleting, firstName, id }) {
+  const [isDeletingFriend, setIsDeletingFriend] = useState(false);
+  const { setFriendWasDeleted } = useSetAddingFriends();
+  const { userUid } = useUserInfo();
+  const navigate = useNavigate();
+
   const handleDelete = () => {
     console.log('Deleting friend', id);
+    setIsDeletingFriend(true);
+
+    deleteDoc(doc(db, userUid, id))
+      .then(() => {
+        navigate('/allFriends');
+        setIsDeletingFriend(false);
+        setFriendWasDeleted(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsDeletingFriend(false);
+      });
   };
 
   return (
@@ -44,6 +70,8 @@ function DeleteFriendModal({ isDeleting, setIsDeleting, firstName, id }) {
           className='mt-8'
           color={'red'}
           onClick={handleDelete}
+          loading={isDeletingFriend}
+          loaderProps={{ type: 'dots' }}
         >
           Delete {firstName || 'Friend'}
         </Button>

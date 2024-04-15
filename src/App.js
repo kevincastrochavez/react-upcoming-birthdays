@@ -94,17 +94,23 @@ const FriendDetailsPage = lazy(() =>
 function App() {
   const { userUid } = useUserInfo();
   const { setFriendsList } = useSetFriends();
-  const { friendWasAdded } = useAddingFriends();
-  const { setFriendWasAdded } = useSetAddingFriends();
+  const { friendWasAdded, friendWasDeleted } = useAddingFriends();
+  const { setFriendWasAdded, setFriendWasDeleted } = useSetAddingFriends();
   const checkIcon = <IconCheck />;
 
   const getFriendslist = (userUid) => {
-    const friendsList = [];
+    let friendsList = [];
     // Listening for realtime updates
     onSnapshot(collection(db, userUid), (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
           friendsList.push({ ...change.doc.data(), id: change.doc.id });
+        }
+        if (change.type === 'removed') {
+          friendsList = friendsList.filter(
+            (friend) => friend.id !== change.doc.id
+          );
+          console.log(friendsList);
         }
       });
 
@@ -124,12 +130,19 @@ function App() {
     }, 3000);
   }
 
+  if (friendWasDeleted) {
+    setTimeout(() => {
+      setFriendWasDeleted(false);
+    }, 3000);
+  }
+
   return (
     <>
       <BrowserRouter>
         <Navigation />
         <Toaster />
         <AddFriend />
+
         {friendWasAdded && (
           <Notification
             css={addedNotificationCss}
@@ -138,6 +151,17 @@ function App() {
             title='Your friend was successfully added'
             withBorder
             onClose={() => setFriendWasAdded(false)}
+          />
+        )}
+
+        {friendWasDeleted && (
+          <Notification
+            css={addedNotificationCss}
+            icon={checkIcon}
+            color='teal'
+            title='Your friend was successfully deleted'
+            withBorder
+            onClose={() => setFriendWasDeleted(false)}
           />
         )}
 
