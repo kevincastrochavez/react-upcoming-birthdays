@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { Button } from '@mantine/core';
 import { useLocation } from 'react-router-dom';
+import { IconEdit, IconTrash } from '@tabler/icons-react';
 
 import { useFriends } from '../../components/BirthdayProvider';
 import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
@@ -28,16 +30,29 @@ function FriendDetails() {
   const friendId = location.pathname.split('/')[2];
 
   const friendDetails = getFriendInfo(friends, friendId);
+  const { firstName } = friendDetails;
 
   return (
     <main css={mainContainerCss}>
       <Breadcrumbs />
 
-      <h1>
-        {friendDetails.firstName ? `${friendDetails.firstName}'s` : 'Friend'}{' '}
-        Info
-      </h1>
+      <h1>{firstName ? `${firstName}'s` : 'Friend'} Info</h1>
+
       <FriendInfo {...friendDetails} />
+
+      <Button leftSection={<IconEdit size={20} />} fullWidth className='mt-8'>
+        Edit {firstName || 'Friend'}'s Info
+      </Button>
+
+      <Button
+        leftSection={<IconTrash size={20} />}
+        fullWidth
+        className='mt-4'
+        variant={'light'}
+        color={'red'}
+      >
+        Delete {firstName || 'Friend'}
+      </Button>
     </main>
   );
 }

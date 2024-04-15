@@ -22,7 +22,7 @@ const friendPreferenceCss = css`
 
   & span {
     color: #f4bfbf;
-    margin-right: 4px;
+    margin-left: 4px;
     font-size: 14px;
   }
 `;
@@ -45,24 +45,24 @@ function FriendPreferences({
     <div css={friendInfoCss}>
       <div>
         <div css={friendPreferenceCss}>
-          <span>Color</span>
           <img src={colorIcon} alt='' />
+          <span>Color</span>
         </div>
 
         <p>{favoriteColor}</p>
       </div>
       <div>
         <div css={friendPreferenceCss}>
-          <span>Tooth</span>
           <img src={toothIcon} alt='' />
+          <span>Tooth</span>
         </div>
 
         <p>{candyPreference}</p>
       </div>
       <div>
         <div css={friendPreferenceCss}>
-          <span>Celebrate</span>
           <img src={celebrateIcon} alt='' />
+          <span>Celebrate</span>
         </div>
 
         <p>{celebrateText}</p>
