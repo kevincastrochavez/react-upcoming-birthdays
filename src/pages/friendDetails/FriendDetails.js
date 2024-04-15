@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Button } from '@mantine/core';
+import { useState } from 'react';
+import { Button, Group, Modal } from '@mantine/core';
 import { useLocation } from 'react-router-dom';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 
@@ -20,11 +21,17 @@ const mainContainerCss = css`
   }
 `;
 
+const buttonsContainerCss = css`
+  flex-direction: row;
+  flex-wrap: nowrap;
+`;
+
 /**
  * Displays the FriendDetails component page, main part for the FriendDetails page
  * @returns {JSX.Element}
  */
 function FriendDetails() {
+  const [isDeleting, setIsDeleting] = useState(false);
   const { friendsList: friends } = useFriends();
   const location = useLocation();
   const friendId = location.pathname.split('/')[2];
@@ -50,9 +57,38 @@ function FriendDetails() {
         className='mt-4'
         variant={'light'}
         color={'red'}
+        onClick={() => setIsDeleting(true)}
       >
         Delete {firstName || 'Friend'}
       </Button>
+
+      <Modal
+        opened={isDeleting}
+        onClose={setIsDeleting}
+        title='Are you absolutely sure?'
+        centered
+      >
+        <p>You won't be able to undo this action.</p>
+
+        <Group css={buttonsContainerCss} justify='end'>
+          <Button
+            leftSection={<IconEdit size={20} />}
+            className='mt-8'
+            variant={'default'}
+            onClick={() => setIsDeleting(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            leftSection={<IconTrash size={20} />}
+            className='mt-8'
+            color={'red'}
+            onClick={() => setIsDeleting(true)}
+          >
+            Delete {firstName || 'Friend'}
+          </Button>
+        </Group>
+      </Modal>
     </main>
   );
 }
