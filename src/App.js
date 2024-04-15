@@ -75,7 +75,6 @@ const ShareImportPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Link for Spotlight to go to details page
 // Link for logo to go to Homepage
 // Figure out color for links
 // Share functionality for the QR code
@@ -98,7 +97,7 @@ function App() {
     onSnapshot(collection(db, userUid), (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
-          friendsList.push(change.doc.data());
+          friendsList.push({ ...change.doc.data(), id: change.doc.id });
         }
       });
 

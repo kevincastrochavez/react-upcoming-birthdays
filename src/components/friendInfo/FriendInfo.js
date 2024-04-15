@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { Link } from 'react-router-dom';
 
 import FriendPreferences from './FriendPreferences';
 import { daysUntilBirthday } from '../../helper/utils';
@@ -75,6 +76,7 @@ const friendBirthdateCss = css`
  * @param {Boolean} likesToCelebrate - true if friend likes to celebrate
  * @param {String} candyPreference - sweet or sour
  * @param {String} birthdate - birthdate of the friend
+ * @param {String} id - id of the friend
  * @returns {JSX} the FriendInfo component
  */
 function FriendInfo({
@@ -86,31 +88,34 @@ function FriendInfo({
   likesToCelebrate,
   candyPreference,
   birthdate,
+  id,
 }) {
   const { daysToBirthday, isBirthdayToday } = daysUntilBirthday(birthdate);
 
   return (
     <>
       {isSpotlight && <p css={spotlightHeadingCss}>Closest Birthday </p>}
-      <div css={friendContainerCss}>
-        <LazyLoadImage src={imageUrl} alt={''} width={'100%'} effect='blur' />
-        <h2 css={friendNameCss}>{formattedFullName}</h2>
-        {isBirthdayToday ? (
-          <h1 css={friendBirthdateCss}>
-            {firstName}'s birthday is <span>Today!</span>
-          </h1>
-        ) : (
-          <h1 css={friendBirthdateCss}>
-            Coming up in <span>{daysToBirthday}</span> days
-          </h1>
-        )}
+      <Link to={`/allFriends/${id}`} key={id}>
+        <div css={friendContainerCss}>
+          <LazyLoadImage src={imageUrl} alt={''} width={'100%'} effect='blur' />
+          <h2 css={friendNameCss}>{formattedFullName}</h2>
+          {isBirthdayToday ? (
+            <h1 css={friendBirthdateCss}>
+              {firstName}'s birthday is <span>Today!</span>
+            </h1>
+          ) : (
+            <h1 css={friendBirthdateCss}>
+              Coming up in <span>{daysToBirthday}</span> days
+            </h1>
+          )}
 
-        <FriendPreferences
-          favoriteColor={favoriteColor}
-          candyPreference={candyPreference}
-          likesToCelebrate={likesToCelebrate}
-        />
-      </div>
+          <FriendPreferences
+            favoriteColor={favoriteColor}
+            candyPreference={candyPreference}
+            likesToCelebrate={likesToCelebrate}
+          />
+        </div>
+      </Link>
     </>
   );
 }
