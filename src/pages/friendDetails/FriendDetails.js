@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { Button, Group, Modal } from '@mantine/core';
+import { Button } from '@mantine/core';
 import { useLocation } from 'react-router-dom';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 
 import { useFriends } from '../../components/BirthdayProvider';
 import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import { FriendInfo } from '../../components/friendInfo/FriendInfo';
+import DeleteFriendModal from './DeleteFriendModal';
 
 const mainContainerCss = css`
   padding: 12px 24px 24px 24px;
@@ -62,33 +63,12 @@ function FriendDetails() {
         Delete {firstName || 'Friend'}
       </Button>
 
-      <Modal
-        opened={isDeleting}
-        onClose={setIsDeleting}
-        title='Are you absolutely sure?'
-        centered
-      >
-        <p>You won't be able to undo this action.</p>
-
-        <Group css={buttonsContainerCss} justify='end'>
-          <Button
-            leftSection={<IconEdit size={20} />}
-            className='mt-8'
-            variant={'default'}
-            onClick={() => setIsDeleting(false)}
-          >
-            Cancel
-          </Button>
-          <Button
-            leftSection={<IconTrash size={20} />}
-            className='mt-8'
-            color={'red'}
-            onClick={() => setIsDeleting(true)}
-          >
-            Delete {firstName || 'Friend'}
-          </Button>
-        </Group>
-      </Modal>
+      <DeleteFriendModal
+        isDeleting={isDeleting}
+        setIsDeleting={setIsDeleting}
+        firstName={firstName}
+        id={friendId}
+      />
     </main>
   );
 }
