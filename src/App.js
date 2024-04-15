@@ -73,17 +73,23 @@ const AllFriendsPage = lazy(() =>
 const ShareImportPage = lazy(() =>
   componentLoader(() => import('./pages/shareImport/ShareImport'))
 );
+const FriendDetailsPage = lazy(() =>
+  componentLoader(() => import('./pages/friendDetails/FriendDetails'))
+);
 
 // TODOS FOR APP
-// Figure out color for links
-// Share functionality for the QR code
-// When having the url/shareImport/id, load the import
-// Check if QR code belongs to app
-// Implement the import functionality, along with uploading of separate images
 // Friends details page, with Edit and Delete buttons and forms, and notifications
+// Friend details skeleton
+// Make switch for sharing list work
+// Check if QR code belongs to app
+// Share functionality for the QR code
+// Implement the import functionality, along with uploading of separate images
+// When having the url/shareImport/id, load the import
 // Improve 3D object
 // Improve space next friends related shadows
-// Make switch for sharing list work
+// Figure out color for links
+// Fix breadcrumbs name for details page
+// Fix breadcrumbs link color for All Friends
 
 function App() {
   const { userUid } = useUserInfo();
@@ -162,6 +168,16 @@ function App() {
               element={
                 <Suspense fallback={<AllFriendsSkeleton />}>
                   <AllFriendsPage />
+                  <BottomNav />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path='/allFriends/:id'
+              element={
+                <Suspense fallback={<h1>Loading...</h1>}>
+                  <FriendDetailsPage />
                   <BottomNav />
                 </Suspense>
               }
