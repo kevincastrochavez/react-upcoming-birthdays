@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 import { auth } from '../../firebase';
 import { useSetUserInfo } from '../BirthdayProvider';
@@ -56,10 +57,10 @@ function Navigation() {
 
   return (
     <header css={navigationCSS}>
-      <div css={navigationLogoCSS}>
+      <Link css={navigationLogoCSS} to='/'>
         <img src='http://via.placeholder.com/200' alt='' />
         <p>Happy B!</p>
-      </div>
+      </Link>
 
       <Logout onClick={handleSignout} />
     </header>

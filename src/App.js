@@ -75,7 +75,6 @@ const ShareImportPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Link for logo to go to Homepage
 // Figure out color for links
 // Share functionality for the QR code
 // When having the url/shareImport/id, load the import
@@ -119,21 +118,21 @@ function App() {
 
   return (
     <>
-      <Navigation />
-      <Toaster />
-      <AddFriend />
-      {friendWasAdded && (
-        <Notification
-          css={addedNotificationCss}
-          icon={checkIcon}
-          color='teal'
-          title='Your friend was successfully added'
-          withBorder
-          onClose={() => setFriendWasAdded(false)}
-        />
-      )}
-
       <BrowserRouter>
+        <Navigation />
+        <Toaster />
+        <AddFriend />
+        {friendWasAdded && (
+          <Notification
+            css={addedNotificationCss}
+            icon={checkIcon}
+            color='teal'
+            title='Your friend was successfully added'
+            withBorder
+            onClose={() => setFriendWasAdded(false)}
+          />
+        )}
+
         <Routes>
           <Route
             path='/login'
