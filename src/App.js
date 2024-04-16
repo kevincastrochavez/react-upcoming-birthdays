@@ -109,14 +109,20 @@ function App() {
     // Listening for realtime updates
     onSnapshot(collection(db, userUid), (snapshot) => {
       snapshot.docChanges().forEach((change) => {
+        console.log(change);
         if (change.type === 'added') {
+          friendsList.push({ ...change.doc.data(), id: change.doc.id });
+        }
+        if (change.type === 'modified') {
+          friendsList = friendsList.filter(
+            (friend) => friend.id !== change.doc.id
+          );
           friendsList.push({ ...change.doc.data(), id: change.doc.id });
         }
         if (change.type === 'removed') {
           friendsList = friendsList.filter(
             (friend) => friend.id !== change.doc.id
           );
-          console.log(friendsList);
         }
       });
 
