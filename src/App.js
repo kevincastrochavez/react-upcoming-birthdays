@@ -97,8 +97,10 @@ const FriendDetailsPage = lazy(() =>
 function App() {
   const { userUid } = useUserInfo();
   const { setFriendsList } = useSetFriends();
-  const { friendWasAdded, friendWasDeleted } = useActionFriends();
-  const { setFriendWasAdded, setFriendWasDeleted } = useSetAddingFriends();
+  const { friendWasAdded, friendWasDeleted, friendWasUpdated } =
+    useActionFriends();
+  const { setFriendWasAdded, setFriendWasDeleted, setFriendWasUpdated } =
+    useSetAddingFriends();
   const checkIcon = <IconCheck />;
 
   const getFriendslist = (userUid) => {
@@ -133,6 +135,12 @@ function App() {
     }, 3000);
   }
 
+  if (friendWasUpdated) {
+    setTimeout(() => {
+      setFriendWasUpdated(false);
+    }, 3000);
+  }
+
   if (friendWasDeleted) {
     setTimeout(() => {
       setFriendWasDeleted(false);
@@ -157,6 +165,16 @@ function App() {
           />
         )}
 
+        {friendWasUpdated && (
+          <Notification
+            css={addedNotificationCss}
+            icon={checkIcon}
+            color='teal'
+            title='Your friend was successfully updated'
+            withBorder
+            onClose={() => setFriendWasUpdated(false)}
+          />
+        )}
         {friendWasDeleted && (
           <Notification
             css={addedNotificationCss}
