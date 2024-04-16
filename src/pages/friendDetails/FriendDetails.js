@@ -5,10 +5,14 @@ import { Button } from '@mantine/core';
 import { useLocation } from 'react-router-dom';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 
-import { useFriends } from '../../components/BirthdayProvider';
+import {
+  useFriends,
+  useSetAddingFriends,
+} from '../../components/BirthdayProvider';
 import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import { FriendInfo } from '../../components/friendInfo/FriendInfo';
 import DeleteFriendModal from './DeleteFriendModal';
+import EditFriend from '../../components/editFriend/EditFriend';
 
 const mainContainerCss = css`
   padding: 12px 24px 24px 24px;
@@ -33,6 +37,7 @@ const buttonsContainerCss = css`
  */
 function FriendDetails() {
   const [isDeleting, setIsDeleting] = useState(false);
+  const { setIsEditingFriend } = useSetAddingFriends();
   const { friendsList: friends } = useFriends();
   const location = useLocation();
   const friendId = location.pathname.split('/')[2];
@@ -43,12 +48,18 @@ function FriendDetails() {
   return (
     <main css={mainContainerCss}>
       <Breadcrumbs />
+      <EditFriend />
 
       <h1>{firstName ? `${firstName}'s` : 'Friend'} Info</h1>
 
       <FriendInfo {...friendDetails} />
 
-      <Button leftSection={<IconEdit size={20} />} fullWidth className='mt-8'>
+      <Button
+        leftSection={<IconEdit size={20} />}
+        fullWidth
+        className='mt-8'
+        onClick={() => setIsEditingFriend(true)}
+      >
         Edit {firstName || 'Friend'}'s Info
       </Button>
 
