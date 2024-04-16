@@ -82,6 +82,7 @@ const FriendDetailsPage = lazy(() =>
 // Delete image when friend is deleted
 // Delete image when friend is edited
 // Friend details skeleton
+// Add Notifications for errors in Adding, Editing and Deleting
 // Make switch for sharing list work
 // Check if QR code belongs to app
 // Share functionality for the QR code
