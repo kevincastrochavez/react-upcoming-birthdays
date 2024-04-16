@@ -59,6 +59,7 @@ function FriendDetails() {
         fullWidth
         className='mt-8'
         onClick={() => setIsEditingFriend(true)}
+        disabled={!firstName}
       >
         Edit {firstName || 'Friend'}'s Info
       </Button>
@@ -70,6 +71,7 @@ function FriendDetails() {
         variant={'light'}
         color={'red'}
         onClick={() => setIsDeleting(true)}
+        disabled={!firstName}
       >
         Delete {firstName || 'Friend'}
       </Button>
