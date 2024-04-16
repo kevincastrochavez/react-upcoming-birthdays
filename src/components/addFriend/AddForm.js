@@ -43,7 +43,7 @@ function AddForm() {
     'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=db5411aa-be64-49a1-89d4-b293d202ee7d';
 
   // Regex functions for validations
-  const fullNameRegex = /^[a-zA-Z]{3,20}\s[a-zA-Z]{3,20}$/;
+  const fullNameRegex = /^[a-zA-Z]{5,25}\s[a-zA-Z]{5,25}$/;
   const colorRegex = /^[a-zA-Z]{3,12}$/;
   const likesToCelebrateRegex = /^(Yes|No)$/;
   const candyRegex = /^(Sweet|Sour)$/;
@@ -83,7 +83,7 @@ function AddForm() {
       fullName: (value) =>
         fullNameRegex.test(value)
           ? null
-          : 'Full name must fall in the format "First Last", between 3-20 characters',
+          : 'Full name must fall in the format "First Last", between 5-25 characters',
       favoriteColor: (value) =>
         colorRegex.test(value)
           ? null
