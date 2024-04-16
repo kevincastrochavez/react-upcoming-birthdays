@@ -26,11 +26,6 @@ const mainContainerCss = css`
   }
 `;
 
-const buttonsContainerCss = css`
-  flex-direction: row;
-  flex-wrap: nowrap;
-`;
-
 /**
  * Displays the FriendDetails component page, main part for the FriendDetails page
  * @returns {JSX.Element}
