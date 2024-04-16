@@ -92,6 +92,7 @@ const FriendDetailsPage = lazy(() =>
 // Figure out color for links
 // Fix breadcrumbs name for details page
 // Fix breadcrumbs link color for All Friends
+// Change picture id in firebase
 
 function App() {
   const { userUid } = useUserInfo();
