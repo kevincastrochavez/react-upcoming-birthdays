@@ -244,7 +244,7 @@ function EditForm() {
           type='submit'
           disabled={isCompressingPicture}
         >
-          Save Friend
+          Save Changes
         </Button>
       </Group>
     </form>
