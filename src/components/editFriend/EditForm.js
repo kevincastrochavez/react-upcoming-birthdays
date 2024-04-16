@@ -9,11 +9,25 @@ import {
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IconAbc, IconColorFilter, IconPhoto } from '@tabler/icons-react';
+import { useLocation } from 'react-router-dom';
 
-import { useSetAddingFriends } from '../BirthdayProvider';
+import { useFriends, useSetAddingFriends } from '../BirthdayProvider';
+import { getFriendInfo } from '../../pages/friendDetails/FriendDetails';
 
 function EditForm() {
   const { setIsEditingFriend } = useSetAddingFriends();
+  const location = useLocation();
+  const friendId = location.pathname.split('/')[2];
+  const { friendsList: friends } = useFriends();
+  const {
+    fullName,
+    birthdate,
+    favoriteColor,
+    likesToCelebrate,
+    candyPreference,
+  } = getFriendInfo(friends, friendId);
+  const favoriteColorCapitalized =
+    favoriteColor.charAt(0).toUpperCase() + favoriteColor.slice(1);
 
   const fullNameIcon = <IconAbc stroke={1.5} />;
   const pictureIcon = <IconPhoto stroke={1.5} />;
@@ -28,6 +42,7 @@ function EditForm() {
         // {...form.getInputProps('fullName')}
         leftSection={fullNameIcon}
         name='name'
+        value={fullName}
       />
 
       <Space h='md' />
@@ -36,7 +51,7 @@ function EditForm() {
         label="Friend's Birthday"
         placeholder='Date input'
         withAsterisk
-        // value={birthdateValue}
+        value={new Date(birthdate)}
         // onChange={setBirthdateValue}
         valueFormat='YYYY MMM DD'
       />
@@ -46,7 +61,7 @@ function EditForm() {
       <FileInput
         accept='image/png,image/jpeg,image/jpg'
         label="Friend's picture (optional)"
-        placeholder='Choose picture'
+        placeholder='Previous picture left unchanged'
         clearable
         leftSection={pictureIcon}
         // onChange={handleCompressImage}
@@ -60,6 +75,7 @@ function EditForm() {
         placeholder='Blue'
         // {...form.getInputProps('favoriteColor')}
         leftSection={favoriteColorIcon}
+        value={favoriteColorCapitalized}
       />
 
       <Space h='md' />
@@ -68,7 +84,7 @@ function EditForm() {
         name='candyPreference'
         label='Candy Preference'
         withAsterisk
-        // value={candyPreferenceValue}
+        value={candyPreference}
         // onChange={setCandyPreferenceValue}
         // {...form.getInputProps('candyPreference')}
       >
@@ -84,7 +100,7 @@ function EditForm() {
         name='likesToCelebrate'
         label='Likes To Celebrate'
         withAsterisk
-        // value={likesToCelebrateValue}
+        value={likesToCelebrate}
         // onChange={setLikesToCelebrateValue}
         // {...form.getInputProps('likesToCelebrate')}
       >

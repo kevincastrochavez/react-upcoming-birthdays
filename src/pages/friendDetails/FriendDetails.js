@@ -94,7 +94,7 @@ export default FriendDetails;
  * @param {String} friendId - id of the friend
  * @returns {Object} friend
  */
-function getFriendInfo(friends, friendId) {
+export function getFriendInfo(friends, friendId) {
   if (!friends) return {};
   if (!friendId) return {};
 
