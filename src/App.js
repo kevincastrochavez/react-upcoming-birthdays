@@ -108,7 +108,6 @@ function App() {
     // Listening for realtime updates
     onSnapshot(collection(db, userUid), (snapshot) => {
       snapshot.docChanges().forEach((change) => {
-        console.log(change);
         if (change.type === 'added') {
           friendsList.push({ ...change.doc.data(), id: change.doc.id });
         }

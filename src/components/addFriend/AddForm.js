@@ -43,8 +43,8 @@ function AddForm() {
     'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=db5411aa-be64-49a1-89d4-b293d202ee7d';
 
   // Regex functions for validations
-  const fullNameRegex = /^[a-zA-Z]{5,25}\s[a-zA-Z]{5,25}$/;
-  const colorRegex = /^[a-zA-Z]{3,12}$/;
+  const fullNameRegex = /^\s*[a-zA-Z]{2,15}\s+[a-zA-Z]{2,15}\s*$/;
+  const colorRegex = /^\s*[a-zA-Z]{3,15}\s*$/;
   const likesToCelebrateRegex = /^(Yes|No)$/;
   const candyRegex = /^(Sweet|Sour)$/;
 
@@ -83,11 +83,11 @@ function AddForm() {
       fullName: (value) =>
         fullNameRegex.test(value)
           ? null
-          : 'Full name must fall in the format "First Last", between 5-25 characters',
+          : 'Full name must fall in the format "First Last", between 2-15 letters each. No special characters allowed',
       favoriteColor: (value) =>
         colorRegex.test(value)
           ? null
-          : 'Color name must be between 3-12 characters',
+          : 'Color name must be between 3-15 letters',
       likesToCelebrate: (value) =>
         likesToCelebrateRegex.test(value) ? null : 'Must choose an option',
       candyPreference: (value) =>
@@ -129,8 +129,8 @@ function AddForm() {
 
     // Add friend to firestore collection for the user
     await setDoc(doc(db, userUid, uniqueId), {
-      fullName,
-      favoriteColor: favoriteColor.toLowerCase(),
+      fullName: fullName.trim(),
+      favoriteColor: favoriteColor.trim().toLowerCase(),
       likesToCelebrate,
       candyPreference,
       imageUrl: pictureUrl || placeHolderImage,

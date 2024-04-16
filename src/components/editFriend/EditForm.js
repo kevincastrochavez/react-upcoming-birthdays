@@ -52,8 +52,8 @@ function EditForm() {
   const favoriteColorIcon = <IconColorFilter stroke={1.5} />;
 
   // Regex functions for validations
-  const fullNameRegex = /^[a-zA-Z]{5,25}\s[a-zA-Z]{5,25}$/;
-  const colorRegex = /^[a-zA-Z]{3,12}$/;
+  const fullNameRegex = /^\s*[a-zA-Z]{2,15}\s+[a-zA-Z]{2,15}\s*$/;
+  const colorRegex = /^\s*[a-zA-Z]{3,15}\s*$/;
   const likesToCelebrateRegex = /^(Yes|No)$/;
   const candyRegex = /^(Sweet|Sour)$/;
 
@@ -92,11 +92,11 @@ function EditForm() {
       fullName: (value) =>
         fullNameRegex.test(value)
           ? null
-          : 'Full name must fall in the format "First Last", between 5-25 characters',
+          : 'Full name must fall in the format "First Last", between 2-15 letters each. No special characters allowed',
       favoriteColor: (value) =>
         colorRegex.test(value)
           ? null
-          : 'Color name must be between 3-12 characters',
+          : 'Color name must be between 3-15 letters',
       likesToCelebrate: (value) =>
         likesToCelebrateRegex.test(value) ? null : 'Must choose an option',
       candyPreference: (value) =>
@@ -144,8 +144,8 @@ function EditForm() {
 
     // Save changes to friend to firestore collection for the user
     await updateDoc(doc(db, userUid, friendId), {
-      fullName,
-      favoriteColor: favoriteColor.toLowerCase(),
+      fullName: fullName.trim(),
+      favoriteColor: favoriteColor.trim().toLowerCase(),
       likesToCelebrate,
       candyPreference,
       imageUrl: pictureUrl,
