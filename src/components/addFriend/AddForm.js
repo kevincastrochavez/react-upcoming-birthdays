@@ -38,7 +38,6 @@ function AddForm() {
   const storage = getStorage();
   const [isUploading, setIsUploading] = useState(false);
   const { setIsAddingFriend, setFriendWasAdded } = useSetAddingFriends();
-  const pictureRef = ref(storage, uniqueId);
   const placeHolderImage =
     'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=db5411aa-be64-49a1-89d4-b293d202ee7d';
 
@@ -109,9 +108,11 @@ function AddForm() {
 
     if (pictureFile) {
       // Upload picture to firebase and get url to attach it to friend
+      const pictureNameFormat = `${userUid}-${birthdayFull}-${fullName}-${favoriteColor}`;
+      const pictureRef = ref(storage, pictureNameFormat);
       await uploadBytes(pictureRef, pictureFile)
         .then(async (snapshot) => {
-          await getDownloadURL(ref(storage, uniqueId))
+          await getDownloadURL(ref(storage, pictureNameFormat))
             .then((url) => {
               console.log('Image uploaded');
               pictureUrl = url;
