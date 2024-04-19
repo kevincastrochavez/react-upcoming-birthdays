@@ -11,14 +11,7 @@ import { DatePickerInput } from '@mantine/dates';
 import { IconAbc, IconColorFilter, IconPhoto } from '@tabler/icons-react';
 import { useLocation } from 'react-router-dom';
 import { useForm } from '@mantine/form';
-import ShortUniqueId from 'short-unique-id';
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytes,
-  deleteObject,
-} from 'firebase/storage';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import Compressor from 'compressorjs';
 
 import {
@@ -125,15 +118,14 @@ function EditForm() {
     let pictureUrl = imageUrl; // Set previous image url if no new image is selected
     // If new image is selected, upload it to firebase and get url to attach it to friend
     if (pictureFile) {
-      const uid = new ShortUniqueId({ length: 20 });
-      const uniqueId = uid.rnd();
       const storage = getStorage();
-      const pictureRef = ref(storage, uniqueId);
+      const pictureNameFormat = `${userUid}-${birthdayFull}-${fullName}-${favoriteColor}`;
+      const pictureRef = ref(storage, pictureNameFormat);
 
       // Upload picture to firebase and get url to attach it to friend
       await uploadBytes(pictureRef, pictureFile)
         .then(async (snapshot) => {
-          await getDownloadURL(ref(storage, uniqueId))
+          await getDownloadURL(ref(storage, pictureNameFormat))
             .then((url) => {
               console.log('Image uploaded');
               pictureUrl = url;
@@ -162,21 +154,6 @@ function EditForm() {
         setIsSaving(false);
         setFriendWasUpdated(true);
         setIsEditingFriend(false);
-
-        if (pictureFile) {
-          // Delete image from storage if friend updated successfully
-          const favoriteColorCapitalized =
-            favoriteColor.charAt(0).toUpperCase() + favoriteColor.slice(1);
-          const pictureNameFormat = `${userUid}-${birthdate}-${fullName}-${favoriteColorCapitalized}`;
-          const desertRef = ref(storage, pictureNameFormat);
-          deleteObject(desertRef)
-            .then(() => {
-              console.log('Image deleted');
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
       })
       .catch((error) => {
         setIsSaving(false);

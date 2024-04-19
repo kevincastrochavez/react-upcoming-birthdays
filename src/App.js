@@ -78,7 +78,6 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Change image name when friend is edited
 // Friend details skeleton
 // Add Notifications for errors in Adding, Editing and Deleting
 // Make switch for sharing list work
