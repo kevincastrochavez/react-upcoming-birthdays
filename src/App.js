@@ -78,7 +78,6 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Delete image when friend is deleted
 // Delete image when friend is edited
 // Friend details skeleton
 // Add Notifications for errors in Adding, Editing and Deleting

@@ -5,6 +5,7 @@ import { Button, Group, Modal } from '@mantine/core';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { getStorage, ref, deleteObject } from 'firebase/storage';
 
 import {
   useSetAddingFriends,
@@ -22,17 +23,28 @@ const buttonsContainerCss = css`
  * @param {Boolean} isDeleting - true if the modal is open
  * @param {Function} setIsDeleting - updates the state of the modal
  * @param {String} firstName - first name of the friend
+ * @param {String} birthdate - birthdate of the friend
+ * @param {String} fullName - full name of the friend
+ * @param {String} favoriteColor - favorite color of the friend
  * @param {String} id - id of the friend
  * @returns {JSX.Element}
  */
-function DeleteFriendModal({ isDeleting, setIsDeleting, firstName, id }) {
+function DeleteFriendModal({
+  isDeleting,
+  setIsDeleting,
+  firstName,
+  birthdate,
+  fullName,
+  favoriteColor,
+  id,
+}) {
   const [isDeletingFriend, setIsDeletingFriend] = useState(false);
   const { setFriendWasDeleted } = useSetAddingFriends();
   const { userUid } = useUserInfo();
   const navigate = useNavigate();
+  const storage = getStorage();
 
   const handleDelete = () => {
-    console.log('Deleting friend', id);
     setIsDeletingFriend(true);
 
     deleteDoc(doc(db, userUid, id))
@@ -40,6 +52,19 @@ function DeleteFriendModal({ isDeleting, setIsDeleting, firstName, id }) {
         navigate('/allFriends');
         setIsDeletingFriend(false);
         setFriendWasDeleted(true);
+
+        // Delete image from storage if friend deleted successfully
+        const favoriteColorCapitalized =
+          favoriteColor.charAt(0).toUpperCase() + favoriteColor.slice(1);
+        const pictureNameFormat = `${userUid}-${birthdate}-${fullName}-${favoriteColorCapitalized}`;
+        const desertRef = ref(storage, pictureNameFormat);
+        deleteObject(desertRef)
+          .then(() => {
+            console.log('Image deleted');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -54,7 +79,10 @@ function DeleteFriendModal({ isDeleting, setIsDeleting, firstName, id }) {
       title='Are you absolutely sure?'
       centered
     >
-      <p>You won't be able to undo this action.</p>
+      <p>
+        All data will be lost and the image will be deleted. You won't be able
+        to undo this action.
+      </p>
 
       <Group css={buttonsContainerCss} justify='end'>
         <Button
