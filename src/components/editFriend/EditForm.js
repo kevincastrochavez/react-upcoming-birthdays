@@ -12,7 +12,13 @@ import { IconAbc, IconColorFilter, IconPhoto } from '@tabler/icons-react';
 import { useLocation } from 'react-router-dom';
 import { useForm } from '@mantine/form';
 import ShortUniqueId from 'short-unique-id';
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+  deleteObject,
+} from 'firebase/storage';
 import Compressor from 'compressorjs';
 
 import {
@@ -28,6 +34,7 @@ function EditForm() {
   const { setIsEditingFriend, setFriendWasUpdated } = useSetAddingFriends();
   const location = useLocation();
   const friendId = location.pathname.split('/')[2];
+  const storage = getStorage();
   const { friendsList: friends } = useFriends();
   const {
     fullName,
@@ -155,6 +162,21 @@ function EditForm() {
         setIsSaving(false);
         setFriendWasUpdated(true);
         setIsEditingFriend(false);
+
+        if (pictureFile) {
+          // Delete image from storage if friend updated successfully
+          const favoriteColorCapitalized =
+            favoriteColor.charAt(0).toUpperCase() + favoriteColor.slice(1);
+          const pictureNameFormat = `${userUid}-${birthdate}-${fullName}-${favoriteColorCapitalized}`;
+          const desertRef = ref(storage, pictureNameFormat);
+          deleteObject(desertRef)
+            .then(() => {
+              console.log('Image deleted');
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         setIsSaving(false);
