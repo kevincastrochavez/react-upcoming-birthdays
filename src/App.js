@@ -5,7 +5,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { Notification } from '@mantine/core';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck, IconX } from '@tabler/icons-react';
 
 import {
   useActionFriends,
@@ -96,11 +96,24 @@ const FriendDetailsPage = lazy(() =>
 function App() {
   const { userUid } = useUserInfo();
   const { setFriendsList } = useSetFriends();
-  const { friendWasAdded, friendWasDeleted, friendWasUpdated } =
-    useActionFriends();
-  const { setFriendWasAdded, setFriendWasDeleted, setFriendWasUpdated } =
-    useSetAddingFriends();
+  const {
+    friendWasAdded,
+    friendWasDeleted,
+    friendWasUpdated,
+    addingFriendFailed,
+    updatingFriendFailed,
+    deletingFriendFailed,
+  } = useActionFriends();
+  const {
+    setFriendWasAdded,
+    setFriendWasDeleted,
+    setFriendWasUpdated,
+    setAddingFriendFailed,
+    setUpdatingFriendFailed,
+    setDeletingFriendFailed,
+  } = useSetAddingFriends();
   const checkIcon = <IconCheck />;
+  const closeIcon = <IconX />;
 
   const getFriendslist = (userUid) => {
     let friendsList = [];
@@ -151,6 +164,24 @@ function App() {
     }, 3000);
   }
 
+  if (addingFriendFailed) {
+    setTimeout(() => {
+      setAddingFriendFailed(false);
+    }, 3000);
+  }
+
+  if (updatingFriendFailed) {
+    setTimeout(() => {
+      setUpdatingFriendFailed(false);
+    }, 3000);
+  }
+
+  if (deletingFriendFailed) {
+    setTimeout(() => {
+      setDeletingFriendFailed(false);
+    }, 3000);
+  }
+
   return (
     <>
       <BrowserRouter>
@@ -187,6 +218,39 @@ function App() {
             title='Your friend was successfully deleted'
             withBorder
             onClose={() => setFriendWasDeleted(false)}
+          />
+        )}
+
+        {addingFriendFailed && (
+          <Notification
+            css={addedNotificationCss}
+            icon={closeIcon}
+            color='red'
+            title='Something went wrong while adding your friend. Please try again later.'
+            withBorder
+            onClose={() => setAddingFriendFailed(false)}
+          />
+        )}
+
+        {updatingFriendFailed && (
+          <Notification
+            css={addedNotificationCss}
+            icon={closeIcon}
+            color='red'
+            title='Something went wrong while updating your friend. Please try again later.'
+            withBorder
+            onClose={() => setUpdatingFriendFailed(false)}
+          />
+        )}
+
+        {deletingFriendFailed && (
+          <Notification
+            css={addedNotificationCss}
+            icon={closeIcon}
+            color='red'
+            title='Something went wrong while deleting your friend. Please try again later.'
+            withBorder
+            onClose={() => setDeletingFriendFailed(false)}
           />
         )}
 

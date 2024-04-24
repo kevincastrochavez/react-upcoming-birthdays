@@ -39,7 +39,8 @@ function DeleteFriendModal({
   id,
 }) {
   const [isDeletingFriend, setIsDeletingFriend] = useState(false);
-  const { setFriendWasDeleted } = useSetAddingFriends();
+  const { setFriendWasDeleted, setDeletingFriendFailed } =
+    useSetAddingFriends();
   const { userUid } = useUserInfo();
   const navigate = useNavigate();
   const storage = getStorage();
@@ -59,16 +60,14 @@ function DeleteFriendModal({
         const pictureNameFormat = `${userUid}-${birthdate}-${fullName}-${favoriteColorCapitalized}`;
         const desertRef = ref(storage, pictureNameFormat);
         deleteObject(desertRef)
-          .then(() => {
-            console.log('Image deleted');
-          })
+          .then(() => {})
           .catch((error) => {
-            console.log(error);
+            setDeletingFriendFailed(true);
           });
       })
       .catch((error) => {
-        console.log(error);
         setIsDeletingFriend(false);
+        setDeletingFriendFailed(true);
       });
   };
 
