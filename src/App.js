@@ -79,7 +79,6 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Add Notifications for errors in Adding, Editing and Deleting
 // Make switch for sharing list work
 // Check if QR code belongs to app
 // Share functionality for the QR code
