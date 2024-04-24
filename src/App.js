@@ -22,6 +22,7 @@ import LoginSkeleton from './pages/login/LoginSkeleton';
 import DashboardSkeleton from './pages/dashboard/DashboardSkeleton';
 import AllFriendsSkeleton from './pages/allFriends/AllFriendsSkeleton';
 import ShareImportSkeleton from './pages/shareImport/ShareImportSkeleton';
+import FriendDetailsSkeleton from './pages/friendDetails/FriendDetailsSkeleton';
 
 const addedNotificationCss = css`
   position: fixed;
@@ -78,7 +79,6 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Friend details skeleton
 // Add Notifications for errors in Adding, Editing and Deleting
 // Make switch for sharing list work
 // Check if QR code belongs to app
@@ -91,6 +91,7 @@ const FriendDetailsPage = lazy(() =>
 // Fix breadcrumbs name for details page
 // Fix breadcrumbs link color for All Friends
 // Change picture id in firebase
+// Get rid of transparency in Searching
 
 function App() {
   const { userUid } = useUserInfo();
@@ -224,7 +225,7 @@ function App() {
             <Route
               path='/allFriends/:id'
               element={
-                <Suspense fallback={<h1>Loading...</h1>}>
+                <Suspense fallback={<FriendDetailsSkeleton />}>
                   <FriendDetailsPage />
                   <BottomNav />
                 </Suspense>
