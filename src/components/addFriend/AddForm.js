@@ -37,7 +37,8 @@ function AddForm() {
   const uniqueId = uid.rnd();
   const storage = getStorage();
   const [isUploading, setIsUploading] = useState(false);
-  const { setIsAddingFriend, setFriendWasAdded } = useSetAddingFriends();
+  const { setIsAddingFriend, setFriendWasAdded, setAddingFriendFailed } =
+    useSetAddingFriends();
   const placeHolderImage =
     'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=db5411aa-be64-49a1-89d4-b293d202ee7d';
 
@@ -118,13 +119,13 @@ function AddForm() {
               pictureUrl = url;
             })
             .catch((error) => {
-              console.log(error);
-              throw new Error(error);
+              setIsUploading(false);
+              setAddingFriendFailed(true);
             });
         })
         .catch((error) => {
-          console.log(error);
-          throw new Error(error);
+          setIsUploading(false);
+          setAddingFriendFailed(true);
         });
     }
 
@@ -144,8 +145,7 @@ function AddForm() {
       })
       .catch((error) => {
         setIsUploading(false);
-        console.log(error);
-        throw new Error(error);
+        setAddingFriendFailed(true);
       });
   }
 
