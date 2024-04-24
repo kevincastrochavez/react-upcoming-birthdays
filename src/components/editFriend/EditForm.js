@@ -24,7 +24,8 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 function EditForm() {
-  const { setIsEditingFriend, setFriendWasUpdated } = useSetAddingFriends();
+  const { setIsEditingFriend, setFriendWasUpdated, setUpdatingFriendFailed } =
+    useSetAddingFriends();
   const location = useLocation();
   const friendId = location.pathname.split('/')[2];
   const storage = getStorage();
@@ -131,13 +132,13 @@ function EditForm() {
               pictureUrl = url;
             })
             .catch((error) => {
-              console.log(error);
-              throw new Error(error);
+              setIsSaving(false);
+              setUpdatingFriendFailed(true);
             });
         })
         .catch((error) => {
-          console.log(error);
-          throw new Error(error);
+          setIsSaving(false);
+          setUpdatingFriendFailed(true);
         });
     }
 
@@ -157,8 +158,7 @@ function EditForm() {
       })
       .catch((error) => {
         setIsSaving(false);
-        console.log(error);
-        throw new Error(error);
+        setUpdatingFriendFailed(true);
       });
   }
 
