@@ -39,8 +39,6 @@ function FriendPreferences({
   likesToCelebrate,
   candyPreference,
 }) {
-  const celebrateText = likesToCelebrate ? 'Yes' : 'No';
-
   return (
     <div css={friendInfoCss}>
       <div>
@@ -65,7 +63,7 @@ function FriendPreferences({
           <span>Celebrate</span>
         </div>
 
-        <p>{celebrateText}</p>
+        <p>{likesToCelebrate}</p>
       </div>
     </div>
   );
