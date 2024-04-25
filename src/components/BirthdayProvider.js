@@ -28,6 +28,7 @@ export default function BirthdayProvider({ children }) {
   const [addingFriendFailed, setAddingFriendFailed] = useState(false);
   const [updatingFriendFailed, setUpdatingFriendFailed] = useState(false);
   const [deletingFriendFailed, setDeletingFriendFailed] = useState(false);
+  const [strangeQrCode, setStrangeQrCode] = useState(false);
 
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
@@ -86,6 +87,7 @@ export default function BirthdayProvider({ children }) {
         setAddingFriendFailed,
         setUpdatingFriendFailed,
         setDeletingFriendFailed,
+        setStrangeQrCode,
       }}
     >
       <BirthdayContext.Provider
@@ -109,6 +111,7 @@ export default function BirthdayProvider({ children }) {
           addingFriendFailed,
           updatingFriendFailed,
           deletingFriendFailed,
+          strangeQrCode,
         }}
       >
         {children}
@@ -273,6 +276,28 @@ export function useSetUserInfo() {
   const { setUserUid, setIsUserSharingList } =
     useSetBirthdayProvider('useSetUserInfo');
   return { setUserUid, setIsUserSharingList };
+}
+
+/**
+ * Returns the state for the strangeQrCode
+ *
+ * @returns { strangeQrCode }
+ */
+export function useSharing() {
+  const { strangeQrCode } = useBirthdayProvider('useSharing');
+  return {
+    strangeQrCode,
+  };
+}
+
+/**
+ * Updates the state for the strangeQrCode
+ *
+ * @returns { setStrangeQrCode }
+ */
+export function useSetSharing() {
+  const { setStrangeQrCode } = useSetBirthdayProvider('useSetSharing');
+  return { setStrangeQrCode };
 }
 
 /**
