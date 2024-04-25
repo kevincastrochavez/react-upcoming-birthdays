@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Button,
   FileInput,
@@ -11,8 +11,15 @@ import { DatePickerInput } from '@mantine/dates';
 import { IconAbc, IconColorFilter, IconPhoto } from '@tabler/icons-react';
 import { useLocation } from 'react-router-dom';
 import { useForm } from '@mantine/form';
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
 import Compressor from 'compressorjs';
+import ShortUniqueId from 'short-unique-id';
 
 import {
   useFriends,
@@ -28,7 +35,6 @@ function EditForm() {
     useSetAddingFriends();
   const location = useLocation();
   const friendId = location.pathname.split('/')[2];
-  const storage = getStorage();
   const { friendsList: friends } = useFriends();
   const {
     fullName,
@@ -37,9 +43,11 @@ function EditForm() {
     likesToCelebrate,
     candyPreference,
     imageUrl,
+    imagePath,
   } = getFriendInfo(friends, friendId);
   const [birthdateValue, setBirthdateValue] = useState(new Date(birthdate));
   const [pictureFile, setPictureFile] = useState(null);
+  const imagePathRef = useRef({ old: imagePath, new: imagePath });
   const [isCompressingPicture, setIsCompressingPicture] = useState(false);
   const favoriteColorCapitalized =
     favoriteColor.charAt(0).toUpperCase() + favoriteColor.slice(1);
@@ -47,6 +55,7 @@ function EditForm() {
   // Upload picture logic
   const { userUid } = useUserInfo();
   const [isSaving, setIsSaving] = useState(false);
+  const storage = getStorage();
 
   const fullNameIcon = <IconAbc stroke={1.5} />;
   const pictureIcon = <IconPhoto stroke={1.5} />;
@@ -119,9 +128,11 @@ function EditForm() {
     let pictureUrl = imageUrl; // Set previous image url if no new image is selected
     // If new image is selected, upload it to firebase and get url to attach it to friend
     if (pictureFile) {
-      const storage = getStorage();
-      const pictureNameFormat = `${userUid}-${birthdayFull}-${fullName}-${favoriteColor}`;
+      const uid = new ShortUniqueId({ length: 20 });
+      const uniqueId = uid.rnd();
+      const pictureNameFormat = `${userUid}-${uniqueId}`;
       const pictureRef = ref(storage, pictureNameFormat);
+      imagePathRef.current.new = pictureNameFormat;
 
       // Upload picture to firebase and get url to attach it to friend
       await uploadBytes(pictureRef, pictureFile)
@@ -161,6 +172,7 @@ function EditForm() {
         likesToCelebrate,
         candyPreference,
         imageUrl: pictureUrl,
+        imagePath: imagePathRef.current.new,
         birthdate: birthdayFull,
       }
     )
@@ -168,6 +180,14 @@ function EditForm() {
         setIsSaving(false);
         setFriendWasUpdated(true);
         setIsEditingFriend(false);
+
+        if (imagePathRef.current.old !== imagePathRef.current.new) {
+          deleteObject(ref(storage, imagePathRef.current.old))
+            .then(() => {})
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         setIsSaving(false);
