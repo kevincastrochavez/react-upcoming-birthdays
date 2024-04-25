@@ -38,7 +38,7 @@ function FriendDetails() {
   const friendId = location.pathname.split('/')[2];
 
   const friendDetails = getFriendInfo(friends, friendId);
-  const { firstName, birthdate, fullName, favoriteColor } = friendDetails;
+  const { firstName } = friendDetails;
 
   return (
     <main css={mainContainerCss}>
@@ -74,11 +74,7 @@ function FriendDetails() {
       <DeleteFriendModal
         isDeleting={isDeleting}
         setIsDeleting={setIsDeleting}
-        firstName={firstName}
-        birthdate={birthdate}
-        fullName={fullName}
-        favoriteColor={favoriteColor}
-        id={friendId}
+        {...friendDetails}
       />
     </main>
   );

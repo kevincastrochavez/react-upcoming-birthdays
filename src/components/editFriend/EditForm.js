@@ -139,7 +139,6 @@ function EditForm() {
         .then(async (snapshot) => {
           await getDownloadURL(ref(storage, pictureNameFormat))
             .then((url) => {
-              console.log('Image uploaded');
               pictureUrl = url;
             })
             .catch((error) => {

@@ -23,20 +23,16 @@ const buttonsContainerCss = css`
  * @param {Boolean} isDeleting - true if the modal is open
  * @param {Function} setIsDeleting - updates the state of the modal
  * @param {String} firstName - first name of the friend
- * @param {String} birthdate - birthdate of the friend
- * @param {String} fullName - full name of the friend
- * @param {String} favoriteColor - favorite color of the friend
  * @param {String} id - id of the friend
+ * @param {String} imagePath - image path of the friend linked to firebase storage
  * @returns {JSX.Element}
  */
 function DeleteFriendModal({
   isDeleting,
   setIsDeleting,
   firstName,
-  birthdate,
-  fullName,
-  favoriteColor,
   id,
+  imagePath,
 }) {
   const [isDeletingFriend, setIsDeletingFriend] = useState(false);
   const { setFriendWasDeleted, setDeletingFriendFailed } =
@@ -61,10 +57,7 @@ function DeleteFriendModal({
         setFriendWasDeleted(true);
 
         // Delete image from storage if friend deleted successfully
-        const favoriteColorCapitalized =
-          favoriteColor.charAt(0).toUpperCase() + favoriteColor.slice(1);
-        const pictureNameFormat = `${userUid}-${birthdate}-${fullName}-${favoriteColorCapitalized}`;
-        const desertRef = ref(storage, pictureNameFormat);
+        const desertRef = ref(storage, imagePath);
         deleteObject(desertRef)
           .then(() => {})
           .catch((error) => {
