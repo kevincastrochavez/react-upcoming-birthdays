@@ -107,10 +107,11 @@ function AddForm() {
     const birthdayFull = `${birthdayYear}-${birthdayMonth + 1}-${birthdayDay}`;
     let pictureUrl = '';
 
-    const pictureNameFormat = `${userUid}-${uniqueId}`;
+    let pictureNameFormat = '';
 
     if (pictureFile) {
       // Upload picture to firebase and get url to attach it to friend
+      pictureNameFormat = `${userUid}-${uniqueId}`;
       const pictureRef = ref(storage, pictureNameFormat);
       await uploadBytes(pictureRef, pictureFile)
         .then(async (snapshot) => {

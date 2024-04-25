@@ -57,12 +57,14 @@ function DeleteFriendModal({
         setFriendWasDeleted(true);
 
         // Delete image from storage if friend deleted successfully
-        const desertRef = ref(storage, imagePath);
-        deleteObject(desertRef)
-          .then(() => {})
-          .catch((error) => {
-            setDeletingFriendFailed(true);
-          });
+        if (imagePath !== '') {
+          const desertRef = ref(storage, imagePath);
+          deleteObject(desertRef)
+            .then(() => {})
+            .catch((error) => {
+              setDeletingFriendFailed(true);
+            });
+        }
       })
       .catch((error) => {
         setIsDeletingFriend(false);

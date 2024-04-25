@@ -180,7 +180,10 @@ function EditForm() {
         setFriendWasUpdated(true);
         setIsEditingFriend(false);
 
-        if (imagePathRef.current.old !== imagePathRef.current.new) {
+        if (
+          imagePathRef.current.old !== imagePathRef.current.new &&
+          imagePathRef.current.old !== ''
+        ) {
           deleteObject(ref(storage, imagePathRef.current.old))
             .then(() => {})
             .catch((error) => {
