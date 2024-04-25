@@ -41,13 +41,26 @@ const idContainerCss = css`
  */
 function Import() {
   const [qrCodeData, setQrCodeData] = useState(null);
+  const baseUrlApp = 'happyb-five.vercel.app';
   let scanner;
 
-  console.log(qrCodeData);
+  function checkQrCodeBelongsToApp(qrValue) {
+    const qrValueArray = qrValue.split('/');
+    let belongsToApp = false;
+    if (qrValueArray.length > 4) {
+      const appDomain = qrValueArray[2];
+      belongsToApp = appDomain === baseUrlApp;
+    }
+
+    return belongsToApp;
+  }
 
   useEffect(() => {
     const onScanSuccess = (decodedText) => {
-      setQrCodeData(decodedText);
+      const belongsToApp = checkQrCodeBelongsToApp(decodedText);
+      if (belongsToApp) {
+        setQrCodeData(decodedText);
+      }
       scanner.clear();
     };
 
