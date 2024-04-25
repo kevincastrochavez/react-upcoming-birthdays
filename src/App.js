@@ -129,8 +129,10 @@ function App() {
     const sharingRef = doc(db, `friends/${userUid}/sharingList`, 'sharingList');
     const sharingSnap = await getDoc(sharingRef);
     const sharingHasBeenCreated = sharingSnap.exists();
-    const { sharing } = sharingSnap.data();
-    setIsUserSharingList(sharing);
+    if (sharingHasBeenCreated) {
+      const { sharing } = sharingSnap.data();
+      setIsUserSharingList(sharing);
+    }
 
     // For new users create a sharing list and set it to true
     if (!sharingHasBeenCreated) {
