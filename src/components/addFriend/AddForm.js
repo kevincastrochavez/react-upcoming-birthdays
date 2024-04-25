@@ -129,15 +129,28 @@ function AddForm() {
         });
     }
 
+    const globalCollection = 'friends';
+    const personalCollection = userUid;
+    const friendsCollection = 'personalFriends';
+
     // Add friend to firestore collection for the user
-    await setDoc(doc(db, userUid, uniqueId), {
-      fullName: fullName.trim(),
-      favoriteColor: favoriteColor.trim().toLowerCase(),
-      likesToCelebrate,
-      candyPreference,
-      imageUrl: pictureUrl || placeHolderImage,
-      birthdate: birthdayFull,
-    })
+    await setDoc(
+      doc(
+        db,
+        globalCollection,
+        personalCollection,
+        friendsCollection,
+        uniqueId
+      ),
+      {
+        fullName: fullName.trim(),
+        favoriteColor: favoriteColor.trim().toLowerCase(),
+        likesToCelebrate,
+        candyPreference,
+        imageUrl: pictureUrl || placeHolderImage,
+        birthdate: birthdayFull,
+      }
+    )
       .then(() => {
         setIsUploading(false);
         setFriendWasAdded(true);

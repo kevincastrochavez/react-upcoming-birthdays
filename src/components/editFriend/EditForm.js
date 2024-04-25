@@ -142,15 +142,28 @@ function EditForm() {
         });
     }
 
+    const globalCollection = 'friends';
+    const personalCollection = userUid;
+    const friendsCollection = 'personalFriends';
+
     // Save changes to friend to firestore collection for the user
-    await updateDoc(doc(db, userUid, friendId), {
-      fullName: fullName.trim(),
-      favoriteColor: favoriteColor.trim().toLowerCase(),
-      likesToCelebrate,
-      candyPreference,
-      imageUrl: pictureUrl,
-      birthdate: birthdayFull,
-    })
+    await updateDoc(
+      doc(
+        db,
+        globalCollection,
+        personalCollection,
+        friendsCollection,
+        friendId
+      ),
+      {
+        fullName: fullName.trim(),
+        favoriteColor: favoriteColor.trim().toLowerCase(),
+        likesToCelebrate,
+        candyPreference,
+        imageUrl: pictureUrl,
+        birthdate: birthdayFull,
+      }
+    )
       .then(() => {
         setIsSaving(false);
         setFriendWasUpdated(true);

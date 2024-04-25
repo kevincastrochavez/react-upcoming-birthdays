@@ -48,7 +48,13 @@ function DeleteFriendModal({
   const handleDelete = () => {
     setIsDeletingFriend(true);
 
-    deleteDoc(doc(db, userUid, id))
+    const globalCollection = 'friends';
+    const personalCollection = userUid;
+    const friendsCollection = 'personalFriends';
+
+    deleteDoc(
+      doc(db, globalCollection, personalCollection, friendsCollection, id)
+    )
       .then(() => {
         navigate('/allFriends');
         setIsDeletingFriend(false);
