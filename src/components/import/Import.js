@@ -1,8 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { Notification } from '@mantine/core';
+import { IconX } from '@tabler/icons-react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { useEffect, useState } from 'react';
 
+import { useSetSharing, useSharing } from '../BirthdayProvider';
 import DialogImport from './DialogImport';
 
 const shareContainerCss = css`
@@ -35,14 +38,26 @@ const idContainerCss = css`
   }
 `;
 
+const addedNotificationCss = css`
+  position: fixed;
+  bottom: 90px;
+  left: 24px;
+  right: 24px;
+  z-index: 10;
+`;
+
 /**
  * Displays the Import component
  * @returns {JSX.Element}
  */
 function Import() {
   const [qrCodeData, setQrCodeData] = useState(null);
+  const { strangeQrCode } = useSharing();
+  const { setStrangeQrCode } = useSetSharing();
   const baseUrlApp = 'happyb-five.vercel.app';
   let scanner;
+
+  const closeIcon = <IconX />;
 
   function checkQrCodeBelongsToApp(qrValue) {
     const qrValueArray = qrValue.split('/');
@@ -50,6 +65,8 @@ function Import() {
     if (qrValueArray.length > 4) {
       const appDomain = qrValueArray[2];
       belongsToApp = appDomain === baseUrlApp;
+    } else {
+      setStrangeQrCode(true);
     }
 
     return belongsToApp;
@@ -81,6 +98,12 @@ function Import() {
     }
   }, []);
 
+  if (strangeQrCode) {
+    setTimeout(() => {
+      setStrangeQrCode(false);
+    }, 3000);
+  }
+
   return (
     <div css={shareContainerCss}>
       <h1>Got a QR code? Scan it or upload it here!</h1>
@@ -91,6 +114,17 @@ function Import() {
 
         <DialogImport />
       </div>
+
+      {strangeQrCode && (
+        <Notification
+          css={addedNotificationCss}
+          icon={closeIcon}
+          color='red'
+          title='Looks like this QR Code does not belong to this app'
+          withBorder
+          onClose={() => setStrangeQrCode(false)}
+        />
+      )}
     </div>
   );
 }

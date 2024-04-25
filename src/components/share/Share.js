@@ -13,7 +13,7 @@ import {
   Form,
 } from '../../componentsShadcn/ui/form';
 import { Switch } from '../../componentsShadcn/ui/switch';
-import { useSetUserInfo, useUserInfo } from '../BirthdayProvider';
+import { useUserInfo } from '../BirthdayProvider';
 import { Button } from '../../componentsShadcn/ui/button';
 import SearchFriend from '../searchFriend/SearchFriend';
 import Copy from './Copy';
