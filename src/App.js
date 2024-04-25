@@ -117,26 +117,29 @@ function App() {
   const getFriendslist = (userUid) => {
     let friendsList = [];
     // Listening for realtime updates
-    onSnapshot(collection(db, userUid), (snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        if (change.type === 'added') {
-          friendsList.push({ ...change.doc.data(), id: change.doc.id });
-        }
-        if (change.type === 'modified') {
-          friendsList = friendsList.filter(
-            (friend) => friend.id !== change.doc.id
-          );
-          friendsList.push({ ...change.doc.data(), id: change.doc.id });
-        }
-        if (change.type === 'removed') {
-          friendsList = friendsList.filter(
-            (friend) => friend.id !== change.doc.id
-          );
-        }
-      });
+    onSnapshot(
+      collection(db, `friends/${userUid}/personalFriends`),
+      (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === 'added') {
+            friendsList.push({ ...change.doc.data(), id: change.doc.id });
+          }
+          if (change.type === 'modified') {
+            friendsList = friendsList.filter(
+              (friend) => friend.id !== change.doc.id
+            );
+            friendsList.push({ ...change.doc.data(), id: change.doc.id });
+          }
+          if (change.type === 'removed') {
+            friendsList = friendsList.filter(
+              (friend) => friend.id !== change.doc.id
+            );
+          }
+        });
 
-      setFriendsList(friendsList);
-    });
+        setFriendsList(friendsList);
+      }
+    );
   };
 
   useEffect(() => {
