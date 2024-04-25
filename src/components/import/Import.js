@@ -43,6 +43,8 @@ function Import() {
   const [qrCodeData, setQrCodeData] = useState(null);
   let scanner;
 
+  console.log(qrCodeData);
+
   useEffect(() => {
     const onScanSuccess = (decodedText) => {
       setQrCodeData(decodedText);

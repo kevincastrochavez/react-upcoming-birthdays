@@ -3,7 +3,13 @@ import { css } from '@emotion/react';
 
 import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { collection, onSnapshot } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  setDoc,
+} from 'firebase/firestore';
 import { Notification } from '@mantine/core';
 import { IconCheck, IconX } from '@tabler/icons-react';
 
@@ -11,6 +17,7 @@ import {
   useActionFriends,
   useSetAddingFriends,
   useSetFriends,
+  useSetUserInfo,
   useUserInfo,
 } from './components/BirthdayProvider';
 import BottomNav from './components/bottomNav/BottomNav';
@@ -79,7 +86,6 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Make switch for sharing list work
 // Check if QR code belongs to app
 // Share functionality for the QR code
 // Implement the import functionality, along with uploading of separate images
@@ -94,6 +100,7 @@ const FriendDetailsPage = lazy(() =>
 
 function App() {
   const { userUid } = useUserInfo();
+  const { setIsUserSharingList } = useSetUserInfo();
   const { setFriendsList } = useSetFriends();
   const {
     friendWasAdded,
@@ -114,7 +121,51 @@ function App() {
   const checkIcon = <IconCheck />;
   const closeIcon = <IconX />;
 
-  const getFriendslist = (userUid) => {
+  const globalCollection = 'friends';
+  const personalCollection = userUid;
+  const sharedListCollection = 'sharingList';
+
+  const getSharedList = async () => {
+    const sharingRef = doc(db, `friends/${userUid}/sharingList`, 'sharingList');
+    const sharingSnap = await getDoc(sharingRef);
+    const sharingHasBeenCreated = sharingSnap.exists();
+    const { sharing } = sharingSnap.data();
+    setIsUserSharingList(sharing);
+
+    // For new users create a sharing list and set it to true
+    if (!sharingHasBeenCreated) {
+      setDoc(
+        doc(
+          db,
+          globalCollection,
+          personalCollection,
+          sharedListCollection,
+          'sharingList'
+        ),
+        {
+          sharing: true,
+        }
+      )
+        .then(() => {
+          console.log('Sharing list created');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    // Watch for changes to the sharing list and update the state
+    onSnapshot(collection(db, `friends/${userUid}/sharingList`), (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === 'modified') {
+          const { sharing } = change.doc.data();
+          setIsUserSharingList(sharing);
+        }
+      });
+    });
+  };
+
+  const getFriendslist = () => {
     let friendsList = [];
     // Listening for realtime updates
     onSnapshot(
@@ -144,6 +195,7 @@ function App() {
 
   useEffect(() => {
     if (userUid) {
+      getSharedList();
       getFriendslist(userUid);
     }
   }, [userUid]);

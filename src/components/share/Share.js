@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { useForm } from 'react-hook-form';
 import { QRCodeSVG } from 'qrcode.react';
 import { Share2Icon } from '@radix-ui/react-icons';
+import { doc, updateDoc } from 'firebase/firestore';
 
 import {
   FormControl,
@@ -16,6 +17,7 @@ import { useSetUserInfo, useUserInfo } from '../BirthdayProvider';
 import { Button } from '../../componentsShadcn/ui/button';
 import SearchFriend from '../searchFriend/SearchFriend';
 import Copy from './Copy';
+import { db } from '../../firebase';
 
 const shareContainerCss = css`
   background-color: #fff;
@@ -62,14 +64,39 @@ const idContainerCss = css`
  */
 function Share() {
   const { isUserSharingList, userUid } = useUserInfo();
-  const { setIsUserSharingList } = useSetUserInfo();
-  const listUrlToShare = `https://www.happyb.com/shareImport/${userUid}`;
+  const baseUrl = 'https://happyb-five.vercel.app/shareImport';
+  const listUrlToShare = `${baseUrl}/${userUid}`;
 
   const form = useForm({
     defaultValues: {
       security_emails: true,
     },
   });
+
+  function updateSharing() {
+    const globalCollection = 'friends';
+    const personalCollection = userUid;
+    const sharedListCollection = 'sharingList';
+
+    updateDoc(
+      doc(
+        db,
+        globalCollection,
+        personalCollection,
+        sharedListCollection,
+        'sharingList'
+      ),
+      {
+        sharing: !isUserSharingList,
+      }
+    )
+      .then(() => {
+        console.log('Sharing list updated');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <div css={shareContainerCss}>
@@ -85,7 +112,7 @@ function Share() {
           <FormControl>
             <Switch
               checked={isUserSharingList}
-              onCheckedChange={() => setIsUserSharingList(!isUserSharingList)}
+              onCheckedChange={updateSharing}
             />
           </FormControl>
         </FormItem>
@@ -93,7 +120,7 @@ function Share() {
 
       {isUserSharingList && (
         <div css={qrContainerCss}>
-          {userUid && <QRCodeSVG value={userUid} />}
+          {userUid && <QRCodeSVG value={listUrlToShare} />}
           <Button className='rounded-full' variant='outline' size='icon'>
             <Share2Icon className='h-4 w-4' />
           </Button>
