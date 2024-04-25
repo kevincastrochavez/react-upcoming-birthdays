@@ -107,15 +107,15 @@ function AddForm() {
     const birthdayFull = `${birthdayYear}-${birthdayMonth + 1}-${birthdayDay}`;
     let pictureUrl = '';
 
+    const pictureNameFormat = `${userUid}-${uniqueId}`;
+
     if (pictureFile) {
       // Upload picture to firebase and get url to attach it to friend
-      const pictureNameFormat = `${userUid}-${birthdayFull}-${fullName}-${favoriteColor}`;
       const pictureRef = ref(storage, pictureNameFormat);
       await uploadBytes(pictureRef, pictureFile)
         .then(async (snapshot) => {
           await getDownloadURL(ref(storage, pictureNameFormat))
             .then((url) => {
-              console.log('Image uploaded');
               pictureUrl = url;
             })
             .catch((error) => {
@@ -148,6 +148,7 @@ function AddForm() {
         likesToCelebrate,
         candyPreference,
         imageUrl: pictureUrl || placeHolderImage,
+        imagePath: pictureNameFormat,
         birthdate: birthdayFull,
       }
     )
