@@ -86,7 +86,7 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Show error if QR code does not belong to app
+// Check if list is shared
 // Share functionality for the QR code
 // Implement the import functionality, along with uploading of separate images
 // When having the url/shareImport/id, load the import

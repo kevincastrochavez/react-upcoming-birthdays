@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Notification } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
+import { useEffect, useRef, useState } from 'react';
+import { Button, Checkbox, Modal, Notification, Table } from '@mantine/core';
+import { IconThumbUp, IconX } from '@tabler/icons-react';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { Html5QrcodeScanner } from 'html5-qrcode';
-import { useEffect, useState } from 'react';
 
 import { useSetSharing, useSharing } from '../BirthdayProvider';
 import DialogImport from './DialogImport';
+import { db } from '../../firebase';
 
 const shareContainerCss = css`
   background-color: #fff;
@@ -46,12 +48,28 @@ const addedNotificationCss = css`
   z-index: 10;
 `;
 
+const rightAlignedBtnCss = css`
+  display: flex;
+`;
+
+const tableCss = css`
+  & td > img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+  }
+`;
+
 /**
  * Displays the Import component
  * @returns {JSX.Element}
  */
 function Import() {
-  const [qrCodeData, setQrCodeData] = useState(null);
+  const [openImportModal, setOpenImportModal] = useState(false);
+  const [friendsToDisplay, setFriendsToDisplay] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const isSharingListPublic = useRef(null);
   const { strangeQrCode } = useSharing();
   const { setStrangeQrCode } = useSetSharing();
   const baseUrlApp = 'happyb-five.vercel.app';
@@ -72,11 +90,38 @@ function Import() {
     return belongsToApp;
   }
 
+  const checkUserIsSharingList = async (qrValue) => {
+    const qrUserId = qrValue.split('/')[4];
+    const sharingRef = doc(
+      db,
+      `friends/${qrUserId}/sharingList`,
+      'sharingList'
+    );
+    const sharingSnap = await getDoc(sharingRef);
+    const { sharing } = sharingSnap.data();
+
+    return sharing;
+  };
+
   useEffect(() => {
-    const onScanSuccess = (decodedText) => {
+    const onScanSuccess = async (decodedText) => {
       const belongsToApp = checkQrCodeBelongsToApp(decodedText);
       if (belongsToApp) {
-        setQrCodeData(decodedText);
+        const listIsPublic = await checkUserIsSharingList(decodedText);
+        isSharingListPublic.current = listIsPublic;
+
+        const friendToImportId = decodedText.split('/')[4];
+        const allFriendsToDisplay = [];
+        const querySnapshot = await getDocs(
+          collection(db, `friends/${friendToImportId}/personalFriends`)
+        );
+        querySnapshot.forEach((doc) => {
+          allFriendsToDisplay.push({ ...doc.data(), id: doc.id });
+        });
+
+        setFriendsToDisplay(allFriendsToDisplay);
+
+        setOpenImportModal(true);
       }
       scanner.clear();
     };
@@ -97,6 +142,59 @@ function Import() {
       scanner.render(onScanSuccess, onScanError);
     }
   }, []);
+
+  const rows = friendsToDisplay.map((friend) => (
+    <Table.Tr key={friend.id}>
+      <Table.Td>
+        <Checkbox
+          aria-label='Select row'
+          checked={selectedRows.includes(friend.id)}
+          onChange={(event) =>
+            setSelectedRows(
+              event.currentTarget.checked
+                ? [...selectedRows, friend]
+                : selectedRows.filter(
+                    (friendPassed) => friendPassed.id !== friend.id
+                  )
+            )
+          }
+        />
+      </Table.Td>
+      <Table.Td>
+        <img src={friend.imageUrl} />
+      </Table.Td>
+      <Table.Td>{friend.fullName}</Table.Td>
+    </Table.Tr>
+  ));
+
+  const sharingJsx = (
+    <Table css={tableCss}>
+      <Table.Thead>
+        <Table.Tr>
+          <Table.Th />
+          <Table.Th>Picture</Table.Th>
+          <Table.Th>Name</Table.Th>
+        </Table.Tr>
+      </Table.Thead>
+      <Table.Tbody>{rows}</Table.Tbody>
+    </Table>
+  );
+
+  const notSharingJsx = (
+    <>
+      <p>
+        We are sorry. Looks like your friend's list is not public at the moment.
+      </p>
+      <Button
+        leftSection={<IconThumbUp size={20} />}
+        className='mt-8 ml-auto'
+        onClick={() => setOpenImportModal(false)}
+        css={rightAlignedBtnCss}
+      >
+        Understood
+      </Button>
+    </>
+  );
 
   if (strangeQrCode) {
     setTimeout(() => {
@@ -125,6 +223,15 @@ function Import() {
           onClose={() => setStrangeQrCode(false)}
         />
       )}
+
+      <Modal
+        centered
+        opened={openImportModal}
+        onClose={() => setOpenImportModal(false)}
+        title='Import your friends list'
+      >
+        {isSharingListPublic.current ? sharingJsx : notSharingJsx}
+      </Modal>
     </div>
   );
 }
