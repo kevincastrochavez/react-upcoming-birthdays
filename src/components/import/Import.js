@@ -148,7 +148,7 @@ function Import() {
       <Table.Td>
         <Checkbox
           aria-label='Select row'
-          checked={selectedRows.includes(friend.id)}
+          checked={selectedRows.includes(friend)}
           onChange={(event) =>
             setSelectedRows(
               event.currentTarget.checked
