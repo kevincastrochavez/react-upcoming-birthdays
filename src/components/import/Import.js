@@ -185,6 +185,9 @@ function Import() {
     </Table.Tr>
   ));
 
+  const allRowsAreChecked = selectedRows.length === friendsToDisplay.length;
+  const noRowsAreChecked = selectedRows.length === 0;
+
   const sharingJsx = (
     <>
       {' '}
@@ -195,6 +198,7 @@ function Import() {
               {' '}
               <Checkbox
                 aria-label='Select all rows'
+                checked={allRowsAreChecked && !noRowsAreChecked}
                 onChange={(event) =>
                   setSelectedRows(
                     event.currentTarget.checked ? friendsToDisplay : []
