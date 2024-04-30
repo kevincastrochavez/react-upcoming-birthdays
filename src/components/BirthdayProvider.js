@@ -29,6 +29,9 @@ export default function BirthdayProvider({ children }) {
   const [updatingFriendFailed, setUpdatingFriendFailed] = useState(false);
   const [deletingFriendFailed, setDeletingFriendFailed] = useState(false);
   const [strangeQrCode, setStrangeQrCode] = useState(false);
+  const [openImportModal, setOpenImportModal] = useState(false);
+  const [friendsWereImported, setFriendsWereImported] = useState(false);
+  const [importingFriendsFailed, setImportingFriendsFailed] = useState(false);
 
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
@@ -88,6 +91,9 @@ export default function BirthdayProvider({ children }) {
         setUpdatingFriendFailed,
         setDeletingFriendFailed,
         setStrangeQrCode,
+        setOpenImportModal,
+        setFriendsWereImported,
+        setImportingFriendsFailed,
       }}
     >
       <BirthdayContext.Provider
@@ -112,6 +118,9 @@ export default function BirthdayProvider({ children }) {
           updatingFriendFailed,
           deletingFriendFailed,
           strangeQrCode,
+          openImportModal,
+          friendsWereImported,
+          importingFriendsFailed,
         }}
       >
         {children}
@@ -139,7 +148,7 @@ const monthNames = [
 /**
  * Returns the state of if the user is adding a friend, and if the friend was added
  *
- * @returns { isAddingFriend, friendWasAdded, friendWasDeleted, isEditingFriend, friendWasUpdated, addingFriendFailed, updatingFriendFailed, deletingFriendFailed, }
+ * @returns { isAddingFriend, friendWasAdded, friendWasDeleted, isEditingFriend, friendWasUpdated, addingFriendFailed, updatingFriendFailed, deletingFriendFailed, openImportModal, friendsWereImported, importingFriendsFailed }
  */
 export function useActionFriends() {
   const {
@@ -151,6 +160,9 @@ export function useActionFriends() {
     addingFriendFailed,
     updatingFriendFailed,
     deletingFriendFailed,
+    openImportModal,
+    friendsWereImported,
+    importingFriendsFailed,
   } = useBirthdayProvider('useActionFriends');
   return {
     isAddingFriend,
@@ -161,6 +173,9 @@ export function useActionFriends() {
     addingFriendFailed,
     updatingFriendFailed,
     deletingFriendFailed,
+    openImportModal,
+    friendsWereImported,
+    importingFriendsFailed,
   };
 }
 
@@ -219,7 +234,7 @@ export function useUserInfo() {
 /**
  * Updates the state of if the user is adding a friend, and if the friend was added
  *
- * @returns { setIsAddingFriend, setFriendWasAdded, setFriendWasDeleted, setIsEditingFriend, setFriendWasUpdated, setAddingFriendFailed, setUpdatingFriendFailed, setDeletingFriendFailed, }
+ * @returns { setIsAddingFriend, setFriendWasAdded, setFriendWasDeleted, setIsEditingFriend, setFriendWasUpdated, setAddingFriendFailed, setUpdatingFriendFailed, setDeletingFriendFailed, setOpenImportModal, setFriendsWereImported, setImportingFriendsFailed }
  */
 export function useSetAddingFriends() {
   const {
@@ -231,6 +246,9 @@ export function useSetAddingFriends() {
     setAddingFriendFailed,
     setUpdatingFriendFailed,
     setDeletingFriendFailed,
+    setOpenImportModal,
+    setFriendsWereImported,
+    setImportingFriendsFailed,
   } = useSetBirthdayProvider('useSetAddingFriends');
   return {
     setIsAddingFriend,
@@ -241,6 +259,9 @@ export function useSetAddingFriends() {
     setAddingFriendFailed,
     setUpdatingFriendFailed,
     setDeletingFriendFailed,
+    setOpenImportModal,
+    setFriendsWereImported,
+    setImportingFriendsFailed,
   };
 }
 
