@@ -140,8 +140,8 @@ function Import() {
         setFriendsToDisplay(allFriendsToDisplay);
 
         setOpenImportModal(true);
+        scanner.pause();
       }
-      scanner.clear();
     };
 
     const onScanError = (errorMessage) => {
