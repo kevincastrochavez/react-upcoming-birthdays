@@ -86,10 +86,9 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Check if list is shared
-// Share functionality for the QR code
 // Implement the import functionality, along with uploading of separate images
 // When having the url/shareImport/id, load the import
+// Make the share button work
 // Improve 3D object
 // Improve space next friends related shadows
 // Figure out color for links
@@ -97,6 +96,7 @@ const FriendDetailsPage = lazy(() =>
 // Fix breadcrumbs link color for All Friends
 // Change picture id in firebase
 // Get rid of transparency in Searching
+// Keep private certain friends when adding and editing so that they are always private
 
 function App() {
   const { userUid } = useUserInfo();
@@ -109,6 +109,8 @@ function App() {
     addingFriendFailed,
     updatingFriendFailed,
     deletingFriendFailed,
+    friendsWereImported,
+    importingFriendsFailed,
   } = useActionFriends();
   const {
     setFriendWasAdded,
@@ -117,6 +119,8 @@ function App() {
     setAddingFriendFailed,
     setUpdatingFriendFailed,
     setDeletingFriendFailed,
+    setFriendsWereImported,
+    setImportingFriendsFailed,
   } = useSetAddingFriends();
   const checkIcon = <IconCheck />;
   const closeIcon = <IconX />;
@@ -238,6 +242,18 @@ function App() {
     }, 3000);
   }
 
+  if (friendsWereImported) {
+    setTimeout(() => {
+      setFriendsWereImported(false);
+    }, 3000);
+  }
+
+  if (importingFriendsFailed) {
+    setTimeout(() => {
+      setImportingFriendsFailed(false);
+    }, 3000);
+  }
+
   return (
     <>
       <BrowserRouter>
@@ -266,6 +282,7 @@ function App() {
             onClose={() => setFriendWasUpdated(false)}
           />
         )}
+
         {friendWasDeleted && (
           <Notification
             css={addedNotificationCss}
@@ -274,6 +291,17 @@ function App() {
             title='Your friend was successfully deleted'
             withBorder
             onClose={() => setFriendWasDeleted(false)}
+          />
+        )}
+
+        {friendsWereImported && (
+          <Notification
+            css={addedNotificationCss}
+            icon={checkIcon}
+            color='teal'
+            title='Your friends were successfully imported'
+            withBorder
+            onClose={() => setFriendsWereImported(false)}
           />
         )}
 
@@ -307,6 +335,17 @@ function App() {
             title='Something went wrong while deleting your friend. Please try again later.'
             withBorder
             onClose={() => setDeletingFriendFailed(false)}
+          />
+        )}
+
+        {importingFriendsFailed && (
+          <Notification
+            css={addedNotificationCss}
+            icon={closeIcon}
+            color='red'
+            title='Something went wrong while importing your friends. Please try again later.'
+            withBorder
+            onClose={() => setImportingFriendsFailed(false)}
           />
         )}
 
