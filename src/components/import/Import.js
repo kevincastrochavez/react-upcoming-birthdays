@@ -1,12 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
-import { Button, Checkbox, Modal, Notification, Table } from '@mantine/core';
-import { IconThumbUp, IconX } from '@tabler/icons-react';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import {
+  Button,
+  Checkbox,
+  Group,
+  Modal,
+  Notification,
+  Table,
+} from '@mantine/core';
+import { IconDownload, IconThumbUp, IconX } from '@tabler/icons-react';
+import { collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import ShortUniqueId from 'short-unique-id';
 
-import { useSetSharing, useSharing } from '../BirthdayProvider';
+import {
+  useActionFriends,
+  useSetAddingFriends,
+  useSetSharing,
+  useSharing,
+  useUserInfo,
+} from '../BirthdayProvider';
 import DialogImport from './DialogImport';
 import { db } from '../../firebase';
 
@@ -66,10 +81,13 @@ const tableCss = css`
  * @returns {JSX.Element}
  */
 function Import() {
-  const [openImportModal, setOpenImportModal] = useState(false);
+  const { openImportModal } = useActionFriends();
+  const { setOpenImportModal, setFriendsWereImported } = useSetAddingFriends();
   const [friendsToDisplay, setFriendsToDisplay] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [isImporting, setIsImporting] = useState(false);
   const isSharingListPublic = useRef(null);
+  const { userUid } = useUserInfo();
   const { strangeQrCode } = useSharing();
   const { setStrangeQrCode } = useSetSharing();
   const baseUrlApp = 'happyb-five.vercel.app';
@@ -168,16 +186,45 @@ function Import() {
   ));
 
   const sharingJsx = (
-    <Table css={tableCss}>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th />
-          <Table.Th>Picture</Table.Th>
-          <Table.Th>Name</Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
+    <>
+      {' '}
+      <Table css={tableCss}>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>
+              {' '}
+              <Checkbox
+                aria-label='Select all rows'
+                onChange={(event) =>
+                  setSelectedRows(
+                    event.currentTarget.checked ? friendsToDisplay : []
+                  )
+                }
+              />
+            </Table.Th>
+            <Table.Th>Picture</Table.Th>
+            <Table.Th>Name</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>{rows}</Table.Tbody>
+      </Table>
+      <Group justify='flex-end' mt='xl'>
+        <Button onClick={() => setOpenImportModal(false)} variant='default'>
+          Cancel
+        </Button>
+        <Button
+          leftSection={<IconDownload size={20} />}
+          className='ml-auto'
+          onClick={handleFriendsImport}
+          css={rightAlignedBtnCss}
+          disabled={selectedRows.length < 1}
+          loading={isImporting}
+          loaderProps={{ type: 'dots' }}
+        >
+          Import
+        </Button>
+      </Group>
+    </>
   );
 
   const notSharingJsx = (
@@ -200,6 +247,72 @@ function Import() {
     setTimeout(() => {
       setStrangeQrCode(false);
     }, 3000);
+  }
+
+  async function handleFriendsImport() {
+    setIsImporting(true);
+    const storage = getStorage();
+    const placeHolderImage =
+      'https://firebasestorage.googleapis.com/v0/b/happyb-5c66e.appspot.com/o/user.jpg?alt=media&token=db5411aa-be64-49a1-89d4-b293d202ee7d';
+
+    try {
+      await Promise.all(
+        selectedRows.map(async (friend) => {
+          const {
+            fullName,
+            favoriteColor,
+            birthdate,
+            likesToCelebrate,
+            candyPreference,
+            imagePath,
+          } = friend;
+
+          const uid = new ShortUniqueId({ length: 20 });
+          const uniqueId = uid.rnd();
+          let pictureUrl = '';
+          const pictureNameFormat = `${userUid}-${uniqueId}`;
+
+          if (imagePath !== '') {
+            const url = await getDownloadURL(ref(storage, imagePath));
+            const imageBlob = await fetch(url).then((res) => res.blob());
+            const imageRef = ref(storage, pictureNameFormat);
+            await uploadBytes(imageRef, imageBlob);
+            pictureUrl = await getDownloadURL(ref(storage, pictureNameFormat));
+          }
+
+          const imageUrl = pictureUrl || placeHolderImage;
+
+          const globalCollection = 'friends';
+          const personalCollection = userUid;
+          const friendsCollection = 'personalFriends';
+
+          setDoc(
+            doc(
+              db,
+              globalCollection,
+              personalCollection,
+              friendsCollection,
+              uniqueId
+            ),
+            {
+              fullName,
+              favoriteColor,
+              likesToCelebrate,
+              candyPreference,
+              imageUrl,
+              imagePath: pictureNameFormat,
+              birthdate: birthdate,
+            }
+          );
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsImporting(false);
+      setOpenImportModal(false);
+      setFriendsWereImported(true);
+    }
   }
 
   return (
