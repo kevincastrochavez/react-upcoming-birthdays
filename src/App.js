@@ -86,8 +86,8 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Implement the import functionality, along with uploading of separate images
 // When having the url/shareImport/id, load the import
+// Keep private certain friends when adding and editing so that they are always private
 // Make the share button work
 // Improve 3D object
 // Improve space next friends related shadows
@@ -96,7 +96,6 @@ const FriendDetailsPage = lazy(() =>
 // Fix breadcrumbs link color for All Friends
 // Change picture id in firebase
 // Get rid of transparency in Searching
-// Keep private certain friends when adding and editing so that they are always private
 
 function App() {
   const { userUid } = useUserInfo();

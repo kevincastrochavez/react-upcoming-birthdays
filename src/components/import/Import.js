@@ -22,7 +22,6 @@ import {
   useSharing,
   useUserInfo,
 } from '../BirthdayProvider';
-import DialogImport from './DialogImport';
 import { db } from '../../firebase';
 
 const shareContainerCss = css`
@@ -44,14 +43,6 @@ const scannerContainerCss = css`
     border: 1px solid black;
     margin-bottom: 12px;
     margin-top: 30px;
-  }
-`;
-
-const idContainerCss = css`
-  & > p {
-    padding: 0 0 8px 4px;
-    margin-top: 40px;
-    font-size: 14px;
   }
 `;
 
@@ -323,12 +314,6 @@ function Import() {
     <div css={shareContainerCss}>
       <h1>Got a QR code? Scan it or upload it here!</h1>
       <div css={scannerContainerCss} id='reader'></div>
-
-      <div css={idContainerCss}>
-        <p>Or look up your friend’s list by the unique ID</p>
-
-        <DialogImport />
-      </div>
 
       {strangeQrCode && (
         <Notification
