@@ -84,10 +84,20 @@ function ShareImport() {
   const closeIcon = <IconX />;
 
   useEffect(() => {
+    const copyIdValue = searchParams.get('listToImport');
+    // const completeUrl = window.location.href;
+    const mockCompleteUrl =
+      'https://happyb-five.vercel.app/shareImport?listToImport=t7faVsPyIweZ78EWetufYMbnt2Q2'; // For testing
+
     if (qrCodeValue !== null) {
       handleGetListFromFriend(qrCodeValue, true);
     }
-  }, [qrCodeValue]);
+
+    if (copyIdValue) {
+      // handleGetListFromFriend(completeUrl, false);
+      handleGetListFromFriend(mockCompleteUrl, false); // For testing
+    }
+  }, [qrCodeValue, searchParams]);
 
   if (strangeQrCode) {
     setTimeout(() => {
@@ -97,16 +107,11 @@ function ShareImport() {
 
   /**
    * Checks if the friend's list is public
-   * @param {String} qrCodeValue - QR code value
+   * @param {String} userId - user ID
    * @returns {Boolean} - true if friend's list is public
    */
-  const checkUserIsSharingList = async (qrCodeValue) => {
-    const qrUserId = qrCodeValue.split('/')[4];
-    const sharingRef = doc(
-      db,
-      `friends/${qrUserId}/sharingList`,
-      'sharingList'
-    );
+  const checkUserIsSharingList = async (userId) => {
+    const sharingRef = doc(db, `friends/${userId}/sharingList`, 'sharingList');
     const sharingSnap = await getDoc(sharingRef);
     const { sharing } = sharingSnap.data();
 
@@ -121,11 +126,8 @@ function ShareImport() {
   function checkQrCodeBelongsToApp(qrCodeValue) {
     const qrValueArray = qrCodeValue.split('/');
     let belongsToApp = false;
-
-    if (qrValueArray.length > 4) {
-      const appDomain = qrValueArray[2];
-      belongsToApp = appDomain === baseUrlApp;
-    }
+    const appDomain = qrValueArray[2];
+    belongsToApp = appDomain === baseUrlApp;
 
     return belongsToApp;
   }
@@ -139,17 +141,19 @@ function ShareImport() {
   async function handleGetListFromFriend(qrCodeValue, comingFromQrCode) {
     const belongsToApp = checkQrCodeBelongsToApp(qrCodeValue);
     if (belongsToApp) {
-      const listIsPublic = await checkUserIsSharingList(qrCodeValue);
-      isSharingListPublic.current = listIsPublic;
-      let friendToImportId = '';
-
+      let userId = '';
       if (comingFromQrCode) {
-        friendToImportId = qrCodeValue.split('/')[4];
+        userId = qrCodeValue.split('/')[4];
+      } else {
+        userId = qrCodeValue.split('=')[1];
       }
+
+      const listIsPublic = await checkUserIsSharingList(userId);
+      isSharingListPublic.current = listIsPublic;
 
       const allFriendsToDisplay = [];
       const querySnapshot = await getDocs(
-        collection(db, `friends/${friendToImportId}/personalFriends`)
+        collection(db, `friends/${userId}/personalFriends`)
       );
       querySnapshot.forEach((doc) => {
         allFriendsToDisplay.push({ ...doc.data(), id: doc.id });
