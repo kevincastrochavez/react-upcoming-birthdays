@@ -93,6 +93,7 @@ const FriendDetailsPage = lazy(() =>
 // Improve space next friends related shadows
 // Figure out color for links
 // Fix breadcrumbs name for details page
+// Change Dashboard to Home
 // Fix breadcrumbs link color for All Friends
 // Change picture id in firebase
 // Get rid of transparency in Searching

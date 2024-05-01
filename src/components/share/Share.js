@@ -91,9 +91,7 @@ function Share() {
         sharing: !isUserSharingList,
       }
     )
-      .then(() => {
-        console.log('Sharing list updated');
-      })
+      .then(() => {})
       .catch((error) => {
         console.log(error);
       });
