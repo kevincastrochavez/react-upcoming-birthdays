@@ -85,17 +85,17 @@ function ShareImport() {
 
   useEffect(() => {
     const copyIdValue = searchParams.get('listToImport');
-    // const completeUrl = window.location.href;
-    const mockCompleteUrl =
-      'https://happyb-five.vercel.app/shareImport?listToImport=t7faVsPyIweZ78EWetufYMbnt2Q2'; // For testing
+    const completeUrl = window.location.href;
+    // const mockCompleteUrl =
+    //   'https://happyb-five.vercel.app/shareImport?listToImport=t7faVsPyIweZ78EWetufYMbnt2Q2'; // For testing
 
     if (qrCodeValue !== null) {
       handleGetListFromFriend(qrCodeValue, true);
     }
 
     if (copyIdValue) {
-      // handleGetListFromFriend(completeUrl, false);
-      handleGetListFromFriend(mockCompleteUrl, false); // For testing
+      handleGetListFromFriend(completeUrl, false);
+      // handleGetListFromFriend(mockCompleteUrl, false); // For testing
     }
   }, [qrCodeValue, searchParams]);
 
