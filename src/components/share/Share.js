@@ -65,7 +65,8 @@ const idContainerCss = css`
 function Share() {
   const { isUserSharingList, userUid } = useUserInfo();
   const baseUrl = 'https://happyb-five.vercel.app/shareImport';
-  const listUrlToShare = `${baseUrl}/${userUid}`;
+  const qrCodeToShare = `${baseUrl}/${userUid}`;
+  const manualIdToShare = `${baseUrl}?listToImport=${userUid}`;
 
   const form = useForm({
     defaultValues: {
@@ -120,7 +121,7 @@ function Share() {
 
       {isUserSharingList && (
         <div css={qrContainerCss}>
-          {userUid && <QRCodeSVG value={listUrlToShare} />}
+          {userUid && <QRCodeSVG value={qrCodeToShare} />}
           <Button className='rounded-full' variant='outline' size='icon'>
             <Share2Icon className='h-4 w-4' />
           </Button>
@@ -131,12 +132,12 @@ function Share() {
         <p>Or share your unique ID:</p>
 
         <SearchFriend
-          value={listUrlToShare}
+          value={manualIdToShare}
           disabled={!isUserSharingList}
           icon={
             <Copy
               disabled={!isUserSharingList}
-              listUrlToShare={listUrlToShare}
+              listUrlToShare={manualIdToShare}
             />
           }
         />
