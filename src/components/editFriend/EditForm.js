@@ -5,6 +5,7 @@ import {
   Group,
   Radio,
   Space,
+  Switch,
   TextInput,
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
@@ -44,11 +45,13 @@ function EditForm() {
     candyPreference,
     imageUrl,
     imagePath,
+    isPrivate,
   } = getFriendInfo(friends, friendId);
   const [birthdateValue, setBirthdateValue] = useState(new Date(birthdate));
   const [pictureFile, setPictureFile] = useState(null);
   const imagePathRef = useRef({ old: imagePath, new: imagePath });
   const [isCompressingPicture, setIsCompressingPicture] = useState(false);
+  const [friendIsPrivate, setFriendIsPrivate] = useState(isPrivate);
   const favoriteColorCapitalized =
     favoriteColor.charAt(0).toUpperCase() + favoriteColor.slice(1);
 
@@ -173,6 +176,7 @@ function EditForm() {
         imageUrl: pictureUrl,
         imagePath: imagePathRef.current.new,
         birthdate: birthdayFull,
+        isPrivate: friendIsPrivate,
       }
     )
       .then(() => {
@@ -267,6 +271,14 @@ function EditForm() {
           <Radio value='No' label='No' />
         </Group>
       </Radio.Group>
+
+      <Switch
+        mt='xl'
+        checked={friendIsPrivate}
+        label='Keep friend private'
+        description='No one can import it even when your list is public'
+        onChange={(event) => setFriendIsPrivate(event.currentTarget.checked)}
+      />
 
       <Group justify='flex-end' mt='xl'>
         <Button onClick={() => setIsEditingFriend(false)} variant='default'>
