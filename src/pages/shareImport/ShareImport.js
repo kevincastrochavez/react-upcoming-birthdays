@@ -362,7 +362,7 @@ function ShareImport() {
           css={addedNotificationCss}
           icon={closeIcon}
           color='red'
-          title='Looks like this QR Code does not belong to this app'
+          title='Looks like this QR Code or unique ID does not belong to this app'
           withBorder
           onClose={() => setStrangeQrCode(false)}
         />
