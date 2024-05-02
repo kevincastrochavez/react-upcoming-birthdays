@@ -52,7 +52,7 @@ function FriendDetails() {
       <Button
         leftSection={<IconEdit size={20} />}
         fullWidth
-        className='mt-8'
+        className='mt-12'
         onClick={() => setIsEditingFriend(true)}
         disabled={!firstName}
       >
