@@ -29,24 +29,16 @@ const shareContainerCss = css`
 const qrContainerCss = css`
   margin-top: 24px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  padding: 12px;
+
+  & > p {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
 
   & > svg {
     width: 200px;
     height: 200px;
-  }
-
-  & button {
-    width: 40px;
-    height: 40px;
-    justify-self: end;
-    align-self: center;
-
-    & svg {
-      width: 24px;
-      height: 24px;
-    }
+    justify-self: center;
   }
 `;
 
@@ -119,10 +111,8 @@ function Share() {
 
       {isUserSharingList && (
         <div css={qrContainerCss}>
-          {userUid && <QRCodeSVG value={qrCodeToShare} />}
-          <Button className='rounded-full' variant='outline' size='icon'>
-            <Share2Icon className='h-4 w-4' />
-          </Button>
+          <p>Have your friends scan this QR code:</p>
+          <QRCodeSVG value={qrCodeToShare} />
         </div>
       )}
 
