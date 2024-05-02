@@ -1,8 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Link } from 'react-router-dom';
+import { ThemeIcon, Tooltip } from '@mantine/core';
+import { IconEye, IconEyeOff } from '@tabler/icons-react';
+import { useClickOutside } from '@mantine/hooks';
 
 import FriendPreferences from './FriendPreferences';
 import { daysUntilBirthday } from '../../helper/utils';
@@ -11,6 +15,17 @@ const spotlightHeadingCss = css`
   margin-top: 60px;
   margin-bottom: 8px;
   text-align: right;
+`;
+
+const friendLinkCss = css`
+  position: relative;
+`;
+
+const visibleIconCss = css`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
 `;
 
 const friendContainerCss = css`
@@ -89,13 +104,61 @@ function FriendInfo({
   candyPreference,
   birthdate,
   id,
+  isPrivate,
 }) {
+  const [openedTooltip, setOpenedTooltip] = useState(false);
+  const visibleBtnRef = useClickOutside(() => setOpenedTooltip(false));
+
   const { daysToBirthday, isBirthdayToday } = daysUntilBirthday(birthdate);
+
+  const visibleJsx = (
+    <Tooltip
+      label='Friend is public to everyone. It can be imported by anyone with your QR code or unique ID'
+      opened={openedTooltip}
+      multiline
+      w={220}
+    >
+      <ThemeIcon
+        variant='light'
+        aria-label='Settings'
+        css={visibleIconCss}
+        radius='xl'
+        onClick={() => setOpenedTooltip((prev) => !prev)}
+        ref={visibleBtnRef}
+      >
+        <IconEye style={{ width: '70%', height: '70%' }} stroke={1.5} />
+      </ThemeIcon>
+    </Tooltip>
+  );
+
+  const notVisibleJsx = (
+    <Tooltip
+      label='Friend is private. No one can see it or import it'
+      opened={openedTooltip}
+      multiline
+      w={220}
+    >
+      <ThemeIcon
+        variant='light'
+        aria-label='Settings'
+        css={visibleIconCss}
+        radius='xl'
+        onClick={() => setOpenedTooltip((prev) => !prev)}
+        ref={visibleBtnRef}
+      >
+        <IconEyeOff style={{ width: '70%', height: '70%' }} stroke={1.5} />
+      </ThemeIcon>
+    </Tooltip>
+  );
+
+  const visibleStatus = isPrivate ? notVisibleJsx : visibleJsx;
 
   return (
     <>
       {isSpotlight && <p css={spotlightHeadingCss}>Closest Birthday </p>}
-      <Link to={`/allFriends/${id}`} key={id}>
+      <Link to={`/allFriends/${id}`} key={id} css={friendLinkCss}>
+        {!isSpotlight && visibleStatus}
+
         <div css={friendContainerCss}>
           <LazyLoadImage src={imageUrl} alt={''} width={'100%'} effect='blur' />
           <h2 css={friendNameCss}>{formattedFullName}</h2>
