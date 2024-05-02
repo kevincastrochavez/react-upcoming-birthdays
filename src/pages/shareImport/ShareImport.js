@@ -168,7 +168,8 @@ function ShareImport() {
         collection(db, `friends/${userId}/personalFriends`)
       );
       querySnapshot.forEach((doc) => {
-        allFriendsToDisplay.push({ ...doc.data(), id: doc.id });
+        const { isPrivate } = doc.data();
+        if (!isPrivate) allFriendsToDisplay.push({ ...doc.data(), id: doc.id });
       });
 
       setFriendsToDisplay(allFriendsToDisplay);
