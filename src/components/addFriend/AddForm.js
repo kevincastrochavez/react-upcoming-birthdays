@@ -12,6 +12,7 @@ import {
   Space,
   TextInput,
   Radio,
+  Switch,
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IconAbc, IconColorFilter, IconPhoto } from '@tabler/icons-react';
@@ -26,6 +27,7 @@ function AddForm() {
   const [likesToCelebrateValue, setLikesToCelebrateValue] = useState('');
   const [pictureFile, setPictureFile] = useState(null);
   const [isCompressingPicture, setIsCompressingPicture] = useState(false);
+  const [friendIsPrivate, setFriendIsPrivate] = useState(false);
 
   const fullNameIcon = <IconAbc stroke={1.5} />;
   const pictureIcon = <IconPhoto stroke={1.5} />;
@@ -151,6 +153,7 @@ function AddForm() {
         imageUrl: pictureUrl || placeHolderImage,
         imagePath: pictureNameFormat,
         birthdate: birthdayFull,
+        isPrivate: friendIsPrivate,
       }
     )
       .then(() => {
@@ -238,6 +241,13 @@ function AddForm() {
           <Radio value='No' label='No' />
         </Group>
       </Radio.Group>
+
+      <Switch
+        mt='xl'
+        label='Keep friend private'
+        description='No one can import it even when your list is public. (You can edit this later)'
+        onChange={(event) => setFriendIsPrivate(event.currentTarget.checked)}
+      />
 
       <Group justify='flex-end' mt='xl'>
         <Button onClick={() => setIsAddingFriend(false)} variant='default'>
