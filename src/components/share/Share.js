@@ -102,10 +102,10 @@ function Share() {
       <Form {...form}>
         <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm  bg-slate-50 gap-4'>
           <div className='space-y-0.5'>
-            <FormLabel>Do you want your Friends list to be sharable?</FormLabel>
+            <FormLabel>Do you want your friends list to be public?</FormLabel>
             <FormDescription>
-              Anybody who you shared your QR code with will be able to import
-              any of your friends
+              Anybody who you share your QR code or unique ID with will be able
+              to import any of your friends marked as not private
             </FormDescription>
           </div>
           <FormControl>
