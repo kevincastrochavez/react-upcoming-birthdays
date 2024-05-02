@@ -92,7 +92,6 @@ const FriendDetailsPage = lazy(() =>
 // Fix breadcrumbs name for details page
 // Fix breadcrumbs link color for All Friends
 // Change picture id in firebase
-// Get rid of transparency in Searching
 // Make app responsive for desktop
 
 function App() {

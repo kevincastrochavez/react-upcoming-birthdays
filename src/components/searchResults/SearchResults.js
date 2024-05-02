@@ -22,6 +22,7 @@ const searchResultsLinkCss = css`
 
   & > div {
     gap: 8px;
+    opacity: 1 !important;
   }
 `;
 
