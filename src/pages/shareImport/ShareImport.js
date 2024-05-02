@@ -6,8 +6,10 @@ import {
   Button,
   Checkbox,
   Group,
+  Loader,
   Modal,
   Notification,
+  Overlay,
   Table,
 } from '@mantine/core';
 import { IconDownload, IconThumbUp, IconX } from '@tabler/icons-react';
@@ -63,6 +65,14 @@ const tableCss = css`
   }
 `;
 
+const loaderCss = css`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+`;
+
 /**
  * Displays the ShareImport component page
  * @returns {JSX.Element}
@@ -72,6 +82,7 @@ function ShareImport() {
   const [selectedRows, setSelectedRows] = useState([]);
   const [isImporting, setIsImporting] = useState(false);
   const [friendsToDisplay, setFriendsToDisplay] = useState([]);
+  const [isLoadingDirectLink, setIsLoadingDirectLink] = useState(false);
   const { setOpenImportModal, setFriendsWereImported } = useSetAddingFriends();
   const { setStrangeQrCode } = useSetSharing();
   const { openImportModal } = useActionFriends();
@@ -94,6 +105,7 @@ function ShareImport() {
     }
 
     if (copyIdValue) {
+      setIsLoadingDirectLink(true);
       handleGetListFromFriend(completeUrl, false);
       // handleGetListFromFriend(mockCompleteUrl, false); // For testing
     }
@@ -161,9 +173,11 @@ function ShareImport() {
 
       setFriendsToDisplay(allFriendsToDisplay);
       setOpenImportModal(true);
+      setIsLoadingDirectLink(false);
     } else {
       setStrangeQrCode(true);
       setQrCodeValue(null);
+      setIsLoadingDirectLink(false);
     }
   }
 
@@ -357,10 +371,16 @@ function ShareImport() {
         centered
         opened={openImportModal}
         onClose={() => setOpenImportModal(false)}
-        title='Import your friends list'
+        title="Import whoever you want from your friend's list"
       >
         {isSharingListPublic.current ? sharingJsx : notSharingJsx}
       </Modal>
+      {isLoadingDirectLink && (
+        <>
+          <Overlay color='#000' backgroundOpacity={0.85} />
+          <Loader css={loaderCss} color='blue' />
+        </>
+      )}
     </main>
   );
 }
