@@ -68,12 +68,12 @@ function BottomNav() {
         <Tabs.List grow>
           <Tabs.Tab
             css={bottomNavTabCss}
-            value='Dashboard'
+            value='Home'
             leftSection={<IconHome />}
             onClick={() => navigate('/')}
             is-tab-active={location.pathname === '/' ? 'true' : 'false'}
           >
-            Dashboard
+            Home
           </Tabs.Tab>
           <Tabs.Tab
             css={bottomNavTabCss}

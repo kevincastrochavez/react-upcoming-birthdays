@@ -6,7 +6,7 @@ import useBreadcrumbs from 'use-react-router-breadcrumbs';
 
 // Define custom breadcrumbs for certain routes.
 const routes = [
-  { path: '/', breadcrumb: 'Dashboard' },
+  { path: '/', breadcrumb: 'Home' },
   { path: '/allFriends', breadcrumb: 'All Friends' },
   { path: '/shareImport', breadcrumb: 'Share or Import' },
 ];
