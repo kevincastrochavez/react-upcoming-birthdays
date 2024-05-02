@@ -86,7 +86,6 @@ const FriendDetailsPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Keep private certain friends when adding and editing so that they are always private
 // Make the share button work
 // Improve 3D object
 // Improve space next friends related shadows
