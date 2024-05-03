@@ -14,6 +14,7 @@ const BirthdayUpdateContext = createContext({});
 export default function BirthdayProvider({ children }) {
   const existentUserUid = getUserUid('userUid');
   const [userUid, setUserUid] = useState(existentUserUid);
+  const [isFetchingFriends, setIsFetchingFriends] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isIdSearching, setIsIdSearching] = useState(false);
   const [searchText, setSearchText] = useDebouncedState('', 300);
@@ -76,6 +77,7 @@ export default function BirthdayProvider({ children }) {
     <BirthdayUpdateContext.Provider
       value={{
         setUserUid,
+        setIsFetchingFriends,
         setFriendsList,
         setIsSearching,
         setSearchText,
@@ -99,6 +101,7 @@ export default function BirthdayProvider({ children }) {
       <BirthdayContext.Provider
         value={{
           userUid,
+          isFetchingFriends,
           friendsList,
           isSearching,
           searchText,
@@ -148,7 +151,7 @@ const monthNames = [
 /**
  * Returns the state of if the user is adding a friend, and if the friend was added
  *
- * @returns { isAddingFriend, friendWasAdded, friendWasDeleted, isEditingFriend, friendWasUpdated, addingFriendFailed, updatingFriendFailed, deletingFriendFailed, openImportModal, friendsWereImported, importingFriendsFailed }
+ * @returns { isAddingFriend, friendWasAdded, friendWasDeleted, isEditingFriend, friendWasUpdated, addingFriendFailed, updatingFriendFailed, deletingFriendFailed, openImportModal, friendsWereImported, importingFriendsFailed, isFetchingFriends }
  */
 export function useActionFriends() {
   const {
@@ -163,6 +166,7 @@ export function useActionFriends() {
     openImportModal,
     friendsWereImported,
     importingFriendsFailed,
+    isFetchingFriends,
   } = useBirthdayProvider('useActionFriends');
   return {
     isAddingFriend,
@@ -176,6 +180,7 @@ export function useActionFriends() {
     openImportModal,
     friendsWereImported,
     importingFriendsFailed,
+    isFetchingFriends,
   };
 }
 
@@ -234,7 +239,7 @@ export function useUserInfo() {
 /**
  * Updates the state of if the user is adding a friend, and if the friend was added
  *
- * @returns { setIsAddingFriend, setFriendWasAdded, setFriendWasDeleted, setIsEditingFriend, setFriendWasUpdated, setAddingFriendFailed, setUpdatingFriendFailed, setDeletingFriendFailed, setOpenImportModal, setFriendsWereImported, setImportingFriendsFailed }
+ * @returns { setIsAddingFriend, setFriendWasAdded, setFriendWasDeleted, setIsEditingFriend, setFriendWasUpdated, setAddingFriendFailed, setUpdatingFriendFailed, setDeletingFriendFailed, setOpenImportModal, setFriendsWereImported, setImportingFriendsFailed, setIsFetchingFriends }
  */
 export function useSetAddingFriends() {
   const {
@@ -249,6 +254,7 @@ export function useSetAddingFriends() {
     setOpenImportModal,
     setFriendsWereImported,
     setImportingFriendsFailed,
+    setIsFetchingFriends,
   } = useSetBirthdayProvider('useSetAddingFriends');
   return {
     setIsAddingFriend,
@@ -262,6 +268,7 @@ export function useSetAddingFriends() {
     setOpenImportModal,
     setFriendsWereImported,
     setImportingFriendsFailed,
+    setIsFetchingFriends,
   };
 }
 
