@@ -31,6 +31,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import AllFriends from './pages/allFriends/AllFriends';
 import FriendDetails from './pages/friendDetails/FriendDetails';
 import ShareImport from './pages/shareImport/ShareImport';
+import Notifications from './components/notifications/Notifications';
 
 /**
  * This will retry failed chunks up to 5 times
@@ -64,7 +65,6 @@ const LoginPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Move notifications from here to Dashboard page
 // Add notifications for switching list visibility
 // Change Sour to Salty
 // Improve 3D object
@@ -78,7 +78,8 @@ const LoginPage = lazy(() =>
 
 function App() {
   const { userUid } = useUserInfo();
-  const { setIsFetchingFriends, setIsFetchingList } = useSetAddingFriends();
+  const { setIsFetchingFriends, setIsFetchingList, setFetchingListFailed } =
+    useSetAddingFriends();
   const { setIsUserSharingList } = useSetUserInfo();
   const { setFriendsList } = useSetFriends();
   const { isFetchingFriends, isFetchingList } = useActionFriends();
@@ -88,47 +89,58 @@ function App() {
   const sharedListCollection = 'sharingList';
 
   const getSharedList = async () => {
-    setIsFetchingList(true);
-    const sharingRef = doc(db, `friends/${userUid}/sharingList`, 'sharingList');
-    const sharingSnap = await getDoc(sharingRef);
-    const sharingHasBeenCreated = sharingSnap.exists();
-    if (sharingHasBeenCreated) {
-      const { sharing } = sharingSnap.data();
-      setIsUserSharingList(sharing);
-      setIsFetchingList(false);
-    }
+    try {
+      setIsFetchingList(true);
+      const sharingRef = doc(
+        db,
+        `friends/${userUid}/sharingList`,
+        'sharingList'
+      );
+      const sharingSnap = await getDoc(sharingRef);
+      const sharingHasBeenCreated = sharingSnap.exists();
+      if (sharingHasBeenCreated) {
+        const { sharing } = sharingSnap.data();
+        setIsUserSharingList(sharing);
+        setIsFetchingList(false);
+      }
 
-    // For new users create a sharing list and set it to true
-    if (!sharingHasBeenCreated) {
-      setDoc(
-        doc(
-          db,
-          globalCollection,
-          personalCollection,
-          sharedListCollection,
-          'sharingList'
-        ),
-        {
-          sharing: true,
-        }
-      )
-        .then(() => {
-          setIsFetchingList(false);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+      // For new users create a sharing list and set it to true
+      if (!sharingHasBeenCreated) {
+        setDoc(
+          doc(
+            db,
+            globalCollection,
+            personalCollection,
+            sharedListCollection,
+            'sharingList'
+          ),
+          {
+            sharing: true,
+          }
+        )
+          .then(() => {
+            setIsFetchingList(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
 
-    // Watch for changes to the sharing list and update the state
-    onSnapshot(collection(db, `friends/${userUid}/sharingList`), (snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        if (change.type === 'modified') {
-          const { sharing } = change.doc.data();
-          setIsUserSharingList(sharing);
+      // Watch for changes to the sharing list and update the state
+      onSnapshot(
+        collection(db, `friends/${userUid}/sharingList`),
+        (snapshot) => {
+          snapshot.docChanges().forEach((change) => {
+            if (change.type === 'modified') {
+              const { sharing } = change.doc.data();
+              setIsUserSharingList(sharing);
+            }
+          });
         }
-      });
-    });
+      );
+    } catch (error) {
+      setFetchingListFailed(false);
+    }
   };
 
   const getFriendslist = () => {
@@ -174,6 +186,7 @@ function App() {
         <Navigation />
         <Toaster />
         <AddFriend />
+        <Notifications />
 
         <Routes>
           <Route

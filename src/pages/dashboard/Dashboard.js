@@ -11,7 +11,6 @@ import { FriendInfo } from '../../components/friendInfo/FriendInfo';
 import { useFriends } from '../../components/BirthdayProvider';
 import NextFriends from '../../components/nextFriends/NextFriends';
 import SpotlightEmpty from '../../components/friendInfo/SpotlightEmpty';
-import Notifications from '../../components/notifications/Notifications';
 
 const mainContainerCss = css`
   padding: 12px 24px 24px 24px;
@@ -43,7 +42,6 @@ function Dashboard() {
       )}
 
       <NextFriends />
-      <Notifications />
     </main>
   );
 }
