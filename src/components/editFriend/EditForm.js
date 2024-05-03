@@ -68,7 +68,7 @@ function EditForm() {
   const fullNameRegex = /^\s*[a-zA-Z]{2,15}\s+[a-zA-Z]{2,15}\s*$/;
   const colorRegex = /^\s*[a-zA-Z]{3,15}\s*$/;
   const likesToCelebrateRegex = /^(Yes|No)$/;
-  const candyRegex = /^(Sweet|Sour)$/;
+  const candyRegex = /^(Sweet|Salty)$/;
 
   const handleCompressImage = (imageFile) => {
     setIsCompressingPicture(true);
@@ -254,7 +254,7 @@ function EditForm() {
       >
         <Group mt='xs'>
           <Radio value='Sweet' label='Sweet' />
-          <Radio value='Sour' label='Sour' />
+          <Radio value='Salty' label='Salty' />
         </Group>
       </Radio.Group>
 

@@ -5,7 +5,7 @@ const fakeData = [
     birthdate: '1990-05-15',
     favoriteColor: 'Blue',
     likesToCelebrate: true,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 1,
   },
   {
@@ -14,7 +14,7 @@ const fakeData = [
     birthdate: '1990-03-01',
     favoriteColor: 'Blue',
     likesToCelebrate: true,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 2,
   },
   {
@@ -23,7 +23,7 @@ const fakeData = [
     birthdate: '1990-03-07',
     favoriteColor: 'Blue',
     likesToCelebrate: true,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 3,
   },
   {
@@ -32,7 +32,7 @@ const fakeData = [
     birthdate: '1990-03-09',
     favoriteColor: 'Blue',
     likesToCelebrate: true,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 4,
   },
   {
@@ -41,7 +41,7 @@ const fakeData = [
     birthdate: '1988-09-20',
     favoriteColor: 'Pink',
     likesToCelebrate: true,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 5,
   },
   {
@@ -50,7 +50,7 @@ const fakeData = [
     birthdate: '1995-03-10',
     favoriteColor: 'Green',
     likesToCelebrate: false,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 6,
   },
   {
@@ -59,7 +59,7 @@ const fakeData = [
     birthdate: '1987-11-25',
     favoriteColor: 'Purple',
     likesToCelebrate: true,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 7,
   },
   {
@@ -68,7 +68,7 @@ const fakeData = [
     birthdate: '1993-07-18',
     favoriteColor: 'Red',
     likesToCelebrate: true,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 8,
   },
   {
@@ -77,7 +77,7 @@ const fakeData = [
     birthdate: '1992-01-30',
     favoriteColor: 'Yellow',
     likesToCelebrate: false,
-    candyPreference: 'Sour',
+    candyPreference: 'Salty',
     id: 9,
   },
   {

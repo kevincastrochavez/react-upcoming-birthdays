@@ -9,7 +9,7 @@ describe('FriendPreferences', () => {
     const props = {
       favoriteColor: 'Blue',
       likesToCelebrate: true,
-      candyPreference: 'Sour',
+      candyPreference: 'Salty',
     };
 
     const { getByText, getByAltText } = render(
@@ -35,7 +35,7 @@ describe('FriendPreferences', () => {
 
     const favoriteColor = getByText(/Blue/);
     const likesToCelebrate = getByText(/Yes/);
-    const candyPreference = getByText(/Sour/);
+    const candyPreference = getByText(/Salty/);
     expect(favoriteColor).toBeInTheDocument();
     expect(likesToCelebrate).toBeInTheDocument();
     expect(candyPreference).toBeInTheDocument();

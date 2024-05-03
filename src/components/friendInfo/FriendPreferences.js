@@ -31,7 +31,7 @@ const friendPreferenceCss = css`
  * Displays the FriendPreferences component which shows your friend's favorite color, if likes to celebrate and their tooth taste
  * @param {String} favoriteColor - favorite color
  * @param {Boolean} likesToCelebrate - true if friend likes to celebrate
- * @param {String} candyPreference - sweet or sour
+ * @param {String} candyPreference - sweet or salty
  * @returns {JSX} the FriendPreferences component
  */
 function FriendPreferences({

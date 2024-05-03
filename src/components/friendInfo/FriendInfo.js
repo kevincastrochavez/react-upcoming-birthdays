@@ -89,7 +89,7 @@ const friendBirthdateCss = css`
  * @param {String} imageUrl - image url for such friend
  * @param {String} favoriteColor - favorite color of the friend
  * @param {Boolean} likesToCelebrate - true if friend likes to celebrate
- * @param {String} candyPreference - sweet or sour
+ * @param {String} candyPreference - sweet or salty
  * @param {String} birthdate - birthdate of the friend
  * @param {String} id - id of the friend
  * @returns {JSX} the FriendInfo component
