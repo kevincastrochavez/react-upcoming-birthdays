@@ -23,6 +23,8 @@ function Notifications() {
     deletingFriendFailed,
     friendsWereImported,
     importingFriendsFailed,
+    fetchingListFailed,
+    listWasUpdated,
   } = useActionFriends();
 
   const {
@@ -34,6 +36,8 @@ function Notifications() {
     setDeletingFriendFailed,
     setFriendsWereImported,
     setImportingFriendsFailed,
+    setFetchingListFailed,
+    setListWasUpdated,
   } = useSetAddingFriends();
 
   const checkIcon = <IconCheck />;
@@ -87,6 +91,18 @@ function Notifications() {
     }, 3000);
   }
 
+  if (fetchingListFailed) {
+    setTimeout(() => {
+      setFetchingListFailed(false);
+    }, 3000);
+  }
+
+  if (listWasUpdated) {
+    setTimeout(() => {
+      setListWasUpdated(false);
+    }, 3000);
+  }
+
   return (
     <>
       {friendWasAdded && (
@@ -133,6 +149,17 @@ function Notifications() {
         />
       )}
 
+      {listWasUpdated && (
+        <Notification
+          css={addedNotificationCss}
+          icon={checkIcon}
+          color='teal'
+          title='Your list status was successfully updated'
+          withBorder
+          onClose={() => setListWasUpdated(false)}
+        />
+      )}
+
       {addingFriendFailed && (
         <Notification
           css={addedNotificationCss}
@@ -174,6 +201,17 @@ function Notifications() {
           title='Something went wrong while importing your friends. Please try again later.'
           withBorder
           onClose={() => setImportingFriendsFailed(false)}
+        />
+      )}
+
+      {fetchingListFailed && (
+        <Notification
+          css={addedNotificationCss}
+          icon={closeIcon}
+          color='red'
+          title='Something went wrong while getting your list status. Please try again later.'
+          withBorder
+          onClose={() => setFetchingListFailed(false)}
         />
       )}
     </>
