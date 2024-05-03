@@ -2,8 +2,8 @@
 import { css } from '@emotion/react';
 import { useForm } from 'react-hook-form';
 import { QRCodeSVG } from 'qrcode.react';
-import { Share2Icon } from '@radix-ui/react-icons';
 import { doc, updateDoc } from 'firebase/firestore';
+import { Loader, Overlay } from '@mantine/core';
 
 import {
   FormControl,
@@ -13,8 +13,11 @@ import {
   Form,
 } from '../../componentsShadcn/ui/form';
 import { Switch } from '../../componentsShadcn/ui/switch';
-import { useUserInfo } from '../BirthdayProvider';
-import { Button } from '../../componentsShadcn/ui/button';
+import {
+  useActionFriends,
+  useSetAddingFriends,
+  useUserInfo,
+} from '../BirthdayProvider';
 import SearchFriend from '../searchFriend/SearchFriend';
 import Copy from './Copy';
 import { db } from '../../firebase';
@@ -50,11 +53,22 @@ const idContainerCss = css`
   }
 `;
 
+const loaderCss = css`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+`;
+
 /**
  * Displays the Share component
  * @returns {JSX.Element}
  */
 function Share() {
+  const { isUpdatingSharing } = useActionFriends();
+  const { setIsUpdatingSharing, setFetchingListFailed, setListWasUpdated } =
+    useSetAddingFriends();
   const { isUserSharingList, userUid } = useUserInfo();
   const baseUrl = 'https://happyb-five.vercel.app/shareImport';
   const qrCodeToShare = `${baseUrl}/${userUid}`;
@@ -67,6 +81,7 @@ function Share() {
   });
 
   function updateSharing() {
+    setIsUpdatingSharing(true);
     const globalCollection = 'friends';
     const personalCollection = userUid;
     const sharedListCollection = 'sharingList';
@@ -83,9 +98,13 @@ function Share() {
         sharing: !isUserSharingList,
       }
     )
-      .then(() => {})
+      .then(() => {
+        setListWasUpdated(true);
+        setIsUpdatingSharing(false);
+      })
       .catch((error) => {
-        console.log(error);
+        setIsUpdatingSharing(false);
+        setFetchingListFailed(true);
       });
   }
 
@@ -109,12 +128,16 @@ function Share() {
         </FormItem>
       </Form>
 
-      {isUserSharingList && (
-        <div css={qrContainerCss}>
-          <p>Have your friends scan this QR code:</p>
-          <QRCodeSVG value={qrCodeToShare} />
-        </div>
-      )}
+      <div css={qrContainerCss}>
+        {isUserSharingList ? (
+          <>
+            <p>Have your friends scan this QR code:</p>
+            <QRCodeSVG value={qrCodeToShare} />
+          </>
+        ) : (
+          <p>Make your list public to get your QR code</p>
+        )}
+      </div>
 
       <div css={idContainerCss}>
         <p>Or share your unique ID:</p>
@@ -130,6 +153,13 @@ function Share() {
           }
         />
       </div>
+
+      {isUpdatingSharing && (
+        <>
+          <Overlay color='#000' backgroundOpacity={0.85} />
+          <Loader css={loaderCss} color='blue' />
+        </>
+      )}
     </div>
   );
 }
