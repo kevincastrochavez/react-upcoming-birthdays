@@ -65,7 +65,6 @@ const LoginPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Add notifications for switching list visibility
 // Change Sour to Salty
 // Improve 3D object
 // Improve space next friends related shadows
