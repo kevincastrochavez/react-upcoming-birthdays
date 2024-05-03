@@ -30,6 +30,12 @@ import DashboardSkeleton from './pages/dashboard/DashboardSkeleton';
 import AllFriendsSkeleton from './pages/allFriends/AllFriendsSkeleton';
 import ShareImportSkeleton from './pages/shareImport/ShareImportSkeleton';
 import FriendDetailsSkeleton from './pages/friendDetails/FriendDetailsSkeleton';
+import Navigation from './components/navigation/Navigation';
+
+import Dashboard from './pages/dashboard/Dashboard';
+import AllFriends from './pages/allFriends/AllFriends';
+import FriendDetails from './pages/friendDetails/FriendDetails';
+import ShareImport from './pages/shareImport/ShareImport';
 
 const addedNotificationCss = css`
   position: fixed;
@@ -66,26 +72,12 @@ function componentLoader(lazyComponent, attemptsLeft = 5) {
 }
 
 // Lazy load imports
-const Navigation = lazy(() =>
-  componentLoader(() => import('./components/navigation/Navigation'))
-);
 const LoginPage = lazy(() =>
   componentLoader(() => import('./pages/login/Login'))
 );
-const DashboardPage = lazy(() =>
-  componentLoader(() => import('./pages/dashboard/Dashboard'))
-);
-const AllFriendsPage = lazy(() =>
-  componentLoader(() => import('./pages/allFriends/AllFriends'))
-);
-const ShareImportPage = lazy(() =>
-  componentLoader(() => import('./pages/shareImport/ShareImport'))
-);
-const FriendDetailsPage = lazy(() =>
-  componentLoader(() => import('./pages/friendDetails/FriendDetails'))
-);
 
 // TODOS FOR APP
+// Move notifications from here to Dashboard page
 // Improve 3D object
 // Improve space next friends related shadows
 // Figure out color for links
@@ -93,9 +85,11 @@ const FriendDetailsPage = lazy(() =>
 // Fix breadcrumbs link color for All Friends
 // Change picture id in firebase
 // Make app responsive for desktop
+// Implement onboarding
 
 function App() {
   const { userUid } = useUserInfo();
+  const { setIsFetchingFriends, setIsFetchingList } = useSetAddingFriends();
   const { setIsUserSharingList } = useSetUserInfo();
   const { setFriendsList } = useSetFriends();
   const {
@@ -107,6 +101,8 @@ function App() {
     deletingFriendFailed,
     friendsWereImported,
     importingFriendsFailed,
+    isFetchingFriends,
+    isFetchingList,
   } = useActionFriends();
   const {
     setFriendWasAdded,
@@ -126,12 +122,14 @@ function App() {
   const sharedListCollection = 'sharingList';
 
   const getSharedList = async () => {
+    setIsFetchingList(true);
     const sharingRef = doc(db, `friends/${userUid}/sharingList`, 'sharingList');
     const sharingSnap = await getDoc(sharingRef);
     const sharingHasBeenCreated = sharingSnap.exists();
     if (sharingHasBeenCreated) {
       const { sharing } = sharingSnap.data();
       setIsUserSharingList(sharing);
+      setIsFetchingList(false);
     }
 
     // For new users create a sharing list and set it to true
@@ -149,7 +147,7 @@ function App() {
         }
       )
         .then(() => {
-          console.log('Sharing list created');
+          setIsFetchingList(false);
         })
         .catch((error) => {
           console.log(error);
@@ -168,6 +166,7 @@ function App() {
   };
 
   const getFriendslist = () => {
+    setIsFetchingFriends(true);
     let friendsList = [];
     // Listening for realtime updates
     onSnapshot(
@@ -191,6 +190,7 @@ function App() {
         });
 
         setFriendsList(friendsList);
+        setIsFetchingFriends(false);
       }
     );
   };
@@ -360,40 +360,48 @@ function App() {
               index
               path='/'
               element={
-                <Suspense fallback={<DashboardSkeleton />}>
-                  <DashboardPage />
+                <>
+                  {isFetchingFriends ? <DashboardSkeleton /> : <Dashboard />}
+
                   <BottomNav />
-                </Suspense>
+                </>
               }
             />
 
             <Route
               path='/allFriends'
               element={
-                <Suspense fallback={<AllFriendsSkeleton />}>
-                  <AllFriendsPage />
+                <>
+                  {isFetchingFriends ? <AllFriendsSkeleton /> : <AllFriends />}
+
                   <BottomNav />
-                </Suspense>
+                </>
               }
             />
 
             <Route
               path='/allFriends/:id'
               element={
-                <Suspense fallback={<FriendDetailsSkeleton />}>
-                  <FriendDetailsPage />
+                <>
+                  {isFetchingFriends ? (
+                    <FriendDetailsSkeleton />
+                  ) : (
+                    <FriendDetails />
+                  )}
+
                   <BottomNav />
-                </Suspense>
+                </>
               }
             />
 
             <Route
               path='/shareImport'
               element={
-                <Suspense fallback={<ShareImportSkeleton />}>
-                  <ShareImportPage />
+                <>
+                  {isFetchingList ? <ShareImportSkeleton /> : <ShareImport />}
+
                   <BottomNav />
-                </Suspense>
+                </>
               }
             />
           </Route>
