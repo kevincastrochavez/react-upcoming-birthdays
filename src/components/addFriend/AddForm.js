@@ -63,8 +63,6 @@ function AddForm() {
         setIsCompressingPicture(false);
       },
       error(err) {
-        console.log(err);
-        console.log('Image compression failed');
         setIsCompressingPicture(false);
       },
     });

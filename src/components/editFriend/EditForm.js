@@ -83,8 +83,6 @@ function EditForm() {
         setIsCompressingPicture(false);
       },
       error(err) {
-        console.log(err);
-        console.log('Image compression failed');
         setIsCompressingPicture(false);
       },
     });
@@ -190,9 +188,7 @@ function EditForm() {
         ) {
           deleteObject(ref(storage, imagePathRef.current.old))
             .then(() => {})
-            .catch((error) => {
-              console.log(error);
-            });
+            .catch((error) => {});
         }
       })
       .catch((error) => {

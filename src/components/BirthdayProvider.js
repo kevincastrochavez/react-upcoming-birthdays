@@ -38,8 +38,6 @@ export default function BirthdayProvider({ children }) {
   const [friendsWereImported, setFriendsWereImported] = useState(false);
   const [importingFriendsFailed, setImportingFriendsFailed] = useState(false);
 
-  console.log(listWasUpdated);
-
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
   const birthdatesListConverted = birthdatesList?.map((birthdate) =>
