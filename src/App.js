@@ -65,7 +65,7 @@ const LoginPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Change color for All Friends in breadcrumbs when in friend details
+// Add borders for bottom nav
 // Improve 3D object
 // Improve space next friends related shadows
 // Figure out color for links
@@ -73,6 +73,7 @@ const LoginPage = lazy(() =>
 // Change picture id in firebase
 // Make app responsive for desktop
 // Implement onboarding
+// Improve empty state for the spotlight and next friend
 
 function App() {
   const { userUid } = useUserInfo();

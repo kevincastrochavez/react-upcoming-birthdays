@@ -24,7 +24,7 @@ const breadcrumbsCSS = css`
     font-size: 12px;
   }
 
-  & a:not(.active) {
+  & a:not(:last-of-type) {
     color: blue;
   }
 
