@@ -32,6 +32,7 @@ const bottomNavTabCss = css`
   padding: 12px;
   display: grid;
   gap: 8px;
+  border-right: 1px solid #ebebeb;
 
   & span {
     margin: 0;

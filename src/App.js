@@ -65,7 +65,6 @@ const LoginPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Add borders for bottom nav
 // Improve 3D object
 // Improve space next friends related shadows
 // Figure out color for links
