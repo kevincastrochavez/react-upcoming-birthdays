@@ -4,6 +4,8 @@ import { css } from '@emotion/react';
 import { NavLink } from 'react-router-dom';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 
+import { useFriends } from '../BirthdayProvider';
+
 // Define custom breadcrumbs for certain routes.
 const routes = [
   { path: '/', breadcrumb: 'Home' },
@@ -19,6 +21,7 @@ const breadcrumbsCSS = css`
   & a {
     text-decoration: none;
     color: black;
+    font-size: 12px;
   }
 
   & a:not(.active) {
@@ -37,17 +40,31 @@ const breadcrumbsCSS = css`
  */
 const Breadcrumbs = () => {
   const breadcrumbs = useBreadcrumbs(routes);
+  const { friendsList } = useFriends();
 
   return (
     <nav css={breadcrumbsCSS}>
-      {breadcrumbs?.map(({ match, breadcrumb }, index) => (
-        <React.Fragment key={match.pathname}>
-          <NavLink to={match.pathname} data-testid={match.pathname}>
-            {breadcrumb}
-          </NavLink>
-          {index !== breadcrumbs.length - 1 && <span>/</span>}
-        </React.Fragment>
-      ))}
+      {breadcrumbs?.map(({ match, breadcrumb }, index) => {
+        let textToDisplay = breadcrumb;
+
+        if (index === 2) {
+          const currentFriendId = match.pathname.split('/')[2];
+          const { formattedFullName } = friendsList.find(
+            (friend) => friend.id === currentFriendId
+          );
+
+          textToDisplay = formattedFullName;
+        }
+
+        return (
+          <React.Fragment key={match.pathname}>
+            <NavLink to={match.pathname} data-testid={match.pathname}>
+              {textToDisplay}
+            </NavLink>
+            {index !== breadcrumbs.length - 1 && <span>/</span>}
+          </React.Fragment>
+        );
+      })}
     </nav>
   );
 };

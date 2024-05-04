@@ -65,10 +65,10 @@ const LoginPage = lazy(() =>
 );
 
 // TODOS FOR APP
+// Change color for All Friends in breadcrumbs when in friend details
 // Improve 3D object
 // Improve space next friends related shadows
 // Figure out color for links
-// Fix breadcrumbs name for details page
 // Fix breadcrumbs link color for All Friends
 // Change picture id in firebase
 // Make app responsive for desktop
