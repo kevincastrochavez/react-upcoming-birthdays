@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { IconChevronRight } from '@tabler/icons-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -9,6 +10,7 @@ const friendContainerCss = css`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  gap: 20px;
   padding: 16px;
   background: #ffffff;
   border-radius: 8px;
@@ -29,13 +31,14 @@ const friendContainerCss = css`
 const friendNameCss = css`
   flex: 1;
   font-size: 14px;
-  margin-left: 24px;
+  margin-left: 4px;
 `;
 
 const friendDateCss = css`
   display: flex;
   gap: 6px;
   align-items: center;
+  transform: translateY(-2px);
 
   & p {
     line-height: 16px;
@@ -65,12 +68,15 @@ function MonthFriend({
         height={50}
         effect='blur'
       />
+
       <p css={friendNameCss}>{formattedFullName}</p>
 
       <div css={friendDateCss}>
         <img src={cakeIcon} alt='' />
         <p>{shortenedBirthdateFormatted}</p>
       </div>
+
+      <IconChevronRight style={{ width: '20px', height: '20px' }} />
     </div>
   );
 }
