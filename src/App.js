@@ -69,7 +69,6 @@ const LoginPage = lazy(() =>
 // Figure out color for links
 // Make app responsive for desktop
 // Implement onboarding
-// Improve empty state for the spotlight and next friend
 // Improve buttons for camera on import
 
 function App() {

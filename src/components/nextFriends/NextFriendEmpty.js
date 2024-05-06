@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-
-import { PlusIcon } from '@radix-ui/react-icons';
+import { IconCirclePlus } from '@tabler/icons-react';
 
 import { useSetAddingFriends } from '../BirthdayProvider';
 
@@ -24,6 +23,11 @@ const nextFriendContainerCss = css`
   column-gap: 12px;
   width: fit-content;
 
+  & svg {
+    color: #228be6;
+    stroke-width: 1.5;
+  }
+
   & p {
     align-self: center;
     font-size: 16px;
@@ -45,7 +49,7 @@ function NextFriendEmpty() {
 
   return (
     <div css={nextFriendContainerCss} onClick={() => setIsAddingFriend(true)}>
-      <PlusIcon css={nextFriendIconCss} />
+      <IconCirclePlus css={nextFriendIconCss} />
       <p>Add friend</p>
     </div>
   );

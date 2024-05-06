@@ -49,9 +49,7 @@ function NextFriends() {
             <NextFriend friend={friend} />
           </Link>
         ))}
-        {emptyNextFriendSlotsArray.map((nextFriend, index) => (
-          <NextFriendEmpty key={index} />
-        ))}
+        {emptyNextFriendSlotsArray.length > 0 && <NextFriendEmpty />}
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { PlusIcon } from '@radix-ui/react-icons';
+import { IconFriends } from '@tabler/icons-react';
 
 import { useSetAddingFriends } from '../BirthdayProvider';
-import { Button } from '../../componentsShadcn/ui/button';
+import { Button } from '@mantine/core';
 
 const friendContainerCss = css`
   margin-top: 60px;
@@ -17,17 +17,37 @@ const friendContainerCss = css`
     0px 2.6px 5.0375px rgba(12, 20, 33, 0.02),
     0px 1.37109px 2.99707px rgba(12, 20, 33, 0.016875),
     0px 0.56875px 1.79219px rgba(12, 20, 33, 0.013), inset 0px 2px 1px #ffffff;
+  width: calc(100% - 48px);
+  margin-left: auto;
+  margin-right: auto;
   max-width: 400px;
   display: grid;
   grid-column: 1;
   grid-row: 1;
 
+  & > svg {
+    color: #228be6;
+    width: 50px;
+    height: 50px;
+    justify-self: center;
+    stroke-width: 1.5;
+  }
+
+  & h2 {
+    justify-self: center;
+    font-weight: 500;
+    margin-top: 8px;
+  }
+
+  & p {
+    justify-self: center;
+    font-size: 14px;
+    color: #857e7e;
+  }
+
   & button {
-    grid-column: 1;
-    grid-row: 2;
-    width: fit-content;
-    justify-self: end;
-    margin-top: 40px;
+    justify-self: center;
+    margin-top: 30px;
   }
 `;
 
@@ -40,12 +60,12 @@ function SpotlightEmpty() {
 
   return (
     <div css={friendContainerCss}>
-      <h2>Your first friend will appear here, when you add one</h2>
-      <Button
-        onClick={() => setIsAddingFriend(true)}
-        className='col-span-1 col-start-3'
-      >
-        <PlusIcon className='mr-2 h-5 w-5' /> Add your first Friend
+      <IconFriends />
+      <h2>No Friends</h2>
+      <p>Start adding your friends to your list.</p>
+
+      <Button onClick={() => setIsAddingFriend(true)}>
+        Add your First Friend
       </Button>
     </div>
   );
