@@ -44,6 +44,7 @@ const friendDateCss = css`
     line-height: 16px;
     margin-bottom: -4px;
     font-size: 14px;
+    color: #857e7e;
   }
 `;
 
@@ -76,7 +77,9 @@ function MonthFriend({
         <p>{shortenedBirthdateFormatted}</p>
       </div>
 
-      <IconChevronRight style={{ width: '20px', height: '20px' }} />
+      <IconChevronRight
+        style={{ width: '20px', height: '20px', color: '#228be6' }}
+      />
     </div>
   );
 }
