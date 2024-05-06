@@ -13,6 +13,13 @@ import {
 } from '../../components/BirthdayProvider';
 import { db } from '../../firebase';
 
+const modalContainerCss = css`
+  & p {
+    font-size: 14px;
+    color: #857e7e;
+  }
+`;
+
 const buttonsContainerCss = css`
   flex-direction: row;
   flex-wrap: nowrap;
@@ -78,6 +85,7 @@ function DeleteFriendModal({
       onClose={setIsDeleting}
       title='Are you absolutely sure?'
       centered
+      css={modalContainerCss}
     >
       <p>
         All data will be lost and the image will be deleted. You won't be able
