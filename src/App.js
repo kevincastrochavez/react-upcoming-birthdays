@@ -66,12 +66,11 @@ const LoginPage = lazy(() =>
 
 // TODOS FOR APP
 // Improve 3D object
-// Improve space next friends related shadows
 // Figure out color for links
-// Change picture id in firebase
 // Make app responsive for desktop
 // Implement onboarding
 // Improve empty state for the spotlight and next friend
+// Improve buttons for camera on import
 
 function App() {
   const { userUid } = useUserInfo();

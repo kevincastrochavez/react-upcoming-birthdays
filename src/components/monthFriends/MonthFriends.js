@@ -7,6 +7,7 @@ import MonthFriend from '../monthFriend/MonthFriend';
 
 const monthContainerCss = css`
   margin-bottom: 40px;
+  padding: 0 24px;
 
   & > h2 {
     font-size: 20px;

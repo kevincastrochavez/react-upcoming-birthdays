@@ -12,6 +12,7 @@ import FriendPreferences from './FriendPreferences';
 import { daysUntilBirthday } from '../../helper/utils';
 
 const spotlightHeadingCss = css`
+  padding: 0 24px;
   margin-top: 60px;
   margin-bottom: 8px;
   text-align: right;
@@ -24,7 +25,7 @@ const friendLinkCss = css`
 const visibleIconCss = css`
   position: absolute;
   top: 8px;
-  right: 8px;
+  right: 34px;
   z-index: 10;
 `;
 
@@ -43,6 +44,7 @@ const friendContainerCss = css`
     0px 2.6px 5.0375px rgba(12, 20, 33, 0.02),
     0px 1.37109px 2.99707px rgba(12, 20, 33, 0.016875),
     0px 0.56875px 1.79219px rgba(12, 20, 33, 0.013), inset 0px 2px 1px #ffffff;
+  width: calc(100% - 48px);
   max-width: 400px;
   margin: 0 auto;
 

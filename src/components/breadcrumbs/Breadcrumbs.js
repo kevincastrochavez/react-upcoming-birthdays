@@ -17,6 +17,8 @@ const breadcrumbsCSS = css`
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
+  margin-top: 12px;
+  padding: 0 24px;
 
   & a {
     text-decoration: none;
@@ -49,11 +51,13 @@ const Breadcrumbs = () => {
 
         if (index === 2) {
           const currentFriendId = match.pathname.split('/')[2];
-          const { formattedFullName } = friendsList.find(
+          const currentFriend = friendsList.find(
             (friend) => friend.id === currentFriendId
           );
 
-          textToDisplay = formattedFullName;
+          if (!currentFriend) return;
+
+          textToDisplay = currentFriend.formattedFullName;
         }
 
         return (

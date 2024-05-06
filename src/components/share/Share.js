@@ -51,6 +51,10 @@ const idContainerCss = css`
     margin-top: 40px;
     font-size: 14px;
   }
+
+  & > div {
+    padding: 0;
+  }
 `;
 
 const loaderCss = css`

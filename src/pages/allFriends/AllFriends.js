@@ -13,14 +13,18 @@ import {
 import MonthFriends from '../../components/monthFriends/MonthFriends';
 
 const mainContainerCss = css`
-  padding: 12px 24px 24px 24px;
   margin-bottom: 60px;
 
   & > h1 {
     margin-top: 40px;
     margin-bottom: 20px;
+    padding: 0 24px;
     font-size: 24px;
     font-weight: 400;
+  }
+
+  & > div:last-of-type {
+    padding-bottom: 60px;
   }
 `;
 

@@ -13,7 +13,6 @@ import NextFriends from '../../components/nextFriends/NextFriends';
 import SpotlightEmpty from '../../components/friendInfo/SpotlightEmpty';
 
 const mainContainerCss = css`
-  padding: 12px 24px 24px 24px;
   margin-bottom: 60px;
 `;
 

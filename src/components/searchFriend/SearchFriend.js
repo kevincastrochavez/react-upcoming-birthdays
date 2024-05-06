@@ -4,6 +4,8 @@ import { css } from '@emotion/react';
 import { TextInput } from '@mantine/core';
 
 const searchInputRightCss = css`
+  padding: 0 24px;
+
   & svg {
     margin-right: 12px;
   }

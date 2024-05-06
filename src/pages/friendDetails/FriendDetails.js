@@ -15,14 +15,21 @@ import DeleteFriendModal from './DeleteFriendModal';
 import EditFriend from '../../components/editFriend/EditFriend';
 
 const mainContainerCss = css`
-  padding: 12px 24px 24px 24px;
   margin-bottom: 60px;
+  padding-bottom: 24px;
 
   & > h1 {
     margin-top: 20px;
     margin-bottom: 60px;
+    padding: 0 24px;
     font-size: 24px;
     font-weight: 400;
+  }
+
+  & > button {
+    width: calc(100% - 48px);
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
 
@@ -52,7 +59,7 @@ function FriendDetails() {
       <Button
         leftSection={<IconEdit size={20} />}
         fullWidth
-        className='mt-12'
+        className='mt-8'
         onClick={() => setIsEditingFriend(true)}
         disabled={!firstName}
       >

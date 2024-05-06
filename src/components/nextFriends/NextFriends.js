@@ -8,17 +8,19 @@ import NextFriendEmpty from './NextFriendEmpty';
 
 const nextFiveContainerCss = css`
   margin-top: 60px;
+  padding-bottom: 30px;
 
   & > p {
     text-align: right;
     margin-bottom: 8px;
+    padding: 0 24px;
   }
 `;
 
 const nextFiveInnerContainerCss = css`
+  padding: 0 24px 24px;
   display: flex;
   gap: 12px;
-  overflow: hidden;
   overflow-x: scroll;
   padding-bottom: 30px;
 

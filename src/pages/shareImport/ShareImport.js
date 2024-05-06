@@ -36,12 +36,12 @@ import {
 import { db } from '../../../src/firebase';
 
 const mainContainerCss = css`
-  padding: 12px 24px 24px 24px;
   margin-bottom: 100px;
 `;
 
 const tabsContainerCss = css`
-  margin-top: 30px;
+  padding: 12px 24px;
+  margin-top: 20px;
 `;
 
 const addedNotificationCss = css`
