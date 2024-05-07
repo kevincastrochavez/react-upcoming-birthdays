@@ -68,7 +68,6 @@ const LoginPage = lazy(() =>
 // TODOS FOR APP
 // Improve 3D object
 // Make app responsive for desktop
-// Implement onboarding
 // Improve buttons for camera on import
 // Create logo
 
