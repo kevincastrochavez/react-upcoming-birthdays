@@ -66,7 +66,6 @@ const LoginPage = lazy(() =>
 );
 
 // TODOS FOR APP
-// Turning age and block calendar
 // Improve 3D object
 // Make app responsive for desktop
 // Improve buttons for camera on import
