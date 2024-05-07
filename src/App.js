@@ -1,5 +1,6 @@
-import { lazy, Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { TourProvider } from '@reactour/tour';
 import {
   collection,
   doc,
@@ -78,6 +79,8 @@ function App() {
   const { setIsUserSharingList } = useSetUserInfo();
   const { setFriendsList } = useSetFriends();
   const { isFetchingFriends, isFetchingList } = useActionFriends();
+  const redirect = useNavigate();
+  const [tourStep, setTourStep] = useState(0);
 
   const globalCollection = 'friends';
   const personalCollection = userUid;
@@ -175,9 +178,71 @@ function App() {
     }
   }, [userUid]);
 
+  const steps = [
+    {
+      selector: 'body',
+      content:
+        'Welcome to Happy B! A place where you can keep track of your loved ones and friends birthdays.',
+    },
+    {
+      selector: "[data-tour='spotlightFriend']",
+      content:
+        "The person with the closest birthday will be highlighted here, so you don't miss it",
+    },
+    {
+      selector: "[data-tour='nextFriends']",
+      content:
+        "As well as the next 5 friends, so you are aware who's coming up soon",
+    },
+    {
+      selector: "[data-tour='searchFriend']",
+      content: 'Quicly search for any friend',
+    },
+    {
+      selector: "[data-tour='allFriends']",
+      content: 'Get a glance at all of your friends, grouped by month',
+    },
+    {
+      selector: "[data-tour='shareCode']",
+      content:
+        'Want to let other people import your list of friends? We got you covered! Share your QR code or send them your personal link.',
+    },
+    {
+      selector: "[data-tour='addFriend']",
+      content: 'Ready to start?',
+    },
+  ];
+
+  const setCurrentStep = (step) => {
+    switch (step) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+        redirect('/', true);
+        break;
+      case 4:
+        redirect('/allFriends', true);
+        break;
+      case 5:
+        redirect('/shareImport', true);
+        break;
+      case 6:
+        redirect('/', true);
+        break;
+      default:
+        break;
+    }
+    setTourStep(step);
+  };
+
   return (
     <>
-      <BrowserRouter>
+      <TourProvider
+        steps={steps}
+        currentStep={tourStep}
+        setCurrentStep={setCurrentStep}
+      >
         <Navigation />
         <Toaster />
         <AddFriend />
@@ -199,7 +264,11 @@ function App() {
               path='/'
               element={
                 <>
-                  {isFetchingFriends ? <DashboardSkeleton /> : <Dashboard />}
+                  {isFetchingFriends ? (
+                    <DashboardSkeleton />
+                  ) : (
+                    <Dashboard setTourStep={setTourStep} />
+                  )}
 
                   <BottomNav />
                 </>
@@ -210,7 +279,11 @@ function App() {
               path='/allFriends'
               element={
                 <>
-                  {isFetchingFriends ? <AllFriendsSkeleton /> : <AllFriends />}
+                  {isFetchingFriends ? (
+                    <AllFriendsSkeleton />
+                  ) : (
+                    <AllFriends setTourStep={setTourStep} />
+                  )}
 
                   <BottomNav />
                 </>
@@ -236,7 +309,11 @@ function App() {
               path='/shareImport'
               element={
                 <>
-                  {isFetchingList ? <ShareImportSkeleton /> : <ShareImport />}
+                  {isFetchingList ? (
+                    <ShareImportSkeleton />
+                  ) : (
+                    <ShareImport setTourStep={setTourStep} />
+                  )}
 
                   <BottomNav />
                 </>
@@ -244,7 +321,7 @@ function App() {
             />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </TourProvider>
     </>
   );
 }
