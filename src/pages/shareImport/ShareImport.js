@@ -38,11 +38,34 @@ import { db } from '../../../src/firebase';
 
 const mainContainerCss = css`
   margin-bottom: 100px;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 1024px) {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
 `;
 
 const tabsContainerCss = css`
   padding: 12px 24px;
   margin-top: 20px;
+
+  @media (min-width: 600px) {
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 600px;
+    grid-row: 2/3;
+    grid-column: 1/-1;
+    margin-top: 0;
+  }
 `;
 
 const addedNotificationCss = css`

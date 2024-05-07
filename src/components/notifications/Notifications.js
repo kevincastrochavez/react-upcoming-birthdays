@@ -7,10 +7,18 @@ import { useActionFriends, useSetAddingFriends } from '../BirthdayProvider';
 
 const addedNotificationCss = css`
   position: fixed;
-  bottom: 90px;
-  left: 24px;
+  top: 90px;
   right: 24px;
   z-index: 10;
+  max-width: 400px;
+
+  @media (min-width: 600px) {
+    right: 30px;
+  }
+
+  @media (min-width: 1024px) {
+    right: calc((100% - 1024px) / 2);
+  }
 `;
 
 function Notifications() {
