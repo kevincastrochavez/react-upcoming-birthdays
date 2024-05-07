@@ -16,6 +16,7 @@ import { IconDownload, IconThumbUp, IconX } from '@tabler/icons-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import ShortUniqueId from 'short-unique-id';
+import { useTour } from '@reactour/tour';
 
 import {
   Tabs,
@@ -75,9 +76,10 @@ const loaderCss = css`
 
 /**
  * Displays the ShareImport component page
+ * @param {Function} setTourStep - function to set the tour step
  * @returns {JSX.Element}
  */
-function ShareImport() {
+function ShareImport({ setTourStep }) {
   const [qrCodeValue, setQrCodeValue] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
   const [isImporting, setIsImporting] = useState(false);
@@ -85,14 +87,23 @@ function ShareImport() {
   const [isLoadingDirectLink, setIsLoadingDirectLink] = useState(false);
   const { setOpenImportModal, setFriendsWereImported } = useSetAddingFriends();
   const { setStrangeQrCode } = useSetSharing();
-  const { openImportModal } = useActionFriends();
+  const { openImportModal, isFetchingFriends } = useActionFriends();
   const [searchParams, setSearchParams] = useSearchParams();
   const isSharingListPublic = useRef(null);
   const { userUid } = useUserInfo();
   const { strangeQrCode } = useSharing();
   const navigate = useNavigate();
+  const { setIsOpen } = useTour();
   const baseUrlApp = 'happyb-five.vercel.app';
   const closeIcon = <IconX />;
+
+  const tour = window.localStorage.getItem('tour');
+
+  const openProductTour = () => {
+    window.localStorage.setItem('tour', 'true');
+    setTourStep(0);
+    setIsOpen(true);
+  };
 
   useEffect(() => {
     const copyIdValue = searchParams.get('listToImport');
@@ -110,6 +121,14 @@ function ShareImport() {
       // handleGetListFromFriend(mockCompleteUrl, false); // For testing
     }
   }, [qrCodeValue, searchParams]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!isFetchingFriends && !tour && openImportModal) {
+        openProductTour();
+      }
+    }, 1500);
+  }, []);
 
   if (strangeQrCode) {
     setTimeout(() => {
@@ -247,6 +266,9 @@ function ShareImport() {
       setFriendsWereImported(true);
       setQrCodeValue(null);
       navigate('/allFriends');
+      if (!tour) {
+        openProductTour();
+      }
     }
   }
 
@@ -280,6 +302,10 @@ function ShareImport() {
   function handleCancelImport() {
     setQrCodeValue(null);
     setOpenImportModal(false);
+
+    if (!tour) {
+      openProductTour();
+    }
   }
 
   const notSharingJsx = (
@@ -341,6 +367,14 @@ function ShareImport() {
     </>
   );
 
+  function handleCloseImportModal() {
+    setOpenImportModal(false);
+
+    if (!tour) {
+      openProductTour();
+    }
+  }
+
   return (
     <main css={mainContainerCss}>
       <Breadcrumbs />
@@ -371,7 +405,7 @@ function ShareImport() {
       <Modal
         centered
         opened={openImportModal}
-        onClose={() => setOpenImportModal(false)}
+        onClose={handleCloseImportModal}
         title="Import whoever you want from your friend's list"
       >
         {isSharingListPublic.current ? sharingJsx : notSharingJsx}
