@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
+import { BrowserRouter } from 'react-router-dom';
 import '@mantine/core/styles.css';
 
 import BirthdayProvider from './components/BirthdayProvider';
@@ -15,7 +16,9 @@ root.render(
     <MantineProvider>
       <DatesProvider settings={{ locale: 'en' }}>
         <BirthdayProvider>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </BirthdayProvider>
       </DatesProvider>
     </MantineProvider>
