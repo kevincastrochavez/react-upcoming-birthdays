@@ -9,9 +9,6 @@ import Logout from './Logout';
 import { removeUserUid } from '../../helper/utils';
 
 const navigationCSS = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 16px 24px;
   background: #f9f9fa;
   box-shadow: 0px 13px 31px rgba(12, 20, 33, 0.04),
@@ -25,6 +22,15 @@ const navigationCSS = css`
   @media (min-width: 600px) {
     padding: 20px 30px;
   }
+`;
+
+const navigationWrapperCss = css`
+  max-width: 1024px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const navigationLogoCSS = css`
@@ -61,12 +67,14 @@ function Navigation() {
 
   return (
     <header css={navigationCSS}>
-      <Link css={navigationLogoCSS} to='/'>
-        <img src='http://via.placeholder.com/200' alt='' />
-        <p>Happy B!</p>
-      </Link>
+      <div css={navigationWrapperCss}>
+        <Link css={navigationLogoCSS} to='/'>
+          <img src='http://via.placeholder.com/200' alt='' />
+          <p>Happy B!</p>
+        </Link>
 
-      <Logout onClick={handleSignout} />
+        <Logout onClick={handleSignout} />
+      </div>
     </header>
   );
 }

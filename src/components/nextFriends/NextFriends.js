@@ -10,6 +10,10 @@ const nextFiveContainerCss = css`
   margin-top: 60px;
   padding-bottom: 30px;
 
+  @media (min-width: 1024px) {
+    margin-top: 0;
+  }
+
   & > p {
     text-align: right;
     margin-bottom: 8px;
@@ -36,6 +40,10 @@ const nextFiveInnerContainerCss = css`
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  @media (min-width: 1024px) {
+    flex-wrap: wrap;
   }
 
   &::-webkit-scrollbar {

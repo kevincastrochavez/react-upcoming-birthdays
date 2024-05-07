@@ -19,6 +19,16 @@ import { useEffect } from 'react';
 
 const mainContainerCss = css`
   margin-bottom: 60px;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 1024px) {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
 `;
 
 /**

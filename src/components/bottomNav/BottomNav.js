@@ -34,6 +34,10 @@ const bottomNavTabCss = css`
   gap: 8px;
   border-right: 1px solid #ebebeb;
 
+  @media (min-width: 1024px) {
+    padding: 20px;
+  }
+
   & span {
     margin: 0;
   }
@@ -52,6 +56,11 @@ const addFriendCss = css`
     right: 30px;
     bottom: 100px;
   }
+
+  @media (min-width: 1024px) {
+    right: 60px;
+    bottom: 140px;
+  }
 `;
 
 /**
@@ -64,7 +73,7 @@ function BottomNav() {
   const { setIsAddingFriend } = useSetAddingFriends();
 
   return (
-    <>
+    <footer>
       <Tabs
         variant='unstyled'
         defaultValue='settings'
@@ -117,7 +126,7 @@ function BottomNav() {
       >
         <IconUserPlus style={{ width: '70%', height: '70%' }} stroke={1.5} />
       </ActionIcon>
-    </>
+    </footer>
   );
 }
 

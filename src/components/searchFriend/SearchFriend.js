@@ -13,6 +13,12 @@ const searchInputRightCss = css`
     margin-right: auto;
   }
 
+  @media (min-width: 1024px) {
+    padding: 0;
+    width: 100%;
+    max-width: unset;
+  }
+
   & svg {
     margin-right: 12px;
   }

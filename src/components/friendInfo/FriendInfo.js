@@ -23,10 +23,27 @@ const spotlightHeadingCss = css`
     margin-left: auto;
     margin-right: auto;
   }
+
+  @media (min-width: 1024px) {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    margin: 0;
+    justify-self: end;
+    margin-right: 48px;
+  }
 `;
 
 const friendLinkCss = css`
   position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
+
+  @media (min-width: 1024px) {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    margin-top: 30px;
+  }
 `;
 
 const visibleIconCss = css`
@@ -54,6 +71,10 @@ const friendContainerCss = css`
   width: calc(100% - 48px);
   max-width: 400px;
   margin: 0 auto;
+
+  @media (min-width: 600px) {
+    width: 100%;
+  }
 
   & > span {
     grid-column: 1/3;

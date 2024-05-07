@@ -13,7 +13,7 @@ const routes = [
   { path: '/shareImport', breadcrumb: 'Share or Import' },
 ];
 
-const breadcrumbsCSS = css`
+const breadcrumbsCss = css`
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
@@ -22,6 +22,11 @@ const breadcrumbsCSS = css`
 
   @media (min-width: 600px) {
     padding: 0 30px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0;
+    grid-column: 1/2;
   }
 
   & a {
@@ -49,7 +54,7 @@ const Breadcrumbs = () => {
   const { friendsList } = useFriends();
 
   return (
-    <nav css={breadcrumbsCSS}>
+    <nav css={breadcrumbsCss}>
       {breadcrumbs?.map(({ match, breadcrumb }, index) => {
         let textToDisplay = breadcrumb;
 

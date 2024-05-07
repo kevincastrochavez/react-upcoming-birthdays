@@ -24,6 +24,11 @@ const nextFriendContainerCss = css`
   column-gap: 12px;
   width: fit-content;
 
+  @media (min-width: 1024px) {
+    width: 200px;
+    column-gap: 20px;
+  }
+
   & > span {
     align-self: center;
     grid-column: 1/2;

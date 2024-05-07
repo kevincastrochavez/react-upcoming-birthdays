@@ -23,6 +23,11 @@ const nextFriendContainerCss = css`
   column-gap: 12px;
   width: fit-content;
 
+  @media (min-width: 1024px) {
+    width: 200px;
+    grid-template-columns: 32px 1fr;
+  }
+
   & svg {
     color: #228be6;
     stroke-width: 1.5;
