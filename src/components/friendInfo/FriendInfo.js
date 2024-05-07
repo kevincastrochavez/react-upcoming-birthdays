@@ -158,7 +158,12 @@ function FriendInfo({
   return (
     <>
       {isSpotlight && <p css={spotlightHeadingCss}>Closest Birthday </p>}
-      <Link to={`/allFriends/${id}`} key={id} css={friendLinkCss}>
+      <Link
+        to={`/allFriends/${id}`}
+        key={id}
+        css={friendLinkCss}
+        data-tour={isSpotlight && 'spotlightFriend'}
+      >
         {!isSpotlight && visibleStatus}
 
         <div css={friendContainerCss}>

@@ -108,6 +108,7 @@ function BottomNav() {
         radius='xl'
         aria-label='Settings'
         onClick={() => setIsAddingFriend(true)}
+        data-tour='addFriend'
       >
         <IconUserPlus style={{ width: '70%', height: '70%' }} stroke={1.5} />
       </ActionIcon>

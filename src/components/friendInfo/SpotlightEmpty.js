@@ -59,12 +59,12 @@ function SpotlightEmpty() {
   const { setIsAddingFriend } = useSetAddingFriends();
 
   return (
-    <div css={friendContainerCss}>
+    <div css={friendContainerCss} data-tour='spotlightFriend'>
       <IconFriends />
       <h2>No Friends</h2>
       <p>Start adding your friends to your list.</p>
 
-      <Button onClick={() => setIsAddingFriend(true)}>
+      <Button onClick={() => setIsAddingFriend(true)} data-tour='addFriend'>
         Add your First Friend
       </Button>
     </div>

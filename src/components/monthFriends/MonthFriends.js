@@ -23,14 +23,15 @@ const monthContainerCss = css`
 /**
  * Displays the MonthFriendS component, which displays the list of all friends in such month
  * @param {Object} monthObj - month and list of friends in that month
+ * @param {String} productTourSelector - selector for product tour
  * @returns {JSX.Element}
  */
-function MonthFriends({ monthObj }) {
+function MonthFriends({ monthObj, productTourSelector }) {
   const { setIsAddingFriend } = useSetAddingFriends();
   const { friends } = monthObj;
 
   return (
-    <div css={monthContainerCss}>
+    <div css={monthContainerCss} data-tour={productTourSelector}>
       <h2>{monthObj.month}</h2>
       {friends.length > 0 ? (
         friends.map(

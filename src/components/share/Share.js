@@ -136,30 +136,32 @@ function Share() {
         </FormItem>
       </Form>
 
-      <div css={qrContainerCss}>
-        {isUserSharingList ? (
-          <>
-            <p>Have your friends scan this QR code:</p>
-            <QRCodeSVG value={qrCodeToShare} />
-          </>
-        ) : (
-          <p>Make your list public to get your QR code</p>
-        )}
-      </div>
+      <div data-tour='shareCode'>
+        <div css={qrContainerCss}>
+          {isUserSharingList ? (
+            <>
+              <p>Have your friends scan this QR code:</p>
+              <QRCodeSVG value={qrCodeToShare} />
+            </>
+          ) : (
+            <p>Make your list public to get your QR code</p>
+          )}
+        </div>
 
-      <div css={idContainerCss}>
-        <p>Or share your unique ID:</p>
+        <div css={idContainerCss}>
+          <p>Or share your personal link:</p>
 
-        <SearchFriend
-          value={manualIdToShare}
-          disabled={!isUserSharingList}
-          icon={
-            <Copy
-              disabled={!isUserSharingList}
-              listUrlToShare={manualIdToShare}
-            />
-          }
-        />
+          <SearchFriend
+            value={manualIdToShare}
+            disabled={!isUserSharingList}
+            icon={
+              <Copy
+                disabled={!isUserSharingList}
+                listUrlToShare={manualIdToShare}
+              />
+            }
+          />
+        </div>
       </div>
 
       {isUpdatingSharing && (

@@ -50,6 +50,7 @@ function SearchFriend({
       onClick={onClick}
       value={value && value}
       disabled={disabled}
+      data-tour='searchFriend'
     />
   );
 }

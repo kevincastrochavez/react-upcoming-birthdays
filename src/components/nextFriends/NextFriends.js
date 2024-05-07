@@ -40,7 +40,7 @@ function NextFriends() {
   const emptyNextFriendSlotsArray = Array(emptyNextFriendSlots).fill(1);
 
   return (
-    <div css={nextFiveContainerCss}>
+    <div css={nextFiveContainerCss} data-tour='nextFriends'>
       <p>Next 5 birthdays</p>
 
       <div css={nextFiveInnerContainerCss}>
