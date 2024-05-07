@@ -16,7 +16,18 @@ import EditFriend from '../../components/editFriend/EditFriend';
 
 const mainContainerCss = css`
   margin-bottom: 60px;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 24px;
+
+  @media (min-width: 1024px) {
+    padding-bottom: 0;
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
 
   & > h1 {
     margin-top: 20px;
@@ -24,12 +35,58 @@ const mainContainerCss = css`
     padding: 0 24px;
     font-size: 24px;
     font-weight: 400;
+
+    @media (min-width: 600px) {
+      padding: 0 30px;
+    }
+
+    @media (min-width: 1024px) {
+      grid-column: 1/3;
+      grid-row: 2/3;
+      margin: 0;
+      padding: 0;
+    }
   }
+
+  & > a {
+    justify-self: center;
+    grid-column: 1/-1;
+    grid-row: 3/4;
+  }
+`;
+
+const btnContainerCss = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
 
   & > button {
     width: calc(100% - 48px);
+    max-width: 360px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  @media (min-width: 600px) {
+    display: flex;
+    flex-direction: row;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+    & > button:first-of-type {
+      order: 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    grid-column: 1/3;
+    grid-row: 4/5;
+
+    & > button {
+      width: 192px;
+    }
   }
 `;
 
@@ -56,27 +113,27 @@ function FriendDetails() {
 
       <FriendInfo {...friendDetails} />
 
-      <Button
-        leftSection={<IconEdit size={20} />}
-        fullWidth
-        className='mt-8'
-        onClick={() => setIsEditingFriend(true)}
-        disabled={!firstName}
-      >
-        Edit {firstName || 'Friend'}'s Info
-      </Button>
+      <div css={btnContainerCss}>
+        <Button
+          leftSection={<IconEdit size={20} />}
+          fullWidth
+          onClick={() => setIsEditingFriend(true)}
+          disabled={!firstName}
+        >
+          Edit {firstName || 'Friend'}'s Info
+        </Button>
 
-      <Button
-        leftSection={<IconTrash size={20} />}
-        fullWidth
-        className='mt-4'
-        variant={'light'}
-        color={'red'}
-        onClick={() => setIsDeleting(true)}
-        disabled={!firstName}
-      >
-        Delete {firstName || 'Friend'}
-      </Button>
+        <Button
+          leftSection={<IconTrash size={20} />}
+          fullWidth
+          variant={'light'}
+          color={'red'}
+          onClick={() => setIsDeleting(true)}
+          disabled={!firstName}
+        >
+          Delete {firstName || 'Friend'}
+        </Button>
+      </div>
 
       <DeleteFriendModal
         isDeleting={isDeleting}

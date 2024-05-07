@@ -39,6 +39,10 @@ const friendLinkCss = css`
   margin: 0 auto;
   display: block;
 
+  &:not([is-spotlight='true']) {
+    cursor: unset;
+  }
+
   @media (min-width: 1024px) {
     grid-column: 1/2;
     grid-row: 2/3;
@@ -51,6 +55,11 @@ const visibleIconCss = css`
   top: 8px;
   right: 34px;
   z-index: 10;
+  cursor: pointer;
+
+  @media (min-width: 600px) {
+    right: 12px;
+  }
 `;
 
 const friendContainerCss = css`
@@ -197,6 +206,7 @@ function FriendInfo({
         key={id}
         css={friendLinkCss}
         data-tour={isSpotlight && 'spotlightFriend'}
+        is-spotlight={isSpotlight && 'true'}
       >
         {!isSpotlight && visibleStatus}
 
