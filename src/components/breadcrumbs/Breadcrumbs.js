@@ -27,6 +27,7 @@ const breadcrumbsCss = css`
   @media (min-width: 1024px) {
     padding: 0;
     grid-column: 1/2;
+    margin-top: 0;
   }
 
   & a {

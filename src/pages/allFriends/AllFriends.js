@@ -17,6 +17,16 @@ import MonthFriends from '../../components/monthFriends/MonthFriends';
 
 const mainContainerCss = css`
   margin-bottom: 60px;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 1024px) {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
 
   & > h1 {
     margin-top: 40px;
@@ -24,10 +34,31 @@ const mainContainerCss = css`
     padding: 0 24px;
     font-size: 24px;
     font-weight: 400;
+
+    @media (min-width: 1024px) {
+      grid-column: 1/2;
+      grid-row: 2/3;
+      margin-top: 0;
+    }
   }
 
   & > div:last-of-type {
     padding-bottom: 60px;
+  }
+`;
+
+const monthsContainerCss = css`
+  @media (min-width: 600px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    grid-column: 1/3;
+    grid-row: 2/3;
+    margin-top: 90px;
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
 
@@ -70,14 +101,16 @@ function AllFriends({ setTourStep }) {
       ) : (
         <>
           <h1>All Friends</h1>
-          {sortedBirthdaysByMonth &&
-            sortedBirthdaysByMonth.map((monthObj, index) => (
-              <MonthFriends
-                key={index}
-                monthObj={monthObj}
-                productTourSelector={index === 0 ? 'allFriends' : ''}
-              />
-            ))}
+          <div css={monthsContainerCss}>
+            {sortedBirthdaysByMonth &&
+              sortedBirthdaysByMonth.map((monthObj, index) => (
+                <MonthFriends
+                  key={index}
+                  monthObj={monthObj}
+                  productTourSelector={index === 0 ? 'allFriends' : ''}
+                />
+              ))}
+          </div>
         </>
       )}
     </main>
