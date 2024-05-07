@@ -27,7 +27,7 @@ const breadcrumbsCSS = css`
   }
 
   & a:not(:last-of-type) {
-    color: blue;
+    color: #228be6;
   }
 
   & span {

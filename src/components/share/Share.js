@@ -27,6 +27,10 @@ const shareContainerCss = css`
   padding: 20px;
   border-radius: 12px;
   margin-top: 16px;
+
+  & button[role='switch'][data-state='checked'] {
+    background-color: #228be6 !important;
+  }
 `;
 
 const qrContainerCss = css`

@@ -21,7 +21,7 @@ const friendPreferenceCss = css`
   display: flex;
 
   & span {
-    color: #f4bfbf;
+    color: #db8f8f;
     margin-left: 4px;
     font-size: 14px;
   }

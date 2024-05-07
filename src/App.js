@@ -66,10 +66,10 @@ const LoginPage = lazy(() =>
 
 // TODOS FOR APP
 // Improve 3D object
-// Figure out color for links
 // Make app responsive for desktop
 // Implement onboarding
 // Improve buttons for camera on import
+// Create logo
 
 function App() {
   const { userUid } = useUserInfo();
