@@ -6,6 +6,13 @@ import { TextInput } from '@mantine/core';
 const searchInputRightCss = css`
   padding: 0 24px;
 
+  @media (min-width: 600px) {
+    padding: 0 30px;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   & svg {
     margin-right: 12px;
   }

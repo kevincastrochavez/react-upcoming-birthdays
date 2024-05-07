@@ -8,6 +8,9 @@ import TopSearchSkeleton from './TopSearchSkeleton';
 const skeletonContainerCss = css`
   padding: 0 24px 24px 24px;
   margin-top: 24px;
+  @media (min-width: 600px) {
+    padding: 0 30px 24px;
+  }
 
   & div:after {
     background-color: darkgray;

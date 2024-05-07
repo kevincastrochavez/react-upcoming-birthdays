@@ -20,6 +20,10 @@ const breadcrumbsCSS = css`
   margin-top: 12px;
   padding: 0 24px;
 
+  @media (min-width: 600px) {
+    padding: 0 30px;
+  }
+
   & a {
     text-decoration: none;
     color: black;

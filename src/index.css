@@ -21,6 +21,12 @@ body {
   border-radius: 8px;
 }
 
+@media (min-width: 600px) {
+  [role='dialog'] {
+    max-width: 400px;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

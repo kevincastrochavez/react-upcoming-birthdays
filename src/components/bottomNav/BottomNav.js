@@ -47,6 +47,11 @@ const addFriendCss = css`
   position: fixed;
   bottom: 90px;
   right: 24px;
+
+  @media (min-width: 600px) {
+    right: 30px;
+    bottom: 100px;
+  }
 `;
 
 /**

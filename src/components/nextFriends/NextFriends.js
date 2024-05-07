@@ -14,6 +14,13 @@ const nextFiveContainerCss = css`
     text-align: right;
     margin-bottom: 8px;
     padding: 0 24px;
+
+    @media (min-width: 600px) {
+      padding: 0;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 `;
 
@@ -23,6 +30,13 @@ const nextFiveInnerContainerCss = css`
   gap: 12px;
   overflow-x: scroll;
   padding-bottom: 30px;
+
+  @media (min-width: 600px) {
+    padding: 0 30px 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   &::-webkit-scrollbar {
     display: none;

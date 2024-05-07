@@ -16,6 +16,13 @@ const spotlightHeadingCss = css`
   margin-top: 60px;
   margin-bottom: 8px;
   text-align: right;
+
+  @media (min-width: 600px) {
+    padding: 0;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 
 const friendLinkCss = css`
