@@ -83,10 +83,10 @@ function LoginBody() {
           <p>Continue with Google</p>
         </div>
 
-        <div data-testid='guest-button' css={buttonCss} is-guest='true'>
+        {/* <div data-testid='guest-button' css={buttonCss} is-guest='true'>
           <img src={guestLogo} alt='Guest SVG' />
           <p>Continue as a Guest</p>
-        </div>
+        </div> */}
       </div>
     </>
   );
