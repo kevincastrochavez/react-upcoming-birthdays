@@ -42,6 +42,40 @@ function daysUntilBirthday(birthdate) {
 }
 
 /**
+ * Gets the years the friend is turning this year or next year
+ * @param {Object} birthdate - friend's birthday in the format "2020-05-15"
+ * @returns {Number} - years the friend is turning
+ */
+function getNextBirthdayAge(birthdate) {
+  // Parse the birthdate into a Date object
+  const birthday = new Date(birthdate);
+  const today = new Date();
+
+  // Get the current year and the year of the birthdate
+  const thisYear = today.getFullYear();
+  const birthYear = birthday.getFullYear();
+
+  // Calculate the next birthday year
+  let nextBirthdayYear = thisYear;
+  if (
+    today.getMonth() < birthday.getMonth() ||
+    (today.getMonth() === birthday.getMonth() &&
+      today.getDate() <= birthday.getDate())
+  ) {
+    // If today's date is before the birthday this year, the next birthday is this year
+    nextBirthdayYear = thisYear;
+  } else {
+    // Otherwise, the next birthday is next year
+    nextBirthdayYear = thisYear + 1;
+  }
+
+  // Calculate the age at the next birthday
+  const nextBirthdayAge = nextBirthdayYear - birthYear;
+
+  return nextBirthdayAge;
+}
+
+/**
  * Gets the user ID in localStorage, if any
  * @param {String} key - The key used to retrieve the existing uid from localStorage, if any
  * @return {String} - User ID
@@ -69,4 +103,10 @@ function saveUserUid(key, udi) {
   return localStorage.setItem(key, udi);
 }
 
-export { daysUntilBirthday, getUserUid, removeUserUid, saveUserUid };
+export {
+  daysUntilBirthday,
+  getUserUid,
+  removeUserUid,
+  saveUserUid,
+  getNextBirthdayAge,
+};
