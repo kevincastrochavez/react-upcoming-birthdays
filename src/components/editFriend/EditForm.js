@@ -211,12 +211,13 @@ function EditForm() {
       <Space h='md' />
 
       <DatePickerInput
-        label="Friend's Birthday"
+        label="Friend's Birthdate"
         placeholder='Date input'
         withAsterisk
         value={new Date(birthdateValue)}
         onChange={setBirthdateValue}
         valueFormat='YYYY MMM DD'
+        maxDate={new Date()}
       />
 
       <Space h='md' />
@@ -235,7 +236,7 @@ function EditForm() {
       <TextInput
         withAsterisk
         label='Favorite Color'
-        placeholder='Blue'
+        placeholder="Your friend's favorite color"
         {...form.getInputProps('favoriteColor')}
         leftSection={favoriteColorIcon}
       />

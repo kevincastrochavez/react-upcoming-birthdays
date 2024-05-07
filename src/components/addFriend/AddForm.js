@@ -170,7 +170,7 @@ function AddForm() {
       <TextInput
         withAsterisk
         label='Full Name'
-        placeholder='Kevin Castro'
+        placeholder="Your friend's full name"
         {...form.getInputProps('fullName')}
         leftSection={fullNameIcon}
         name='name'
@@ -179,12 +179,14 @@ function AddForm() {
       <Space h='md' />
 
       <DatePickerInput
-        label="Friend's Birthday"
+        label="Friend's Birthdate"
         placeholder='Date input'
         withAsterisk
         value={birthdateValue}
         onChange={setBirthdateValue}
         valueFormat='YYYY MMM DD'
+        defaultLevel='decade'
+        maxDate={new Date()}
       />
 
       <Space h='md' />
@@ -203,7 +205,7 @@ function AddForm() {
       <TextInput
         withAsterisk
         label='Favorite Color'
-        placeholder='Blue'
+        placeholder="Your friend's favorite color"
         {...form.getInputProps('favoriteColor')}
         leftSection={favoriteColorIcon}
       />

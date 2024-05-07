@@ -6,8 +6,9 @@ import toothIcon from '../../assets/tooth.svg';
 import celebrateIcon from '../../assets/celebrate.svg';
 
 const friendInfoCss = css`
+  margin-top: 24px;
   grid-column: 1/-1;
-  grid-row: 3/4;
+  grid-row: 4/5;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;

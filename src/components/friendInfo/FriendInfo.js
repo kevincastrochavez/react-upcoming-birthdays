@@ -9,7 +9,7 @@ import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import { useClickOutside } from '@mantine/hooks';
 
 import FriendPreferences from './FriendPreferences';
-import { daysUntilBirthday } from '../../helper/utils';
+import { daysUntilBirthday, getNextBirthdayAge } from '../../helper/utils';
 
 const spotlightHeadingCss = css`
   padding: 0 24px;
@@ -59,6 +59,12 @@ const friendContainerCss = css`
       object-fit: cover;
     }
   }
+
+  & > p {
+    grid-column: 1/-1;
+    color: #857e7e;
+    font-size: 14px;
+  }
 `;
 
 const friendNameCss = css`
@@ -76,7 +82,6 @@ const friendBirthdateCss = css`
   grid-column: 1/-1;
   grid-row: 2/3;
   margin-top: 16px;
-  margin-bottom: 24px;
 
   & span {
     color: #8cc0de;
@@ -112,6 +117,7 @@ function FriendInfo({
   const visibleBtnRef = useClickOutside(() => setOpenedTooltip(false));
 
   const { daysToBirthday, isBirthdayToday } = daysUntilBirthday(birthdate);
+  const ageTurning = getNextBirthdayAge(birthdate);
 
   const visibleJsx = (
     <Tooltip
@@ -178,6 +184,7 @@ function FriendInfo({
               Coming up in <span>{daysToBirthday}</span> days
             </h1>
           )}
+          {!isSpotlight && <p>Turning {ageTurning}</p>}
 
           <FriendPreferences
             favoriteColor={favoriteColor}
