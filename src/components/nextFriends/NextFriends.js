@@ -44,12 +44,12 @@ function NextFriends() {
       <p>Next 5 birthdays</p>
 
       <div css={nextFiveInnerContainerCss}>
+        {emptyNextFriendSlotsArray.length > 0 && <NextFriendEmpty />}
         {nextFiveFriends.map(({ friend }) => (
           <Link key={friend.id} to={`/allFriends/${friend.id}`}>
             <NextFriend friend={friend} />
           </Link>
         ))}
-        {emptyNextFriendSlotsArray.length > 0 && <NextFriendEmpty />}
       </div>
     </div>
   );
