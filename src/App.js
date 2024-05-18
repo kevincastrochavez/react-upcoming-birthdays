@@ -65,10 +65,6 @@ const LoginPage = lazy(() =>
   componentLoader(() => import('./pages/login/Login'))
 );
 
-// TODOS FOR APP
-// Improve 3D object
-// Improve buttons for camera on import
-
 function App() {
   const { userUid } = useUserInfo();
   const { setIsFetchingFriends, setIsFetchingList, setFetchingListFailed } =
