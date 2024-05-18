@@ -47,6 +47,8 @@ function daysUntilBirthday(birthdate) {
  * @returns {Number} - years the friend is turning
  */
 function getNextBirthdayAge(birthdate) {
+  if (!birthdate) return 0;
+
   // Parse the birthdate into a Date object
   const birthday = new Date(birthdate);
   const today = new Date();

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Link } from 'react-router-dom';
@@ -151,10 +151,14 @@ function FriendInfo({
   isPrivate,
 }) {
   const [openedTooltip, setOpenedTooltip] = useState(false);
+  const ageTurningRef = useRef(0);
   const visibleBtnRef = useClickOutside(() => setOpenedTooltip(false));
 
   const { daysToBirthday, isBirthdayToday } = daysUntilBirthday(birthdate);
-  const ageTurning = getNextBirthdayAge(birthdate);
+
+  useEffect(() => {
+    ageTurningRef.current = getNextBirthdayAge(birthdate); // To avoid getting an undefined error
+  }, [birthdate]);
 
   const visibleJsx = (
     <Tooltip
@@ -222,7 +226,7 @@ function FriendInfo({
               Coming up in <span>{daysToBirthday}</span> days
             </h1>
           )}
-          {!isSpotlight && <p>Turning {ageTurning}</p>}
+          {!isSpotlight && <p>Turning {ageTurningRef.current}</p>}
 
           <FriendPreferences
             favoriteColor={favoriteColor}
