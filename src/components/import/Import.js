@@ -47,8 +47,8 @@ function Import({ setQrCodeValue }) {
       scanner = new Html5QrcodeScanner('reader', {
         fps: 1,
         qrbox: {
-          width: 200,
-          height: 200,
+          width: 250,
+          height: 250,
         },
       });
 
