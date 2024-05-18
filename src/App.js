@@ -65,6 +65,9 @@ const LoginPage = lazy(() =>
   componentLoader(() => import('./pages/login/Login'))
 );
 
+// TODOS
+// Add Confeti animation
+
 function App() {
   const { userUid } = useUserInfo();
   const { setIsFetchingFriends, setIsFetchingList, setFetchingListFailed } =

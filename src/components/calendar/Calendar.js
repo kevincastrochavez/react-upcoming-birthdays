@@ -23,8 +23,8 @@ function Calendar() {
   });
 
   const { nodes } = useGLTF('./model/calendar.glb');
-  const calendarBody = nodes.Cube.geometry;
-  const calendarTop = nodes.Cube001.geometry;
+  const calendarBody = nodes.Body.geometry;
+  const calendarTop = nodes.Top.geometry;
 
   const bakedTexture = useTexture('./model/calendarBaked.jpg');
   bakedTexture.flipY = false;
@@ -44,13 +44,24 @@ function Calendar() {
           </mesh>
 
           <Text3D
-            scale={0.7}
+            scale={0.65}
             position-z={0.1}
             position-x={-0.5}
-            position-y={-0.3}
+            position-y={-0.4}
             font={'./fonts/Roboto_Regular.json'}
           >
             23
+            <meshMatcapMaterial matcap={matcapTexture} />
+          </Text3D>
+
+          <Text3D
+            scale={0.15}
+            position-z={0.2}
+            position-x={-0.8}
+            position-y={0.3}
+            font={'./fonts/Roboto_Regular.json'}
+          >
+            MAR
             <meshMatcapMaterial matcap={matcapTexture} />
           </Text3D>
         </group>
