@@ -430,6 +430,10 @@ function ShareImport({ setTourStep }) {
         opened={openImportModal}
         onClose={handleCloseImportModal}
         title="Import whoever you want from your friend's list"
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
       >
         {isSharingListPublic.current ? sharingJsx : notSharingJsx}
       </Modal>

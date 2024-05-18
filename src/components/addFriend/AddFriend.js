@@ -12,6 +12,10 @@ function AddFriend() {
       opened={isAddingFriend}
       onClose={setIsAddingFriend}
       title='Add Friend'
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
     >
       <AddForm />
     </Modal>

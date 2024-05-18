@@ -13,6 +13,10 @@ function EditFriend() {
       opened={isEditingFriend}
       onClose={setIsEditingFriend}
       title='Edit Friend'
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
     >
       <EditForm />
     </Modal>
