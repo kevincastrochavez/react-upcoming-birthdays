@@ -174,6 +174,7 @@ function AddForm() {
         {...form.getInputProps('fullName')}
         leftSection={fullNameIcon}
         name='name'
+        size='md'
       />
 
       <Space h='md' />
@@ -187,6 +188,7 @@ function AddForm() {
         valueFormat='YYYY MMM DD'
         defaultLevel='decade'
         maxDate={new Date()}
+        size='md'
       />
 
       <Space h='md' />
@@ -198,6 +200,7 @@ function AddForm() {
         clearable
         leftSection={pictureIcon}
         onChange={handleCompressImage}
+        size='md'
       />
 
       <Space h='md' />
@@ -208,6 +211,7 @@ function AddForm() {
         placeholder="Your friend's favorite color"
         {...form.getInputProps('favoriteColor')}
         leftSection={favoriteColorIcon}
+        size='md'
       />
 
       <Space h='md' />
@@ -219,6 +223,7 @@ function AddForm() {
         value={candyPreferenceValue}
         onChange={setCandyPreferenceValue}
         {...form.getInputProps('candyPreference')}
+        size='md'
       >
         <Group mt='xs'>
           <Radio value='Sweet' label='Sweet' />
@@ -235,6 +240,7 @@ function AddForm() {
         value={likesToCelebrateValue}
         onChange={setLikesToCelebrateValue}
         {...form.getInputProps('likesToCelebrate')}
+        size='md'
       >
         <Group mt='xs'>
           <Radio value='Yes' label='Yes' />
@@ -247,10 +253,15 @@ function AddForm() {
         label='Keep friend private'
         description='No one can import it even when your list is public. (You can edit this later)'
         onChange={(event) => setFriendIsPrivate(event.currentTarget.checked)}
+        size='md'
       />
 
       <Group justify='flex-end' mt='xl'>
-        <Button onClick={() => setIsAddingFriend(false)} variant='default'>
+        <Button
+          onClick={() => setIsAddingFriend(false)}
+          variant='default'
+          size='md'
+        >
           Cancel
         </Button>
         <Button
@@ -258,6 +269,7 @@ function AddForm() {
           loaderProps={{ type: 'dots' }}
           type='submit'
           disabled={isCompressingPicture}
+          size='md'
         >
           Save Friend
         </Button>

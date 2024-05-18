@@ -86,6 +86,10 @@ function DeleteFriendModal({
       title='Are you absolutely sure?'
       centered
       css={modalContainerCss}
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
     >
       <p>
         All data will be lost and the image will be deleted. You won't be able
@@ -98,6 +102,7 @@ function DeleteFriendModal({
           className='mt-8'
           variant={'default'}
           onClick={() => setIsDeleting(false)}
+          size='md'
         >
           Cancel
         </Button>
@@ -108,6 +113,7 @@ function DeleteFriendModal({
           onClick={handleDelete}
           loading={isDeletingFriend}
           loaderProps={{ type: 'dots' }}
+          size='md'
         >
           Delete {firstName || 'Friend'}
         </Button>

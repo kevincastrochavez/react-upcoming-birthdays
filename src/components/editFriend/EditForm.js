@@ -206,6 +206,7 @@ function EditForm() {
         {...form.getInputProps('fullName')}
         leftSection={fullNameIcon}
         name='name'
+        size='md'
       />
 
       <Space h='md' />
@@ -218,6 +219,7 @@ function EditForm() {
         onChange={setBirthdateValue}
         valueFormat='YYYY MMM DD'
         maxDate={new Date()}
+        size='md'
       />
 
       <Space h='md' />
@@ -229,6 +231,7 @@ function EditForm() {
         clearable
         leftSection={pictureIcon}
         onChange={handleCompressImage}
+        size='md'
       />
 
       <Space h='md' />
@@ -239,6 +242,7 @@ function EditForm() {
         placeholder="Your friend's favorite color"
         {...form.getInputProps('favoriteColor')}
         leftSection={favoriteColorIcon}
+        size='md'
       />
 
       <Space h='md' />
@@ -248,6 +252,7 @@ function EditForm() {
         label='Candy Preference'
         withAsterisk
         {...form.getInputProps('candyPreference')}
+        size='md'
       >
         <Group mt='xs'>
           <Radio value='Sweet' label='Sweet' />
@@ -262,6 +267,7 @@ function EditForm() {
         label='Likes To Celebrate'
         withAsterisk
         {...form.getInputProps('likesToCelebrate')}
+        size='md'
       >
         <Group mt='xs'>
           <Radio value='Yes' label='Yes' />
@@ -275,10 +281,15 @@ function EditForm() {
         label='Keep friend private'
         description='No one can import it even when your list is public'
         onChange={(event) => setFriendIsPrivate(event.currentTarget.checked)}
+        size='md'
       />
 
       <Group justify='flex-end' mt='xl'>
-        <Button onClick={() => setIsEditingFriend(false)} variant='default'>
+        <Button
+          onClick={() => setIsEditingFriend(false)}
+          variant='default'
+          size='md'
+        >
           Cancel
         </Button>
         <Button
@@ -286,6 +297,7 @@ function EditForm() {
           loaderProps={{ type: 'dots' }}
           type='submit'
           disabled={isCompressingPicture}
+          size='md'
         >
           Save Changes
         </Button>

@@ -64,7 +64,11 @@ function SpotlightEmpty() {
       <h2>No Friends</h2>
       <p>Start adding your friends to your list.</p>
 
-      <Button onClick={() => setIsAddingFriend(true)} data-tour='addFriend'>
+      <Button
+        onClick={() => setIsAddingFriend(true)}
+        data-tour='addFriend'
+        size='md'
+      >
         Add your First Friend
       </Button>
     </div>
