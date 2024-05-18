@@ -68,7 +68,6 @@ const LoginPage = lazy(() =>
 // TODOS FOR APP
 // Improve 3D object
 // Improve buttons for camera on import
-// Form does not scroll
 
 function App() {
   const { userUid } = useUserInfo();
