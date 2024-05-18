@@ -7,6 +7,7 @@ import { auth } from '../../firebase';
 import { useSetUserInfo } from '../BirthdayProvider';
 import Logout from './Logout';
 import { removeUserUid } from '../../helper/utils';
+import logo from '../../assets/logo.svg';
 
 const navigationCSS = css`
   padding: 16px 24px;
@@ -69,7 +70,10 @@ function Navigation() {
     <header css={navigationCSS}>
       <div css={navigationWrapperCss}>
         <Link css={navigationLogoCSS} to='/'>
-          <img src='http://via.placeholder.com/200' alt='' />
+          <img
+            src={logo}
+            alt='A clean, minimal, and warm logo for a web app called HappyB. The logo features a small, neatly wrapped gift box with a ribbon forming a bow. The color palette includes warm and cheerful colors like coral, teal, and soft gold. The typography is elegant, yet approachable sans-serif font with a slight italic.'
+          />
           <p>Happy B!</p>
         </Link>
 
