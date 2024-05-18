@@ -24,22 +24,22 @@ const buttonsContainerCss = css`
 const buttonCss = css`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 16px;
   padding: 12px 16px;
   background-color: #1877f2;
   color: white;
   border-radius: 10px;
   cursor: pointer;
-
-  &[is-google='true'] {
-    background-color: #fff;
-    color: black;
-  }
-
-  &[is-guest='true'] {
-    background-color: orange;
-    color: black;
-  }
+  background-color: #fff;
+  color: black;
+  box-shadow: 0px 13px 31px rgba(12, 20, 33, 0.04),
+    0px 9.45547px 20.8947px rgba(12, 20, 33, 0.032375),
+    0px 6.58125px 13.5141px rgba(12, 20, 33, 0.027),
+    0px 4.31641px 8.38574px rgba(12, 20, 33, 0.023125),
+    0px 2.6px 5.0375px rgba(12, 20, 33, 0.02),
+    0px 1.37109px 2.99707px rgba(12, 20, 33, 0.016875),
+    0px 0.56875px 1.79219px rgba(12, 20, 33, 0.013), inset 0px 2px 1px #ffffff;
 `;
 
 /**
@@ -82,11 +82,6 @@ function LoginBody() {
           <img src={googleLogo} alt='Google SVG' />
           <p>Continue with Google</p>
         </div>
-
-        {/* <div data-testid='guest-button' css={buttonCss} is-guest='true'>
-          <img src={guestLogo} alt='Guest SVG' />
-          <p>Continue as a Guest</p>
-        </div> */}
       </div>
     </>
   );
