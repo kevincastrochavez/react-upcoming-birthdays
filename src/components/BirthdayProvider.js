@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 import { useDebouncedState } from '@mantine/hooks';
 
 import { getUserUid } from '../helper/utils';
+import { LANGUAGE_OPTIONS } from '../lib/constants';
 
 const BirthdayContext = createContext({});
 const BirthdayUpdateContext = createContext({});
@@ -37,6 +38,9 @@ export default function BirthdayProvider({ children }) {
   const [openImportModal, setOpenImportModal] = useState(false);
   const [friendsWereImported, setFriendsWereImported] = useState(false);
   const [importingFriendsFailed, setImportingFriendsFailed] = useState(false);
+  const [languageSelectedObj, setLanguageSelectedObj] = useState(
+    LANGUAGE_OPTIONS[0]
+  );
 
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
@@ -104,6 +108,7 @@ export default function BirthdayProvider({ children }) {
         setIsUpdatingSharing,
         setFetchingListFailed,
         setListWasUpdated,
+        setLanguageSelectedObj,
       }}
     >
       <BirthdayContext.Provider
@@ -136,6 +141,7 @@ export default function BirthdayProvider({ children }) {
           isUpdatingSharing,
           fetchingListFailed,
           listWasUpdated,
+          languageSelectedObj,
         }}
       >
         {children}
@@ -225,6 +231,18 @@ export function useFriends() {
 }
 
 /**
+ * Returns the language selected for the app in object form
+ *
+ * @returns { languageSelectedObj }
+ */
+export function useLanguage() {
+  const { languageSelectedObj } = useBirthdayProvider('useLanguage');
+  return {
+    languageSelectedObj,
+  };
+}
+
+/**
  * Returns the state for the isSearching, the search value, the filtered list of friends by search, the isIdSearching state, and the searchIdText for looking up a friend's list
  *
  * @returns { isSearching, searchText, isIdSearching, searchIdText }
@@ -309,6 +327,18 @@ export function useSetFriends() {
   const { setFriendsList } = useSetBirthdayProvider('useSetAddingFriends');
   return {
     setFriendsList,
+  };
+}
+
+/**
+ * Updates the language selected for the app in object form
+ *
+ * @returns { setLanguageSelectedObj }
+ */
+export function useSetLanguage() {
+  const { setLanguageSelectedObj } = useSetBirthdayProvider('useSetLanguage');
+  return {
+    setLanguageSelectedObj,
   };
 }
 

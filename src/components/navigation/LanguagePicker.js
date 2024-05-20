@@ -1,14 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import React, { useState } from 'react';
 import { Input, InputBase, Combobox, useCombobox, Group } from '@mantine/core';
-import { MXFlag, USFlag, BRFlag } from 'mantine-flagpack';
 
-const LANGUAGE_OPTIONS = [
-  { value: 'en', label: 'EN', icon: <USFlag w={30} /> },
-  { value: 'es', label: 'ES', icon: <MXFlag w={30} /> },
-  { value: 'pt', label: 'PT-BR', icon: <BRFlag w={30} /> },
-];
+import { LANGUAGE_OPTIONS } from '../../lib/constants';
+import { useLanguage, useSetLanguage } from '../BirthdayProvider';
 
 const comboBoxCss = css`
   width: 100px;
@@ -26,7 +21,8 @@ const flagContainerCss = css`
 `;
 
 function LanguagePicker() {
-  const [valueLanguage, setValue] = useState(LANGUAGE_OPTIONS[0]);
+  const { languageSelectedObj } = useLanguage();
+  const { setLanguageSelectedObj } = useSetLanguage();
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -44,7 +40,7 @@ function LanguagePicker() {
       <Combobox.Option
         value={value}
         key={value}
-        active={value === valueLanguage}
+        active={value === languageSelectedObj}
       >
         <Group gap='xs'>
           <div css={flagContainerCss}>
@@ -54,7 +50,6 @@ function LanguagePicker() {
       </Combobox.Option>
     );
   });
-  console.log(valueLanguage);
 
   return (
     <Combobox
@@ -65,7 +60,7 @@ function LanguagePicker() {
         const languageSelectedObj = LANGUAGE_OPTIONS.find(
           (language) => language.value === val
         );
-        setValue(languageSelectedObj);
+        setLanguageSelectedObj(languageSelectedObj);
         combobox.updateSelectedOptionIndex('active');
         combobox.closeDropdown();
       }}
@@ -79,7 +74,7 @@ function LanguagePicker() {
           rightSectionPointerEvents='none'
           onClick={() => combobox.toggleDropdown()}
         >
-          {valueLanguage.icon || (
+          {languageSelectedObj.icon || (
             <Input.Placeholder>Pick value</Input.Placeholder>
           )}
         </InputBase>
