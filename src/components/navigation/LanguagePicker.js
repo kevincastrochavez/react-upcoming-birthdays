@@ -1,22 +1,32 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React, { useState } from 'react';
-import {
-  Input,
-  InputBase,
-  Combobox,
-  useCombobox,
-  CheckIcon,
-  Group,
-} from '@mantine/core';
+import { Input, InputBase, Combobox, useCombobox, Group } from '@mantine/core';
+import { MXFlag, USFlag, BRFlag } from 'mantine-flagpack';
+
+const LANGUAGE_OPTIONS = [
+  { value: 'en', label: 'EN', icon: <USFlag w={30} /> },
+  { value: 'es', label: 'ES', icon: <MXFlag w={30} /> },
+  { value: 'pt', label: 'PT-BR', icon: <BRFlag w={30} /> },
+];
+
+const comboBoxCss = css`
+  width: 100px;
+
+  & button {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const flagContainerCss = css`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
 
 function LanguagePicker() {
-  const [value, setValue] = useState('🥦 Broccoli');
-  const groceries = [
-    '🍎 Apples',
-    '🍌 Bananas',
-    '🥦 Broccoli',
-    '🥕 Carrots',
-    '🍫 Chocolate',
-  ];
+  const [valueLanguage, setValue] = useState(LANGUAGE_OPTIONS[0]);
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -29,22 +39,35 @@ function LanguagePicker() {
     },
   });
 
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item} active={item === value}>
-      <Group gap='xs'>
-        {item === value && <CheckIcon size={12} />}
-        <span>{item}</span>
-      </Group>
-    </Combobox.Option>
-  ));
+  const options = LANGUAGE_OPTIONS.map(({ value, label, icon }) => {
+    return (
+      <Combobox.Option
+        value={value}
+        key={value}
+        active={value === valueLanguage}
+      >
+        <Group gap='xs'>
+          <div css={flagContainerCss}>
+            {icon} {label}
+          </div>
+        </Group>
+      </Combobox.Option>
+    );
+  });
+  console.log(valueLanguage);
 
   return (
     <Combobox
+      css={comboBoxCss}
       store={combobox}
       resetSelectionOnOptionHover
       onOptionSubmit={(val) => {
-        setValue(val);
+        const languageSelectedObj = LANGUAGE_OPTIONS.find(
+          (language) => language.value === val
+        );
+        setValue(languageSelectedObj);
         combobox.updateSelectedOptionIndex('active');
+        combobox.closeDropdown();
       }}
     >
       <Combobox.Target targetType='button'>
@@ -56,7 +79,9 @@ function LanguagePicker() {
           rightSectionPointerEvents='none'
           onClick={() => combobox.toggleDropdown()}
         >
-          {value || <Input.Placeholder>Pick value</Input.Placeholder>}
+          {valueLanguage.icon || (
+            <Input.Placeholder>Pick value</Input.Placeholder>
+          )}
         </InputBase>
       </Combobox.Target>
 
