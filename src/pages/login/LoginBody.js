@@ -2,12 +2,12 @@
 import { css } from '@emotion/react';
 import { signInWithPopup } from 'firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { auth, provider } from '../../firebase';
 import { useSetUserInfo } from '../../components/BirthdayProvider';
 
 import googleLogo from './../../assets/google.svg';
-import guestLogo from './../../assets/guest.svg';
 import { saveUserUid } from '../../helper/utils';
 
 const loginHeadingCss = css`
@@ -50,6 +50,7 @@ function LoginBody() {
   const navigate = useNavigate();
   const location = useLocation();
   const { setUserUid } = useSetUserInfo();
+  const { t } = useTranslation();
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
@@ -80,7 +81,7 @@ function LoginBody() {
           onClick={handleGoogleLogin}
         >
           <img src={googleLogo} alt='Google SVG' />
-          <p>Continue with Google</p>
+          <p>{t('login-continueWithGoogle')}</p>
         </div>
       </div>
     </>
