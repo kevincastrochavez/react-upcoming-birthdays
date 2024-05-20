@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '@mantine/core/styles.css';
 
 import BirthdayProvider from './components/BirthdayProvider';
+import './i18n/config';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
