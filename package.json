@@ -32,6 +32,7 @@
     "firebase": "^10.8.1",
     "html5-qrcode": "^2.3.8",
     "i18next": "^23.11.5",
+    "mantine-flagpack": "^4.0.1",
     "postcss": "^8.4.35",
     "postcss-preset-mantine": "^1.13.0",
     "postcss-simple-vars": "^7.0.1",

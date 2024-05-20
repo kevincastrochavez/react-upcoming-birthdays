@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import '@mantine/dates/styles.css';
+@import 'mantine-flagpack/styles.css';
 
 * {
   margin: 0;
