@@ -8,6 +8,7 @@ import { useSetUserInfo } from '../BirthdayProvider';
 import Logout from './Logout';
 import { removeUserUid } from '../../helper/utils';
 import logo from '../../assets/logo.svg';
+import LanguagePicker from './LanguagePicker';
 
 const navigationCSS = css`
   padding: 16px 24px;
@@ -76,6 +77,8 @@ function Navigation() {
           />
           <p>Happy B!</p>
         </Link>
+
+        <LanguagePicker />
 
         <Logout onClick={handleSignout} />
       </div>
