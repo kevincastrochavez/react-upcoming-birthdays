@@ -10,6 +10,8 @@ import { useClickOutside } from '@mantine/hooks';
 
 import FriendPreferences from './FriendPreferences';
 import { daysUntilBirthday, getNextBirthdayAge } from '../../helper/utils';
+import { t } from 'i18next';
+import { Trans } from 'react-i18next';
 
 const spotlightHeadingCss = css`
   padding: 0 24px;
@@ -162,7 +164,7 @@ function FriendInfo({
 
   const visibleJsx = (
     <Tooltip
-      label='Friend is public to everyone. It can be imported by anyone with your QR code or unique ID'
+      label={t('friendInfo.tooltipVisible')}
       opened={openedTooltip}
       multiline
       w={220}
@@ -182,7 +184,7 @@ function FriendInfo({
 
   const notVisibleJsx = (
     <Tooltip
-      label='Friend is private. No one can see it or import it'
+      label={t('friendInfo.tooltipNotVisible')}
       opened={openedTooltip}
       multiline
       w={220}
@@ -204,7 +206,9 @@ function FriendInfo({
 
   return (
     <>
-      {isSpotlight && <p css={spotlightHeadingCss}>Closest Birthday </p>}
+      {isSpotlight && (
+        <p css={spotlightHeadingCss}>{t('friendInfo.closest')}</p>
+      )}
       <Link
         to={`/allFriends/${id}`}
         key={id}
@@ -219,14 +223,22 @@ function FriendInfo({
           <h2 css={friendNameCss}>{formattedFullName}</h2>
           {isBirthdayToday ? (
             <h1 css={friendBirthdateCss}>
-              {firstName}'s birthday is <span>Today!</span>
+              <Trans i18nKey='friendInfo.birthday'>
+                {{ firstName }}'s birthday is
+              </Trans>{' '}
+              <span>{t('friendInfo.birthdate')}</span>
             </h1>
           ) : (
             <h1 css={friendBirthdateCss}>
-              Coming up in <span>{daysToBirthday}</span> days
+              {t('friendInfo.comingUp')} <span>{daysToBirthday}</span>{' '}
+              {t('friendInfo.days')}
             </h1>
           )}
-          {!isSpotlight && <p>Turning {ageTurningRef.current}</p>}
+          {!isSpotlight && (
+            <p>
+              {t('friendInfo.turning')} {ageTurningRef.current}
+            </p>
+          )}
 
           <FriendPreferences
             favoriteColor={favoriteColor}

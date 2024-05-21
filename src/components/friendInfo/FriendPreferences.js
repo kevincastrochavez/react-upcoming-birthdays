@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { t } from 'i18next';
 
 import colorIcon from '../../assets/color.svg';
 import toothIcon from '../../assets/tooth.svg';
@@ -53,7 +54,7 @@ function FriendPreferences({
       <div>
         <div css={friendPreferenceCss}>
           <img src={toothIcon} alt='' />
-          <span>Tooth</span>
+          <span>{t('friendPreferences.tooth')}</span>
         </div>
 
         <p>{candyPreference}</p>
@@ -61,7 +62,7 @@ function FriendPreferences({
       <div>
         <div css={friendPreferenceCss}>
           <img src={celebrateIcon} alt='' />
-          <span>Celebrate</span>
+          <span>{t('friendPreferences.celebrate')}</span>
         </div>
 
         <p>{likesToCelebrate}</p>

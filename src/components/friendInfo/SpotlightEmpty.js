@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { IconFriends } from '@tabler/icons-react';
+import { t } from 'i18next';
 
 import { useSetAddingFriends } from '../BirthdayProvider';
 import { Button } from '@mantine/core';
@@ -61,15 +62,15 @@ function SpotlightEmpty() {
   return (
     <div css={friendContainerCss} data-tour='spotlightFriend'>
       <IconFriends />
-      <h2>No Friends</h2>
-      <p>Start adding your friends to your list.</p>
+      <h2>{t('spotlight.title')}</h2>
+      <p>{t('spotlight.message')}</p>
 
       <Button
         onClick={() => setIsAddingFriend(true)}
         data-tour='addFriend'
         size='md'
       >
-        Add your First Friend
+        {t('spotlight.button')}
       </Button>
     </div>
   );
