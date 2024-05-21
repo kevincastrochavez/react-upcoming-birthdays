@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal } from '@mantine/core';
+import { t } from 'i18next';
 
 import EditForm from './EditForm';
 import { useActionFriends, useSetAddingFriends } from '../BirthdayProvider';
@@ -12,7 +13,7 @@ function EditFriend() {
     <Modal
       opened={isEditingFriend}
       onClose={setIsEditingFriend}
-      title='Edit Friend'
+      title={t('editFriend.title')}
       overlayProps={{
         backgroundOpacity: 0.55,
         blur: 3,

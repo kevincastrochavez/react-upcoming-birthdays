@@ -21,6 +21,7 @@ import {
 } from 'firebase/storage';
 import Compressor from 'compressorjs';
 import ShortUniqueId from 'short-unique-id';
+import { t } from 'i18next';
 
 import {
   useFriends,
@@ -201,7 +202,7 @@ function EditForm() {
     <form onSubmit={form.onSubmit(onSubmit)}>
       <TextInput
         withAsterisk
-        label='Full Name'
+        label={t('editFriend.fullName.label')}
         placeholder='Kevin Castro'
         {...form.getInputProps('fullName')}
         leftSection={fullNameIcon}
@@ -212,7 +213,7 @@ function EditForm() {
       <Space h='md' />
 
       <DatePickerInput
-        label="Friend's Birthdate"
+        label={t('editFriend.datePicker.label')}
         placeholder='Date input'
         withAsterisk
         value={new Date(birthdateValue)}
@@ -226,8 +227,8 @@ function EditForm() {
 
       <FileInput
         accept='image/png,image/jpeg,image/jpg'
-        label="Friend's picture (optional)"
-        placeholder='Previous picture left unchanged'
+        label={t('editFriend.picture.label')}
+        placeholder={t('editFriend.picture.placeholder')}
         clearable
         leftSection={pictureIcon}
         onChange={handleCompressImage}
@@ -238,7 +239,7 @@ function EditForm() {
 
       <TextInput
         withAsterisk
-        label='Favorite Color'
+        label={t('editFriend.color.label')}
         placeholder="Your friend's favorite color"
         {...form.getInputProps('favoriteColor')}
         leftSection={favoriteColorIcon}
@@ -249,14 +250,14 @@ function EditForm() {
 
       <Radio.Group
         name='candyPreference'
-        label='Candy Preference'
+        label={t('editFriend.candy.label')}
         withAsterisk
         {...form.getInputProps('candyPreference')}
         size='md'
       >
         <Group mt='xs'>
-          <Radio value='Sweet' label='Sweet' />
-          <Radio value='Salty' label='Salty' />
+          <Radio value='Sweet' label={t('editFriend.candy.sweet')} />
+          <Radio value='Salty' label={t('editFriend.candy.salty')} />
         </Group>
       </Radio.Group>
 
@@ -264,22 +265,22 @@ function EditForm() {
 
       <Radio.Group
         name='likesToCelebrate'
-        label='Likes To Celebrate'
+        label={t('editFriend.celebrate.label')}
         withAsterisk
         {...form.getInputProps('likesToCelebrate')}
         size='md'
       >
         <Group mt='xs'>
-          <Radio value='Yes' label='Yes' />
-          <Radio value='No' label='No' />
+          <Radio value='Yes' label={t('editFriend.celebrate.yes')} />
+          <Radio value='No' label={t('editFriend.celebrate.no')} />
         </Group>
       </Radio.Group>
 
       <Switch
         mt='xl'
         checked={friendIsPrivate}
-        label='Keep friend private'
-        description='No one can import it even when your list is public'
+        label={t('editFriend.private.label')}
+        description={t('editFriend.private.description')}
         onChange={(event) => setFriendIsPrivate(event.currentTarget.checked)}
         size='md'
       />
@@ -289,8 +290,9 @@ function EditForm() {
           onClick={() => setIsEditingFriend(false)}
           variant='default'
           size='md'
+          className='mb-4'
         >
-          Cancel
+          {t('editFriend.cancel')}
         </Button>
         <Button
           loading={isSaving}
@@ -298,8 +300,9 @@ function EditForm() {
           type='submit'
           disabled={isCompressingPicture}
           size='md'
+          className='mb-4'
         >
-          Save Changes
+          {t('editFriend.save')}
         </Button>
       </Group>
     </form>
