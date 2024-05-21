@@ -1,14 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Input, InputBase, Combobox, useCombobox, Group } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 
 import { LANGUAGE_OPTIONS } from '../../lib/constants';
 import { useLanguage, useSetLanguage } from '../BirthdayProvider';
+import { useEffect } from 'react';
 
 const comboBoxCss = css`
-  width: 100px;
+  width: 60px;
+
+  & div[data-position='right'] {
+    width: 24px;
+  }
 
   & button {
+    padding-right: 20px;
+    height: 24px;
     display: flex;
     align-items: center;
   }
@@ -20,9 +28,18 @@ const flagContainerCss = css`
   gap: 8px;
 `;
 
+const optionsWrapperCss = css`
+  width: 110px !important;
+`;
+
 function LanguagePicker() {
   const { languageSelectedObj } = useLanguage();
   const { setLanguageSelectedObj } = useSetLanguage();
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(languageSelectedObj.value);
+  }, [languageSelectedObj, i18n]);
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -80,7 +97,7 @@ function LanguagePicker() {
         </InputBase>
       </Combobox.Target>
 
-      <Combobox.Dropdown>
+      <Combobox.Dropdown css={optionsWrapperCss}>
         <Combobox.Options>{options}</Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
