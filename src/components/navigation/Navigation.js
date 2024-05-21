@@ -38,7 +38,7 @@ const navigationWrapperCss = css`
 const navigationLogoCSS = css`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
 
   & img {
     width: 40px;

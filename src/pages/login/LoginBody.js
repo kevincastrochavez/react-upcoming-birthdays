@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import { signInWithPopup } from 'firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans, withTranslation } from 'react-i18next';
 
 import { auth, provider } from '../../firebase';
 import { useSetUserInfo } from '../../components/BirthdayProvider';
@@ -69,8 +69,12 @@ function LoginBody() {
   return (
     <>
       <h1 css={loginHeadingCss}>
-        The WebApp that will make your friends <strong>remember you</strong>{' '}
-        because you <strong>remember them</strong>
+        {
+          <Trans i18nKey='login-message'>
+            The WebApp that will make your friends <strong>remember you</strong>{' '}
+            because you <strong>remember them</strong>
+          </Trans>
+        }
       </h1>
 
       <div css={buttonsContainerCss}>
@@ -88,4 +92,4 @@ function LoginBody() {
   );
 }
 
-export default LoginBody;
+export default withTranslation()(LoginBody);
