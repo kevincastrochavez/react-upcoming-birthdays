@@ -2,6 +2,101 @@
   "All Friends": "All Friends",
   "Home": "Home",
   "Share or Import": "Share or Import",
+  "Share/Import": "Share/Import",
+  "addFriend": {
+    "fullName": {
+      "label": "Full Name",
+      "placeholder": "Your friend's full name"
+    },
+    "datePicker": {
+      "label": "Friend's Birthdate",
+      "placeholder": "Date input"
+    },
+    "picture": {
+      "label": "Friend's picture (optional)",
+      "placeholder": "Choose picture"
+    },
+    "color": {
+      "label": "Favorite Color",
+      "placeholder": "Your friend's favorite color"
+    },
+    "candy": {
+      "label": "Candy Preference",
+      "sweet": "Sweet",
+      "salty": "Salty"
+    },
+    "celebrate": {
+      "label": "Likes to Celebrate",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "private": {
+      "label": "Keep friend private",
+      "description": "No one can import it even when your list is public. (You can edit this later)"
+    },
+    "cancel": "Cancel",
+    "save": "Save Friend",
+    "title": "Add Friend"
+  },
+  "editFriend": {
+    "fullName": {
+      "label": "Full Name"
+    },
+    "datePicker": {
+      "label": "Friend's Birthdate"
+    },
+    "picture": {
+      "label": "Friend's picture (optional)",
+      "placeholder": "Previous picture left unchanged"
+    },
+    "color": {
+      "label": "Favorite Color"
+    },
+    "candy": {
+      "label": "Candy Preference",
+      "sweet": "Sweet",
+      "salty": "Salty"
+    },
+    "celebrate": {
+      "label": "Likes to Celebrate",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "private": {
+      "label": "Keep friend private",
+      "description": "No one can import it even when your list is public"
+    },
+    "cancel": "Cancel",
+    "save": "Save Changes",
+    "title": "Edit Friend"
+  },
+  "deleteFriend": {
+    "title": "Are you absolutely sure?",
+    "message": "All data will be lost and the image will be deleted. You won't be able to undo this action.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "friendDetails": {
+    "delete": "Delete",
+    "edit": "Edit",
+    "info": "'s Info",
+    "friend": "Friend",
+    "title": "'s Info"
+  },
+  "friendInfo": {
+    "birthdate": "Today!",
+    "birthday": "{{firstName}}'s birthday is",
+    "closest": "Closest Birthday",
+    "comingUp": "Coming up in",
+    "days": "days",
+    "tooltipVisible": "Friend is public to everyone. It can be imported by anyone with your QR code or direct link",
+    "tooltipNotVisible": "Friend is private. No one can see it or import it",
+    "turning": "Turning"
+  },
+  "friendPreferences": {
+    "celebrate": "Celebrate",
+    "tooth": "Tooth"
+  },
   "home": {
     "searchFriends": "Search for a Friend"
   },
@@ -9,8 +104,21 @@
     "continueWithGoogle": "Continue with Google",
     "message": "The WebApp that will make your friends <strong>remember you</strong> because you <strong>remember them</strong>"
   },
+  "logout": "Logout",
+  "nextFriends": {
+    "birthday": "Today!",
+    "days": "days",
+    "in": "'s in",
+    "is": "is",
+    "title": "Next 5 birthdays"
+  },
   "searchResults": {
     "title": "Type your friend's name...",
     "results": "Results"
+  },
+  "spotlight": {
+    "button": "Add your First Friend",
+    "message": "Start adding your friends to your list.",
+    "title": "No Friends"
   }
 }

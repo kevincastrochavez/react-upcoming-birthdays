@@ -2,6 +2,101 @@
   "All Friends": "Amigos",
   "Home": "Inicio",
   "Share or Import": "Comparte o Importa",
+  "Share/Import": "Compartir/Importar",
+  "addFriend": {
+    "fullName": {
+      "label": "Nombre Completo",
+      "placeholder": "Nombre completo de tu amigo(a)"
+    },
+    "datePicker": {
+      "label": "Cumpleaños",
+      "placeholder": "Fecha de cumpleaños"
+    },
+    "picture": {
+      "label": "Fotografía de tu amigo(a) (opcional)",
+      "placeholder": "Elegir foto"
+    },
+    "color": {
+      "label": "Color Favorito",
+      "placeholder": "Color favorito de tu amigo(a)"
+    },
+    "candy": {
+      "label": "Dulce Preferido",
+      "sweet": "Dulce",
+      "salty": "Salado"
+    },
+    "celebrate": {
+      "label": "Le gusta Celebrar",
+      "yes": "Si",
+      "no": "No"
+    },
+    "private": {
+      "label": "Mantener privado",
+      "description": "Nadie podrá importarlo a pesar de que tu lista sea visible. (Puedes editar esto después)."
+    },
+    "cancel": "Cancelar",
+    "save": "Guardar Amigo(a)",
+    "title": "Añadir Amigo(a)"
+  },
+  "editFriend": {
+    "fullName": {
+      "label": "Nombre Completo"
+    },
+    "datePicker": {
+      "label": "Cumpleaños"
+    },
+    "picture": {
+      "label": "Fotografía de tu amigo(a) (opcional)",
+      "placeholder": "La foto previa se mantendra intacta a menos que la cambies"
+    },
+    "color": {
+      "label": "Color Favorito"
+    },
+    "candy": {
+      "label": "Dulce Preferido",
+      "sweet": "Dulce",
+      "salty": "Salado"
+    },
+    "celebrate": {
+      "label": "Le gusta Celebrar",
+      "yes": "Si",
+      "no": "No"
+    },
+    "private": {
+      "label": "Mantener privado",
+      "description": "Nadie puede importarlo a pesar de que tu lista sea visible."
+    },
+    "cancel": "Cancelar",
+    "save": "Guardar Cambios",
+    "title": "Editar Amigo(a)"
+  },
+  "deleteFriend": {
+    "title": "¿Estás absolutamente seguro?",
+    "message": "Toda la información de este amigo(a) se perderá. No podrás deshacer esta acción.",
+    "cancel": "Cancelar",
+    "delete": "Eliminar a"
+  },
+  "friendDetails": {
+    "delete": "Eliminar a ",
+    "edit": "Editar a",
+    "info": "",
+    "friend": "Amigo",
+    "title": ""
+  },
+  "friendInfo": {
+    "birthdate": "Hoy!",
+    "birthday": "El cumpleaños de {{firstName}} es",
+    "closest": "Cumpleaños más cercano",
+    "comingUp": "Cumpliendo en",
+    "days": "días",
+    "tooltipVisible": "Tu amigo(a) es visible para todos. Puede ser importado(a) por cualquiera que tenga tu código QR o link directo",
+    "tooltipNotVisible": "Tu amigo(a) es privado. Nadie puede verlo(a) o importarlo(a)",
+    "turning": "Cumple"
+  },
+  "friendPreferences": {
+    "celebrate": "Celebra",
+    "tooth": "Diente"
+  },
   "home": {
     "searchFriends": "Busca a un amigo"
   },
@@ -9,8 +104,21 @@
     "continueWithGoogle": "Continuar con Google",
     "message": "La aplicación que hará a tus amigos <strong>recordarte</strong> porque tú los <strong>recuerdas<strong> a ellos."
   },
+  "logout": "Salir",
+  "nextFriends": {
+    "birthday": "Hoy!",
+    "days": "días",
+    "in": "en",
+    "is": "es",
+    "title": "Próximos 5 cumpleaños"
+  },
   "searchResults": {
     "title": "Introduce el nombre de tu amigo...",
     "results": "Resultados"
+  },
+  "spotlight": {
+    "button": "Añade tu primer amigo",
+    "message": "Comienza a anadir a tus amigos",
+    "title": "No hay amigos"
   }
 }
