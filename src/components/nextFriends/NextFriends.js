@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
+import { t } from 'i18next';
 
 import { useFriends } from '../../components/BirthdayProvider';
 import NextFriend from './NextFriend';
@@ -63,7 +64,7 @@ function NextFriends() {
 
   return (
     <div css={nextFiveContainerCss} data-tour='nextFriends'>
-      <p>Next 5 birthdays</p>
+      <p>{t('nextFriends.title')}</p>
 
       <div css={nextFiveInnerContainerCss}>
         {emptyNextFriendSlotsArray.length > 0 && <NextFriendEmpty />}

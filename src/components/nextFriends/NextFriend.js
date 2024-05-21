@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { t } from 'i18next';
 
 import { daysUntilBirthday } from '../../helper/utils';
 
@@ -63,15 +64,16 @@ function NextFriend({ friend: { firstName, imageUrl, birthdate } }) {
     <div css={nextFriendContainerCss}>
       <LazyLoadImage src={imageUrl} alt={''} width={'100%'} effect='blur' />
       <p>
-        {firstName}'s {isBirthdayToday ? 'is' : 'in'}
+        {firstName}{' '}
+        {isBirthdayToday ? t('nextFriends.is') : t('nextFriends.in')}
       </p>
       {isBirthdayToday ? (
         <p css={nextFriendBottomCss}>
-          <span>Today!</span>
+          <span>{t('nextFriends.birthday')}</span>
         </p>
       ) : (
         <p css={nextFriendBottomCss}>
-          <span>{daysToBirthday}</span> days
+          <span>{daysToBirthday}</span> {t('nextFriends.days')}
         </p>
       )}
     </div>
