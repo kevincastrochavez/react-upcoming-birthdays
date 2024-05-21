@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
 import { css } from '@emotion/react';
+import { t } from 'i18next';
 
 import { useUserInfo } from '../BirthdayProvider';
 import logout from '../../assets/logout.svg';
@@ -29,7 +29,7 @@ function Logout({ onClick }) {
   const logoutComponent = !!userUid ? (
     <div onClick={onClick} css={navigationLogoutCSS}>
       <img src={logout} alt='Happy B logo' />
-      <p>Logout</p>
+      <p>{t('logout')}</p>
     </div>
   ) : (
     <></>
