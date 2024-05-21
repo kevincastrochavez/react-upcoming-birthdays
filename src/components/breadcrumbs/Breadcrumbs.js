@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 
 import { useFriends } from '../BirthdayProvider';
+import { t } from 'i18next';
 
 // Define custom breadcrumbs for certain routes.
 const routes = [
@@ -73,7 +74,7 @@ const Breadcrumbs = () => {
         return (
           <React.Fragment key={match.pathname}>
             <NavLink to={match.pathname} data-testid={match.pathname}>
-              {textToDisplay}
+              {t(textToDisplay?.props?.children) || textToDisplay}
             </NavLink>
             {index !== breadcrumbs.length - 1 && <span>/</span>}
           </React.Fragment>
