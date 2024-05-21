@@ -13,6 +13,7 @@ import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import { FriendInfo } from '../../components/friendInfo/FriendInfo';
 import DeleteFriendModal from './DeleteFriendModal';
 import EditFriend from '../../components/editFriend/EditFriend';
+import { t } from 'i18next';
 
 const mainContainerCss = css`
   margin-bottom: 60px;
@@ -109,7 +110,9 @@ function FriendDetails() {
       <Breadcrumbs />
       <EditFriend />
 
-      <h1>{firstName ? `${firstName}'s` : 'Friend'} Info</h1>
+      <h1>{`${firstName || t('friendDetails.friend')} ${t(
+        'friendDetails.title'
+      )}`}</h1>
 
       <FriendInfo {...friendDetails} />
 
@@ -120,7 +123,8 @@ function FriendDetails() {
           onClick={() => setIsEditingFriend(true)}
           disabled={!firstName}
         >
-          Edit {firstName || 'Friend'}'s Info
+          {t('friendDetails.edit')} {firstName || 'Friend'}{' '}
+          {t('friendDetails.info')}
         </Button>
 
         <Button
@@ -131,7 +135,7 @@ function FriendDetails() {
           onClick={() => setIsDeleting(true)}
           disabled={!firstName}
         >
-          Delete {firstName || 'Friend'}
+          {t('friendDetails.delete')} {firstName || 'Friend'}
         </Button>
       </div>
 
