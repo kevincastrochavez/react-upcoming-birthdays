@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { Notification } from '@mantine/core';
 import { IconCheck, IconX } from '@tabler/icons-react';
+import { t } from 'i18next';
 
 import { useActionFriends, useSetAddingFriends } from '../BirthdayProvider';
 
@@ -118,7 +119,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={checkIcon}
           color='teal'
-          title='Your friend was successfully added'
+          title={t('notifications.addedSuccess')}
           withBorder
           onClose={() => setFriendWasAdded(false)}
         />
@@ -129,7 +130,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={checkIcon}
           color='teal'
-          title='Your friend was successfully updated'
+          title={t('notifications.updatedSuccess')}
           withBorder
           onClose={() => setFriendWasUpdated(false)}
         />
@@ -140,7 +141,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={checkIcon}
           color='teal'
-          title='Your friend was successfully deleted'
+          title={t('notifications.deletedSuccess')}
           withBorder
           onClose={() => setFriendWasDeleted(false)}
         />
@@ -151,7 +152,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={checkIcon}
           color='teal'
-          title='Your friends were successfully imported'
+          title={t('notifications.importedSuccess')}
           withBorder
           onClose={() => setFriendsWereImported(false)}
         />
@@ -162,7 +163,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={checkIcon}
           color='teal'
-          title='Your list status was successfully updated'
+          title={t('notifications.listSuccess')}
           withBorder
           onClose={() => setListWasUpdated(false)}
         />
@@ -173,7 +174,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={closeIcon}
           color='red'
-          title='Something went wrong while adding your friend. Please try again later.'
+          title={t('notifications.addedFailed')}
           withBorder
           onClose={() => setAddingFriendFailed(false)}
         />
@@ -184,7 +185,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={closeIcon}
           color='red'
-          title='Something went wrong while updating your friend. Please try again later.'
+          title={t('notifications.updatedFailed')}
           withBorder
           onClose={() => setUpdatingFriendFailed(false)}
         />
@@ -195,7 +196,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={closeIcon}
           color='red'
-          title='Something went wrong while deleting your friend. Please try again later.'
+          title={t('notifications.deletedFailed')}
           withBorder
           onClose={() => setDeletingFriendFailed(false)}
         />
@@ -206,7 +207,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={closeIcon}
           color='red'
-          title='Something went wrong while importing your friends. Please try again later.'
+          title={t('notifications.importedFailed')}
           withBorder
           onClose={() => setImportingFriendsFailed(false)}
         />
@@ -217,7 +218,7 @@ function Notifications() {
           css={addedNotificationCss}
           icon={closeIcon}
           color='red'
-          title='Something went wrong while getting your list status. Please try again later.'
+          title={t('notifications.listFailed')}
           withBorder
           onClose={() => setFetchingListFailed(false)}
         />

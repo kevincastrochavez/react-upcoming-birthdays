@@ -118,6 +118,18 @@
     "is": "is",
     "title": "Next 5 birthdays"
   },
+  "notifications": {
+    "addedSuccess": "Your friend was successfully added",
+    "updatedSuccess": "Your friend was successfully updated",
+    "deletedSuccess": "Your friend was successfully deleted",
+    "importedSuccess": "Your friends were successfully imported",
+    "listSuccess": "Your list status was successfully updated",
+    "addedFailed": "Something went wrong while adding your friend. Please try again later.",
+    "updatedFailed": "Something went wrong while updating your friend. Please try again later.",
+    "deletedFailed": "Something went wrong while deleting your friend. Please try again later.",
+    "importedFailed": "Something went wrong while importing your friends. Please try again later.",
+    "listFailed": "Something went wrong while getting your list status. Please try again later."
+  },
   "searchResults": {
     "title": "Type your friend's name...",
     "results": "Results"

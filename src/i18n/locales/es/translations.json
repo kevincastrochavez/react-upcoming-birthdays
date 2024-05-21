@@ -118,6 +118,18 @@
     "is": "es",
     "title": "Próximos 5 cumpleaños"
   },
+  "notifications": {
+    "addedSuccess": "Tu amigo(a) fue añadido(a) exitosamente",
+    "updatedSuccess": "Tu amigo(a) fue actualizado(a) exitosamente",
+    "deletedSuccess": "Tu amigo(a) fue eliminado(a) exitosamente",
+    "importedSuccess": "Tus amigos fueron importados exitosamente",
+    "listSuccess": "El estatus de tu lista fue actualizado exitosamente",
+    "addedFailed": "Algo salió mal al anadir a tu amigo(a). Intenta de nuevo.",
+    "updatedFailed": "Algo salió mal al actualizar a tu amigo(a). Intenta de nuevo.",
+    "deletedFailed": "Algo salió mal al eliminar a tu amigo(a). Intenta de nuevo.",
+    "importedFailed": "Algo salió mal al importar a tus amigos. Intenta de nuevo.",
+    "listFailed": "Algo salió mal al obtener el estatus de tu lista. Intenta de nuevo."
+  },
   "searchResults": {
     "title": "Introduce el nombre de tu amigo...",
     "results": "Resultados"

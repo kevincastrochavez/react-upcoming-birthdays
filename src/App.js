@@ -68,6 +68,7 @@ const LoginPage = lazy(() =>
 // TODOS
 // Add Confeti animation
 // Fix turning not loading properly
+// Fix notification styling
 
 function App() {
   const { userUid } = useUserInfo();
