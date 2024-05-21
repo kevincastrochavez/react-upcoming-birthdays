@@ -6,6 +6,7 @@ import { IconEdit, IconTrash } from '@tabler/icons-react';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { getStorage, ref, deleteObject } from 'firebase/storage';
+import { t } from 'i18next';
 
 import {
   useSetAddingFriends,
@@ -83,7 +84,7 @@ function DeleteFriendModal({
     <Modal
       opened={isDeleting}
       onClose={setIsDeleting}
-      title='Are you absolutely sure?'
+      title={t('deleteFriend.title')}
       centered
       css={modalContainerCss}
       overlayProps={{
@@ -91,10 +92,7 @@ function DeleteFriendModal({
         blur: 3,
       }}
     >
-      <p>
-        All data will be lost and the image will be deleted. You won't be able
-        to undo this action.
-      </p>
+      <p>{t('deleteFriend.message')}</p>
 
       <Group css={buttonsContainerCss} justify='end'>
         <Button
@@ -104,7 +102,7 @@ function DeleteFriendModal({
           onClick={() => setIsDeleting(false)}
           size='md'
         >
-          Cancel
+          {t('deleteFriend.cancel')}
         </Button>
         <Button
           leftSection={<IconTrash size={20} />}
@@ -115,7 +113,7 @@ function DeleteFriendModal({
           loaderProps={{ type: 'dots' }}
           size='md'
         >
-          Delete {firstName || 'Friend'}
+          {t('deleteFriend.delete')} {firstName || 'Friend'}
         </Button>
       </Group>
     </Modal>
