@@ -2,6 +2,8 @@
   "Home": "Home",
   "All Friends": "All Friends",
   "Share or Import": "Share or Import",
-  "login-continueWithGoogle": "Continue with Google",
-  "login-message": "The WebApp that will make your friends <strong>remember you</strong> because you <strong>remember them</strong>"
+  "login": {
+    "continueWithGoogle": "Continue with Google",
+    "message": "The WebApp that will make your friends <strong>remember you</strong> because you <strong>remember them</strong>"
+  }
 }

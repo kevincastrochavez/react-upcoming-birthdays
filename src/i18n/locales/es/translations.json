@@ -2,6 +2,8 @@
   "Home": "Inicio",
   "All Friends": "Amigos",
   "Share or Import": "Comparte o Importa",
-  "login-continueWithGoogle": "Continuar con Google",
-  "login-message": "La aplicación que hará a tus amigos <strong>recordarte</strong> porque tú los <strong>recuerdas<strong> a ellos."
+  "login": {
+    "continueWithGoogle": "Continuar con Google",
+    "message": "La aplicación que hará a tus amigos <strong>recordarte</strong> porque tú los <strong>recuerdas<strong> a ellos."
+  }
 }

@@ -70,7 +70,7 @@ function LoginBody() {
     <>
       <h1 css={loginHeadingCss}>
         {
-          <Trans i18nKey='login-message'>
+          <Trans i18nKey='login.message'>
             The WebApp that will make your friends <strong>remember you</strong>{' '}
             because you <strong>remember them</strong>
           </Trans>
@@ -85,7 +85,7 @@ function LoginBody() {
           onClick={handleGoogleLogin}
         >
           <img src={googleLogo} alt='Google SVG' />
-          <p>{t('login-continueWithGoogle')}</p>
+          <p>{t('login.continueWithGoogle')}</p>
         </div>
       </div>
     </>
