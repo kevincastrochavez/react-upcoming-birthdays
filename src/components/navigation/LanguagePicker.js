@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 import { LANGUAGE_OPTIONS } from '../../lib/constants';
 import { useLanguage, useSetLanguage } from '../BirthdayProvider';
-import { useEffect } from 'react';
 
 const comboBoxCss = css`
   width: 60px;
@@ -36,10 +35,6 @@ function LanguagePicker() {
   const { languageSelectedObj } = useLanguage();
   const { setLanguageSelectedObj } = useSetLanguage();
   const { i18n } = useTranslation();
-
-  useEffect(() => {
-    i18n.changeLanguage(languageSelectedObj.value);
-  }, [languageSelectedObj, i18n]);
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -77,6 +72,8 @@ function LanguagePicker() {
         const languageSelectedObj = LANGUAGE_OPTIONS.find(
           (language) => language.value === val
         );
+
+        i18n.changeLanguage(languageSelectedObj.value);
         setLanguageSelectedObj(languageSelectedObj);
         combobox.updateSelectedOptionIndex('active');
         combobox.closeDropdown();
