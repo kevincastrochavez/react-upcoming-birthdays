@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useDebouncedState } from '@mantine/hooks';
 
 import { getUserUid } from '../helper/utils';
@@ -41,6 +41,14 @@ export default function BirthdayProvider({ children }) {
   const [languageSelectedObj, setLanguageSelectedObj] = useState(
     LANGUAGE_OPTIONS[0]
   );
+
+  useEffect(() => {
+    const languageObjFromNavigator = LANGUAGE_OPTIONS.find((languageObj) =>
+      window.navigator.language.includes(languageObj.value)
+    );
+
+    setLanguageSelectedObj(languageObjFromNavigator);
+  }, []);
 
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);
