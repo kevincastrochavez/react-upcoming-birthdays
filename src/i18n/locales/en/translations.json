@@ -4,6 +4,12 @@
   "Share or Import": "Share or Import",
   "Share/Import": "Share/Import",
   "addFriend": {
+    "errors": {
+      "fullName": "Full name must fall in the format 'First Last', between 2-15 letters each. No special characters or tildes allowed",
+      "favoriteColor": "Color name must be between 3-15 letters, just one word",
+      "likesToCelebrate": "Must choose an option",
+      "candyPreference": "Must choose an option"
+    },
     "fullName": {
       "label": "Full Name",
       "placeholder": "Your friend's full name"

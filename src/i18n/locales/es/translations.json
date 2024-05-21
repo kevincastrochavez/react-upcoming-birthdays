@@ -4,6 +4,12 @@
   "Share or Import": "Comparte o Importa",
   "Share/Import": "Compartir/Importar",
   "addFriend": {
+    "errors": {
+      "fullName": "El nombre completo debe contener entre 2 y 15 letras por parte. No se permiten caracteres especiales ni acentos",
+      "favoriteColor": "El color debe contener entre 2 y 15 letras, solo una palabra",
+      "likesToCelebrate": "Elige una opción",
+      "candyPreference": "Elige una opción"
+    },
     "fullName": {
       "label": "Nombre Completo",
       "placeholder": "Nombre completo de tu amigo(a)"
