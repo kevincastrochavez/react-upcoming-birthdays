@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { useState } from 'react';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
@@ -17,6 +15,7 @@ import {
 import { DatePickerInput } from '@mantine/dates';
 import { IconAbc, IconColorFilter, IconPhoto } from '@tabler/icons-react';
 import Compressor from 'compressorjs';
+import { t } from 'i18next';
 
 import { useSetAddingFriends, useUserInfo } from '../BirthdayProvider';
 import { db } from '../../firebase';
@@ -169,8 +168,8 @@ function AddForm() {
     <form onSubmit={form.onSubmit(onSubmit)}>
       <TextInput
         withAsterisk
-        label='Full Name'
-        placeholder="Your friend's full name"
+        label={t('addFriend.fullName.label')}
+        placeholder={t('addFriend.fullName.placeholder')}
         {...form.getInputProps('fullName')}
         leftSection={fullNameIcon}
         name='name'
@@ -180,8 +179,8 @@ function AddForm() {
       <Space h='md' />
 
       <DatePickerInput
-        label="Friend's Birthdate"
-        placeholder='Date input'
+        label={t('addFriend.datePicker.label')}
+        placeholder={t('addFriend.datePicker.placeholder')}
         withAsterisk
         value={birthdateValue}
         onChange={setBirthdateValue}
@@ -195,8 +194,8 @@ function AddForm() {
 
       <FileInput
         accept='image/png,image/jpeg,image/jpg'
-        label="Friend's picture (optional)"
-        placeholder='Choose picture'
+        label={t('addFriend.picture.label')}
+        placeholder={t('addFriend.picture.placeholder')}
         clearable
         leftSection={pictureIcon}
         onChange={handleCompressImage}
@@ -207,8 +206,8 @@ function AddForm() {
 
       <TextInput
         withAsterisk
-        label='Favorite Color'
-        placeholder="Your friend's favorite color"
+        label={t('addFriend.color.label')}
+        placeholder={t('addFriend.color.placeholder')}
         {...form.getInputProps('favoriteColor')}
         leftSection={favoriteColorIcon}
         size='md'
@@ -218,7 +217,7 @@ function AddForm() {
 
       <Radio.Group
         name='candyPreference'
-        label='Candy Preference'
+        label={t('addFriend.candy.label')}
         withAsterisk
         value={candyPreferenceValue}
         onChange={setCandyPreferenceValue}
@@ -226,8 +225,8 @@ function AddForm() {
         size='md'
       >
         <Group mt='xs'>
-          <Radio value='Sweet' label='Sweet' />
-          <Radio value='Salty' label='Salty' />
+          <Radio value='Sweet' label={t('addFriend.candy.sweet')} />
+          <Radio value='Salty' label={t('addFriend.candy.salty')} />
         </Group>
       </Radio.Group>
 
@@ -235,7 +234,7 @@ function AddForm() {
 
       <Radio.Group
         name='likesToCelebrate'
-        label='Likes To Celebrate'
+        label={t('addFriend.celebrate.label')}
         withAsterisk
         value={likesToCelebrateValue}
         onChange={setLikesToCelebrateValue}
@@ -243,15 +242,15 @@ function AddForm() {
         size='md'
       >
         <Group mt='xs'>
-          <Radio value='Yes' label='Yes' />
-          <Radio value='No' label='No' />
+          <Radio value='Yes' label={t('addFriend.celebrate.yes')} />
+          <Radio value='No' label={t('addFriend.celebrate.no')} />
         </Group>
       </Radio.Group>
 
       <Switch
         mt='xl'
-        label='Keep friend private'
-        description='No one can import it even when your list is public. (You can edit this later)'
+        label={t('addFriend.private.label')}
+        description={t('addFriend.private.description')}
         onChange={(event) => setFriendIsPrivate(event.currentTarget.checked)}
         size='md'
       />
@@ -261,8 +260,9 @@ function AddForm() {
           onClick={() => setIsAddingFriend(false)}
           variant='default'
           size='md'
+          className='mb-4'
         >
-          Cancel
+          {t('addFriend.cancel')}
         </Button>
         <Button
           loading={isUploading}
@@ -270,8 +270,9 @@ function AddForm() {
           type='submit'
           disabled={isCompressingPicture}
           size='md'
+          className='mb-4'
         >
-          Save Friend
+          {t('addFriend.save')}
         </Button>
       </Group>
     </form>
