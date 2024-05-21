@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Tabs, rem } from '@mantine/core';
+import { Tabs } from '@mantine/core';
 import {
   IconUsersGroup,
   IconQrcode,
@@ -9,6 +9,7 @@ import {
 } from '@tabler/icons-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ActionIcon } from '@mantine/core';
+import { t } from 'i18next';
 
 import classes from './BottomNav.module.css';
 import { useSetAddingFriends } from '../BirthdayProvider';
@@ -88,7 +89,7 @@ function BottomNav() {
             onClick={() => navigate('/')}
             is-tab-active={location.pathname === '/' ? 'true' : 'false'}
           >
-            Home
+            {t('Home')}
           </Tabs.Tab>
           <Tabs.Tab
             css={bottomNavTabCss}
@@ -99,7 +100,7 @@ function BottomNav() {
               location.pathname === '/allFriends' ? 'true' : 'false'
             }
           >
-            All Friends
+            {t('All Friends')}
           </Tabs.Tab>
           <Tabs.Tab
             css={bottomNavTabCss}
@@ -110,7 +111,7 @@ function BottomNav() {
               location.pathname === '/shareImport' ? 'true' : 'false'
             }
           >
-            Share/Import
+            {t('Share/Import')}
           </Tabs.Tab>
         </Tabs.List>
       </Tabs>
