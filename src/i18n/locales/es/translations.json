@@ -1,9 +1,16 @@
 {
-  "Home": "Inicio",
   "All Friends": "Amigos",
+  "Home": "Inicio",
   "Share or Import": "Comparte o Importa",
+  "home": {
+    "searchFriends": "Busca a un amigo"
+  },
   "login": {
     "continueWithGoogle": "Continuar con Google",
     "message": "La aplicación que hará a tus amigos <strong>recordarte</strong> porque tú los <strong>recuerdas<strong> a ellos."
+  },
+  "searchResults": {
+    "title": "Introduce el nombre de tu amigo...",
+    "results": "Resultados"
   }
 }

@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { IconSearch } from '@tabler/icons-react';
 import { useTour } from '@reactour/tour';
+import { t } from 'i18next';
 
 import {
   useActionFriends,
@@ -60,7 +61,7 @@ function Dashboard({ setTourStep }) {
       <Breadcrumbs />
       <SearchFriend
         onClick={() => setIsSearching(true)}
-        placeholder='Search for a Friend'
+        placeholder={t('home.searchFriends')}
         icon={searchIcon}
       />
       <SearchResults />

@@ -13,6 +13,7 @@ import {
   CommandItem,
   CommandList,
 } from '../../componentsShadcn/ui/command';
+import { t } from 'i18next';
 
 const searchResultsLinkCss = css`
   & img {
@@ -37,10 +38,10 @@ function ShareResults() {
 
   return (
     <CommandDialog open={isSearching} onOpenChange={setIsSearching}>
-      <CommandInput placeholder="Type your friend's name..." />
+      <CommandInput placeholder={t('searchResults.title')} />
       <CommandList>
         <CommandEmpty>No friends found.</CommandEmpty>
-        <CommandGroup heading='Results'>
+        <CommandGroup heading={t('searchResults.results')}>
           {friendsFilteredBySearch?.map(
             ({ imageUrl, formattedFullName, id }) => (
               <Link
