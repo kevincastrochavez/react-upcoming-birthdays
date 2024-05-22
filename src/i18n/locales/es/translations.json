@@ -156,12 +156,28 @@
     "updatedFailed": "Algo salió mal al actualizar a tu amigo(a). Intenta de nuevo.",
     "deletedFailed": "Algo salió mal al eliminar a tu amigo(a). Intenta de nuevo.",
     "importedFailed": "Algo salió mal al importar a tus amigos. Intenta de nuevo.",
-    "listFailed": "Algo salió mal al obtener el estatus de tu lista. Intenta de nuevo."
+    "listFailed": "Algo salió mal al obtener el estatus de tu lista. Intenta de nuevo.",
+    "strangeQR": "Parece que el código QR no pertenece a esta aplicación.",
+    "import": "Importa a quien desees de la lista de tu amigo(a)."
   },
   "searchResults": {
     "noFriends": "No se encontraron amigos.",
     "title": "Introduce el nombre de tu amigo...",
     "results": "Resultados"
+  },
+  "shareImport": {
+    "shareTitle": "Compartir mi Lista",
+    "importTitle": "Importar una Lista",
+    "share": {
+      "title": "¿Quieres hacer tu lista pública?",
+      "message": "Cualquiera que tenga tu código QR o link directo podrá importar a tus amigos marcados como no privados.",
+      "qrMessage": "Haz que tus amigos escanen este código QR:",
+      "qrPublic": "Haz tu lista pública para obtener tu código QR",
+      "directLink": "O comparte tu link directo:"
+    },
+    "import": {
+      "title": "Tienes un código QR? Escanéalo o súbelo a continuación:"
+    }
   },
   "spotlight": {
     "button": "Añade tu primer amigo",

@@ -156,12 +156,28 @@
     "updatedFailed": "Something went wrong while updating your friend. Please try again later.",
     "deletedFailed": "Something went wrong while deleting your friend. Please try again later.",
     "importedFailed": "Something went wrong while importing your friends. Please try again later.",
-    "listFailed": "Something went wrong while getting your list status. Please try again later."
+    "listFailed": "Something went wrong while getting your list status. Please try again later.",
+    "strangeQR": "Looks like this QR Code or unique ID does not belong to this app",
+    "import": "Import whoever you want from your friend's list"
   },
   "searchResults": {
     "noFriends": "No friends found.",
     "title": "Type your friend's name...",
     "results": "Results"
+  },
+  "shareImport": {
+    "shareTitle": "Share my List",
+    "importTitle": "Import a List",
+    "share": {
+      "title": "Do you want your friends list to be public?",
+      "message": "Anybody who you share your QR code or direct link with will be able to import any of your friends marked as not private.",
+      "qrMessage": "Have your friends scan this QR code:",
+      "qrPublic": "Make your list public to get your QR code",
+      "directLink": "Or share your personal link:"
+    },
+    "import": {
+      "title": "Got a QR code? Scan it or upload it here!"
+    }
   },
   "spotlight": {
     "button": "Add your First Friend",

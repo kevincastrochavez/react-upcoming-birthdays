@@ -2,12 +2,17 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import { t } from 'i18next';
 
 const shareContainerCss = css`
   background-color: #fff;
   padding: 20px;
   border-radius: 12px;
   margin-top: 16px;
+
+  & h1 {
+    margin-bottom: 20px;
+  }
 `;
 
 const scannerContainerCss = css`
@@ -58,7 +63,7 @@ function Import({ setQrCodeValue }) {
 
   return (
     <div css={shareContainerCss}>
-      <h1>Got a QR code? Scan it or upload it here!</h1>
+      <h1>{t('shareImport.import.title')}</h1>
       <div css={scannerContainerCss} id='reader'></div>
     </div>
   );

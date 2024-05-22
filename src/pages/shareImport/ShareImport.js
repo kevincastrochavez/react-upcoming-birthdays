@@ -17,6 +17,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import ShortUniqueId from 'short-unique-id';
 import { useTour } from '@reactour/tour';
+import { t } from 'i18next';
 
 import {
   Tabs,
@@ -403,8 +404,10 @@ function ShareImport({ setTourStep }) {
       <Breadcrumbs />
       <Tabs css={tabsContainerCss} defaultValue='share' className=''>
         <TabsList className='grid w-full grid-cols-2'>
-          <TabsTrigger value='share'>Share my List</TabsTrigger>
-          <TabsTrigger value='import'>Import a List</TabsTrigger>
+          <TabsTrigger value='share'>{t('shareImport.shareTitle')}</TabsTrigger>
+          <TabsTrigger value='import'>
+            {t('shareImport.importTitle')}
+          </TabsTrigger>
         </TabsList>
         <TabsContent value='share'>
           <Share />
@@ -419,7 +422,7 @@ function ShareImport({ setTourStep }) {
           css={addedNotificationCss}
           icon={closeIcon}
           color='red'
-          title='Looks like this QR Code or unique ID does not belong to this app'
+          title={t('notifications.strangeQR')}
           withBorder
           onClose={() => setStrangeQrCode(false)}
         />
@@ -429,7 +432,7 @@ function ShareImport({ setTourStep }) {
         centered
         opened={openImportModal}
         onClose={handleCloseImportModal}
-        title="Import whoever you want from your friend's list"
+        title={t('notifications.import')}
         overlayProps={{
           backgroundOpacity: 0.55,
           blur: 3,

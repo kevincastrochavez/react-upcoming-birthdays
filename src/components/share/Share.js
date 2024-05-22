@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { QRCodeSVG } from 'qrcode.react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { Loader, Overlay } from '@mantine/core';
+import { t } from 'i18next';
 
 import {
   FormControl,
@@ -121,11 +122,8 @@ function Share() {
       <Form {...form}>
         <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm  bg-slate-50 gap-4'>
           <div className='space-y-0.5'>
-            <FormLabel>Do you want your friends list to be public?</FormLabel>
-            <FormDescription>
-              Anybody who you share your QR code or unique ID with will be able
-              to import any of your friends marked as not private
-            </FormDescription>
+            <FormLabel>{t('shareImport.share.title')}</FormLabel>
+            <FormDescription>{t('shareImport.share.message')}</FormDescription>
           </div>
           <FormControl>
             <Switch
@@ -140,16 +138,16 @@ function Share() {
         <div css={qrContainerCss}>
           {isUserSharingList ? (
             <>
-              <p>Have your friends scan this QR code:</p>
+              <p>{t('shareImport.share.qrMessage')}</p>
               <QRCodeSVG value={qrCodeToShare} />
             </>
           ) : (
-            <p>Make your list public to get your QR code</p>
+            <p>{t('shareImport.share.qrPublic')}</p>
           )}
         </div>
 
         <div css={idContainerCss}>
-          <p>Or share your personal link:</p>
+          <p>{t('shareImport.share.directLink')}</p>
 
           <SearchFriend
             value={manualIdToShare}
