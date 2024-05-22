@@ -153,14 +153,10 @@ function FriendInfo({
   isPrivate,
 }) {
   const [openedTooltip, setOpenedTooltip] = useState(false);
-  const ageTurningRef = useRef(0);
+  const ageTurningRef = useRef(getNextBirthdayAge(birthdate));
   const visibleBtnRef = useClickOutside(() => setOpenedTooltip(false));
 
   const { daysToBirthday, isBirthdayToday } = daysUntilBirthday(birthdate);
-
-  useEffect(() => {
-    ageTurningRef.current = getNextBirthdayAge(birthdate); // To avoid getting an undefined error
-  }, [birthdate]);
 
   const visibleJsx = (
     <Tooltip
