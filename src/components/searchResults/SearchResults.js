@@ -40,7 +40,7 @@ function ShareResults() {
     <CommandDialog open={isSearching} onOpenChange={setIsSearching}>
       <CommandInput placeholder={t('searchResults.title')} />
       <CommandList>
-        <CommandEmpty>No friends found.</CommandEmpty>
+        <CommandEmpty>{t('searchResults.noFriends')}</CommandEmpty>
         <CommandGroup heading={t('searchResults.results')}>
           {friendsFilteredBySearch?.map(
             ({ imageUrl, formattedFullName, id }) => (

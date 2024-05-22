@@ -1,8 +1,24 @@
 {
   "All Friends": "Amigos",
+  "April": "Abril",
+  "August": "Agosto",
+  "February": "Febrero",
+  "December": "Diciembre",
   "Home": "Inicio",
+  "January": "Enero",
+  "July": "Julio",
+  "June": "Junio",
+  "March": "Marzo",
+  "May": "Mayo",
+  "No": "No",
+  "November": "Noviembre",
+  "October": "Octubre",
+  "Salty": "Salado",
+  "September": "Septiembre",
+  "Sweet": "Dulce",
   "Share or Import": "Comparte o Importa",
   "Share/Import": "Compartir/Importar",
+  "Yes": "Si",
   "addFriend": {
     "errors": {
       "fullName": "El nombre completo debe contener entre 2 y 15 letras por parte. No se permiten caracteres especiales ni acentos",
@@ -43,6 +59,11 @@
     "cancel": "Cancelar",
     "save": "Guardar Amigo(a)",
     "title": "Añadir Amigo(a)"
+  },
+  "allFriends": {
+    "title": "Amigos",
+    "noFriends": "Aún no tienes amigos en este mes. ",
+    "addFirst": "¡Añade al primero!"
   },
   "editFriend": {
     "fullName": {
@@ -112,6 +133,7 @@
   },
   "logout": "Salir",
   "nextFriends": {
+    "add": "Añadir amigo(a)",
     "birthday": "Hoy!",
     "days": "días",
     "in": "en",
@@ -131,6 +153,7 @@
     "listFailed": "Algo salió mal al obtener el estatus de tu lista. Intenta de nuevo."
   },
   "searchResults": {
+    "noFriends": "No se encontraron amigos.",
     "title": "Introduce el nombre de tu amigo...",
     "results": "Resultados"
   },

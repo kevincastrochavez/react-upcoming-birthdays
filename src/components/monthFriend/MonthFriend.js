@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { IconChevronRight } from '@tabler/icons-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { t } from 'i18next';
 
 import cakeIcon from '../../assets/cake.svg';
 
@@ -60,6 +61,8 @@ function MonthFriend({
   formattedFullName,
   shortenedBirthdateFormatted,
 }) {
+  const [month, day] = shortenedBirthdateFormatted?.split(' ');
+
   return (
     <div css={friendContainerCss}>
       <LazyLoadImage
@@ -74,7 +77,7 @@ function MonthFriend({
 
       <div css={friendDateCss}>
         <img src={cakeIcon} alt='' />
-        <p>{shortenedBirthdateFormatted}</p>
+        <p>{`${t(month)} ${day}`}</p>
       </div>
 
       <IconChevronRight

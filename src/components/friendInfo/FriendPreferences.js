@@ -57,7 +57,7 @@ function FriendPreferences({
           <span>{t('friendPreferences.tooth')}</span>
         </div>
 
-        <p>{candyPreference}</p>
+        <p>{t(candyPreference)}</p>
       </div>
       <div>
         <div css={friendPreferenceCss}>
@@ -65,7 +65,7 @@ function FriendPreferences({
           <span>{t('friendPreferences.celebrate')}</span>
         </div>
 
-        <p>{likesToCelebrate}</p>
+        <p>{t(likesToCelebrate)}</p>
       </div>
     </div>
   );

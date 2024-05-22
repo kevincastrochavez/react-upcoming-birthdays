@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
+import { t } from 'i18next';
 
 import { useSetAddingFriends } from '../BirthdayProvider';
 import MonthFriend from '../monthFriend/MonthFriend';
@@ -32,7 +33,7 @@ function MonthFriends({ monthObj, productTourSelector }) {
 
   return (
     <div css={monthContainerCss} data-tour={productTourSelector}>
-      <h2>{monthObj.month}</h2>
+      <h2>{t(monthObj.month)}</h2>
       {friends.length > 0 ? (
         friends.map(
           ({ imageUrl, formattedFullName, birthdateFormatted, id }) => (
@@ -47,8 +48,10 @@ function MonthFriends({ monthObj, productTourSelector }) {
         )
       ) : (
         <>
-          <span>No friends this month yet. </span>
-          <span onClick={() => setIsAddingFriend(true)}>Add your first!</span>
+          <span>{t('allFriends.noFriends')}</span>
+          <span onClick={() => setIsAddingFriend(true)}>
+            {t('allFriends.addFirst')}
+          </span>
         </>
       )}
     </div>

@@ -1,8 +1,24 @@
 {
   "All Friends": "All Friends",
+  "April": "April",
+  "August": "August",
+  "February": "February",
+  "December": "December",
   "Home": "Home",
+  "January": "January",
+  "July": "July",
+  "June": "June",
+  "March": "March",
+  "May": "May",
+  "No": "No",
+  "November": "November",
+  "October": "October",
+  "Salty": "Salty",
+  "September": "September",
+  "Sweet": "Sweet",
   "Share or Import": "Share or Import",
   "Share/Import": "Share/Import",
+  "Yes": "Yes",
   "addFriend": {
     "errors": {
       "fullName": "Full name must fall in the format 'First Last', between 2-15 letters each. No special characters or tildes allowed",
@@ -43,6 +59,11 @@
     "cancel": "Cancel",
     "save": "Save Friend",
     "title": "Add Friend"
+  },
+  "allFriends": {
+    "title": "All Friends",
+    "noFriends": "No friends this month yet. ",
+    "addFirst": "Add your first!"
   },
   "editFriend": {
     "fullName": {
@@ -112,6 +133,7 @@
   },
   "logout": "Logout",
   "nextFriends": {
+    "add": "Add friend",
     "birthday": "Today!",
     "days": "days",
     "in": "'s in",
@@ -131,6 +153,7 @@
     "listFailed": "Something went wrong while getting your list status. Please try again later."
   },
   "searchResults": {
+    "noFriends": "No friends found.",
     "title": "Type your friend's name...",
     "results": "Results"
   },

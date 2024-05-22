@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { IconCirclePlus } from '@tabler/icons-react';
+import { t } from 'i18next';
 
 import { useSetAddingFriends } from '../BirthdayProvider';
 
@@ -55,7 +56,7 @@ function NextFriendEmpty() {
   return (
     <div css={nextFriendContainerCss} onClick={() => setIsAddingFriend(true)}>
       <IconCirclePlus css={nextFriendIconCss} />
-      <p>Add friend</p>
+      <p>{t('nextFriends.add')}</p>
     </div>
   );
 }

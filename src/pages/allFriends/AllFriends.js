@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import { IconSearch } from '@tabler/icons-react';
 import { useTour } from '@reactour/tour';
+import { t } from 'i18next';
 
 import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import SearchFriend from '../../components/searchFriend/SearchFriend';
@@ -92,7 +93,7 @@ function AllFriends({ setTourStep }) {
       <Breadcrumbs />
       <SearchFriend
         onClick={() => setIsSearching(true)}
-        placeholder='Search for a Friend'
+        placeholder={t('home.searchFriends')}
         icon={searchIcon}
       />
 
@@ -100,7 +101,7 @@ function AllFriends({ setTourStep }) {
         <SearchResults />
       ) : (
         <>
-          <h1>All Friends</h1>
+          <h1>{t('allFriends.title')}</h1>
           <div css={monthsContainerCss}>
             {sortedBirthdaysByMonth &&
               sortedBirthdaysByMonth.map((monthObj, index) => (
