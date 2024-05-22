@@ -102,17 +102,15 @@ function EditForm() {
     // functions will be used to validate values at corresponding key
     validate: {
       fullName: (value) =>
-        fullNameRegex.test(value)
-          ? null
-          : 'Full name must fall in the format "First Last", between 2-15 letters each. No special characters allowed',
+        fullNameRegex.test(value) ? null : t('editFriend.errors.fullName'),
       favoriteColor: (value) =>
-        colorRegex.test(value)
-          ? null
-          : 'Color name must be between 3-15 letters',
+        colorRegex.test(value) ? null : t('editFriend.errors.favoriteColor'),
       likesToCelebrate: (value) =>
-        likesToCelebrateRegex.test(value) ? null : 'Must choose an option',
+        likesToCelebrateRegex.test(value)
+          ? null
+          : t('editFriend.errors.likesToCelebrate'),
       candyPreference: (value) =>
-        candyRegex.test(value) ? null : 'Must choose an option',
+        candyRegex.test(value) ? null : t('editFriend.errors.candyPreference'),
     },
   });
 
