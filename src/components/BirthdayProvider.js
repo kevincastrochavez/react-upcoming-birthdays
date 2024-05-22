@@ -38,17 +38,13 @@ export default function BirthdayProvider({ children }) {
   const [openImportModal, setOpenImportModal] = useState(false);
   const [friendsWereImported, setFriendsWereImported] = useState(false);
   const [importingFriendsFailed, setImportingFriendsFailed] = useState(false);
-  const [languageSelectedObj, setLanguageSelectedObj] = useState(
-    LANGUAGE_OPTIONS[0]
+
+  const languageObjFromNavigator = LANGUAGE_OPTIONS.find((languageObj) =>
+    window.navigator.language.includes(languageObj.value)
   );
-
-  useEffect(() => {
-    const languageObjFromNavigator = LANGUAGE_OPTIONS.find((languageObj) =>
-      window.navigator.language.includes(languageObj.value)
-    );
-
-    setLanguageSelectedObj(languageObjFromNavigator);
-  }, []);
+  const [languageSelectedObj, setLanguageSelectedObj] = useState(
+    languageObjFromNavigator
+  );
 
   // Format birth date and attach it to each friend, in the long format and shortened format
   const birthdatesList = friendsList?.map((friend) => friend?.birthdate);

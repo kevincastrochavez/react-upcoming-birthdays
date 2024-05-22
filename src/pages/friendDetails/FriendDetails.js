@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@mantine/core';
 import { useLocation } from 'react-router-dom';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
+import { t } from 'i18next';
 
 import {
   useFriends,
@@ -13,7 +14,6 @@ import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import { FriendInfo } from '../../components/friendInfo/FriendInfo';
 import DeleteFriendModal from './DeleteFriendModal';
 import EditFriend from '../../components/editFriend/EditFriend';
-import { t } from 'i18next';
 
 const mainContainerCss = css`
   margin-bottom: 60px;

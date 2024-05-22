@@ -11,6 +11,7 @@ import {
 
 import {
   useActionFriends,
+  useLanguage,
   useSetAddingFriends,
   useSetFriends,
   useSetUserInfo,
@@ -27,6 +28,7 @@ import AllFriendsSkeleton from './pages/allFriends/AllFriendsSkeleton';
 import ShareImportSkeleton from './pages/shareImport/ShareImportSkeleton';
 import FriendDetailsSkeleton from './pages/friendDetails/FriendDetailsSkeleton';
 import Navigation from './components/navigation/Navigation';
+import { useTranslation } from 'react-i18next';
 
 import Dashboard from './pages/dashboard/Dashboard';
 import AllFriends from './pages/allFriends/AllFriends';
@@ -77,6 +79,8 @@ function App() {
   const { setIsUserSharingList } = useSetUserInfo();
   const { setFriendsList } = useSetFriends();
   const { isFetchingFriends, isFetchingList } = useActionFriends();
+  const { languageSelectedObj } = useLanguage();
+  const { i18n } = useTranslation();
   const redirect = useNavigate();
   const [tourStep, setTourStep] = useState(0);
 
@@ -175,6 +179,10 @@ function App() {
       getFriendslist(userUid);
     }
   }, [userUid]);
+
+  useEffect(() => {
+    i18n.changeLanguage(languageSelectedObj.value);
+  }, [languageSelectedObj, i18n]);
 
   const steps = [
     {
