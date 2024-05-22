@@ -177,7 +177,13 @@
     },
     "import": {
       "title": "Got a QR code? Scan it or upload it here!"
-    }
+    },
+    "notSharing": "We are sorry. Looks like your friend's list is not public at the moment.",
+    "notSharingBtn": "Understood",
+    "sharingPicture": "Picture",
+    "sharingName": "Name",
+    "sharingCancel": "Cancel",
+    "sharingImport": "Import"
   },
   "spotlight": {
     "button": "Add your First Friend",

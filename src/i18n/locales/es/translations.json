@@ -177,7 +177,13 @@
     },
     "import": {
       "title": "Tienes un código QR? Escanéalo o súbelo a continuación:"
-    }
+    },
+    "notSharing": "Lo sentimos. Parece que la lista que buscas es privada.",
+    "notSharingBtn": "Entendido",
+    "sharingPicture": "Imagen",
+    "sharingName": "Nombre",
+    "sharingCancel": "Cancelar",
+    "sharingImport": "Importar"
   },
   "spotlight": {
     "button": "Añade tu primer amigo",

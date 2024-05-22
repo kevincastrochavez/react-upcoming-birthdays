@@ -23,7 +23,7 @@ describe('daysUntilBirthday', () => {
     expect(result.isBirthdayToday).toBe(true);
   });
 
-  test.only('returns correct number of days until birthday when birthday is in the past', () => {
+  test('returns correct number of days until birthday when birthday is in the past', () => {
     const birthdate = '1997-03-07';
 
     const result = daysUntilBirthday(birthdate);

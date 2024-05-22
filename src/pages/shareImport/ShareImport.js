@@ -112,7 +112,7 @@ function ShareImport({ setTourStep }) {
   const { setOpenImportModal, setFriendsWereImported } = useSetAddingFriends();
   const { setStrangeQrCode } = useSetSharing();
   const { openImportModal, isFetchingFriends } = useActionFriends();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const isSharingListPublic = useRef(null);
   const { userUid } = useUserInfo();
   const { strangeQrCode } = useSharing();
@@ -334,16 +334,14 @@ function ShareImport({ setTourStep }) {
 
   const notSharingJsx = (
     <>
-      <p>
-        We are sorry. Looks like your friend's list is not public at the moment.
-      </p>
+      <p>{t('shareImport.notSharing')}</p>
       <Button
         leftSection={<IconThumbUp size={20} />}
         className='mt-8 ml-auto'
         onClick={() => setOpenImportModal(false)}
         css={rightAlignedBtnCss}
       >
-        Understood
+        {t('shareImport.notSharingBtn')}
       </Button>
     </>
   );
@@ -366,15 +364,15 @@ function ShareImport({ setTourStep }) {
                 }
               />
             </Table.Th>
-            <Table.Th>Picture</Table.Th>
-            <Table.Th>Name</Table.Th>
+            <Table.Th>{t('shareImport.sharingPicture')}</Table.Th>
+            <Table.Th>{t('shareImport.sharingName')}</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>
       </Table>
       <Group justify='flex-end' mt='xl'>
         <Button onClick={handleCancelImport} variant='default'>
-          Cancel
+          {t('shareImport.sharingCancel')}
         </Button>
         <Button
           leftSection={<IconDownload size={20} />}
@@ -385,7 +383,7 @@ function ShareImport({ setTourStep }) {
           loading={isImporting}
           loaderProps={{ type: 'dots' }}
         >
-          Import
+          {t('shareImport.sharingImport')}
         </Button>
       </Group>
     </>
