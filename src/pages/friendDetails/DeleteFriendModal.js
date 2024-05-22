@@ -100,7 +100,6 @@ function DeleteFriendModal({
           className='mt-8'
           variant={'default'}
           onClick={() => setIsDeleting(false)}
-          size='md'
         >
           {t('deleteFriend.cancel')}
         </Button>
@@ -111,7 +110,6 @@ function DeleteFriendModal({
           onClick={handleDelete}
           loading={isDeletingFriend}
           loaderProps={{ type: 'dots' }}
-          size='md'
         >
           {t('deleteFriend.delete')} {firstName || 'Friend'}
         </Button>
