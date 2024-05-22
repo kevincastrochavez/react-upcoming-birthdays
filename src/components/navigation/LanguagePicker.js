@@ -10,10 +10,11 @@ const comboBoxCss = css`
   width: 60px;
 
   & div[data-position='right'] {
-    width: 24px;
+    width: 20px;
   }
 
   & button {
+    padding-left: 8px;
     padding-right: 20px;
     height: 24px;
     display: flex;
