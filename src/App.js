@@ -29,6 +29,7 @@ import ShareImportSkeleton from './pages/shareImport/ShareImportSkeleton';
 import FriendDetailsSkeleton from './pages/friendDetails/FriendDetailsSkeleton';
 import Navigation from './components/navigation/Navigation';
 import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 
 import Dashboard from './pages/dashboard/Dashboard';
 import AllFriends from './pages/allFriends/AllFriends';
@@ -187,35 +188,31 @@ function App() {
   const steps = [
     {
       selector: 'body',
-      content:
-        'Welcome to Happy B! A place where you can keep track of your loved ones and friends birthdays.',
+      content: t('tour.welcomeMessage'),
     },
     {
       selector: "[data-tour='spotlightFriend']",
-      content:
-        "The person with the closest birthday will be highlighted here, so you don't miss it",
+      content: t('tour.spotlight'),
     },
     {
       selector: "[data-tour='nextFriends']",
-      content:
-        "As well as the next 5 friends, so you are aware who's coming up soon",
+      content: t('tour.nextFriends'),
     },
     {
       selector: "[data-tour='searchFriend']",
-      content: 'Quicly search for any friend',
+      content: t('tour.search'),
     },
     {
       selector: "[data-tour='allFriends']",
-      content: 'Get a glance at all of your friends, grouped by month',
+      content: t('tour.allFriends'),
     },
     {
       selector: "[data-tour='shareCode']",
-      content:
-        'Want to let other people import your list of friends? We got you covered! Share your QR code or send them your personal link.',
+      content: t('tour.qrCode'),
     },
     {
       selector: "[data-tour='addFriend']",
-      content: 'Ready to start?',
+      content: t('tour.start'),
     },
   ];
 

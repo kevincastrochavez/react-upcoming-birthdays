@@ -189,5 +189,14 @@
     "button": "Add your First Friend",
     "message": "Start adding your friends to your list.",
     "title": "No Friends"
+  },
+  "tour": {
+    "welcomeMessage": "Welcome to Happy B! A place where you can keep track of your loved ones and friends birthdays.",
+    "spotlight": "The person with the closest birthday will be highlighted here, so you don't miss it",
+    "nextFriends": "As well as the next 5 friends, so you are aware who's coming up soon",
+    "search": "Quickly search for any friend",
+    "allFriends": "Get a glance at all of your friends, grouped by month",
+    "qrCode": "Want to let other people import your list of friends? We got you covered! Share your QR code or send them your direct link.",
+    "start": "Ready to start?"
   }
 }

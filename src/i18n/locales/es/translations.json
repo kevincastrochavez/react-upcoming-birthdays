@@ -189,5 +189,14 @@
     "button": "Añade tu primer amigo",
     "message": "Comienza a anadir a tus amigos",
     "title": "No hay amigos"
+  },
+  "tour": {
+    "welcomeMessage": "¡Bienvenido a Happy B! Un lugar donde puedes registrar cumpleaños de tus seres queridos",
+    "spotlight": "El amigo más cercano se resalta aqui, por lo que no te olvides de echarle un vistazo",
+    "nextFriends": "Los siguientes 5 amigos, para que sepas quienes están por venir pronto",
+    "search": "Busca a un amigo",
+    "allFriends": "Dale un vistazo a todos tus amigos, ordenados por mes",
+    "qrCode": "¿Quieres que tus amigos importen tu lista de amigos? ¡Te ayudamos! Comparte tu código QR o envíales tu link directo.",
+    "start": "¿Listo para comenzar?"
   }
 }
