@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { t } from 'i18next';
 
 import { useSearch, useSetSearch } from '../BirthdayProvider';
 import {
@@ -13,7 +14,6 @@ import {
   CommandItem,
   CommandList,
 } from '../../componentsShadcn/ui/command';
-import { t } from 'i18next';
 
 const searchResultsLinkCss = css`
   & img {

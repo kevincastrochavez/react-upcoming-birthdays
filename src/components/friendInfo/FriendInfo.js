@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 import { ThemeIcon, Tooltip } from '@mantine/core';
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import { useClickOutside } from '@mantine/hooks';
+import { t } from 'i18next';
 
 import FriendPreferences from './FriendPreferences';
 import { daysUntilBirthday, getNextBirthdayAge } from '../../helper/utils';
-import { t } from 'i18next';
 import { Trans } from 'react-i18next';
 
 const spotlightHeadingCss = css`

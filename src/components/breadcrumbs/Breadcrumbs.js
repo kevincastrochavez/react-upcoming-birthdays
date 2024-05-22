@@ -3,9 +3,9 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { NavLink } from 'react-router-dom';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
+import { t } from 'i18next';
 
 import { useFriends } from '../BirthdayProvider';
-import { t } from 'i18next';
 
 // Define custom breadcrumbs for certain routes.
 const routes = [
