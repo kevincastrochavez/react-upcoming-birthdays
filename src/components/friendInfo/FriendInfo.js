@@ -12,6 +12,7 @@ import { t } from 'i18next';
 import FriendPreferences from './FriendPreferences';
 import { daysUntilBirthday, getNextBirthdayAge } from '../../helper/utils';
 import { Trans } from 'react-i18next';
+import { fireConfetti } from '../../helper/utils';
 
 const spotlightHeadingCss = css`
   padding: 0 24px;
@@ -199,6 +200,11 @@ function FriendInfo({
   );
 
   const visibleStatus = isPrivate ? notVisibleJsx : visibleJsx;
+
+  useEffect(() => {
+    if (!isBirthdayToday) return;
+    fireConfetti();
+  }, [isBirthdayToday]);
 
   return (
     <>
