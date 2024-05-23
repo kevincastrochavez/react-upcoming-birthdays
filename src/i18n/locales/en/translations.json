@@ -173,7 +173,7 @@
       "message": "Anybody who you share your QR code or direct link with will be able to import any of your friends marked as not private.",
       "qrMessage": "Have your friends scan this QR code:",
       "qrPublic": "Make your list public to get your QR code",
-      "directLink": "Or share your personal link:"
+      "directLink": "Not close to scan the QR? Share your personal link:"
     },
     "import": {
       "title": "Got a QR code? Scan it or upload it here!"

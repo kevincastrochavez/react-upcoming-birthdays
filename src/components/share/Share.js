@@ -39,7 +39,6 @@ const qrContainerCss = css`
   display: grid;
 
   & > p {
-    font-size: 14px;
     margin-bottom: 16px;
   }
 
@@ -54,7 +53,6 @@ const idContainerCss = css`
   & > p {
     padding: 0 0 8px 4px;
     margin-top: 40px;
-    font-size: 14px;
   }
 
   & > div {

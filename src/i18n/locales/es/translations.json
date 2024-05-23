@@ -173,7 +173,7 @@
       "message": "Cualquiera que tenga tu código QR o link directo podrá importar a tus amigos marcados como no privados.",
       "qrMessage": "Haz que tus amigos escanen este código QR:",
       "qrPublic": "Haz tu lista pública para obtener tu código QR",
-      "directLink": "O comparte tu link directo:"
+      "directLink": "¿Muy lejos para escanear el código QR? Comparte tu link directo:"
     },
     "import": {
       "title": "Tienes un código QR? Escanéalo o súbelo a continuación:"
