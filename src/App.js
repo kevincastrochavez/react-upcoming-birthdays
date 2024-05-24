@@ -30,6 +30,7 @@ import FriendDetailsSkeleton from './pages/friendDetails/FriendDetailsSkeleton';
 import Navigation from './components/navigation/Navigation';
 import { useTranslation } from 'react-i18next';
 import { t } from 'i18next';
+import { Analytics } from '@vercel/analytics/react';
 
 import Dashboard from './pages/dashboard/Dashboard';
 import AllFriends from './pages/allFriends/AllFriends';
@@ -244,6 +245,7 @@ function App() {
         currentStep={tourStep}
         setCurrentStep={setCurrentStep}
       >
+        <Analytics />
         <Navigation />
         <Toaster />
         <AddFriend />
