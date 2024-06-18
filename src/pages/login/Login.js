@@ -6,6 +6,8 @@ import LoginBody from './LoginBody';
 
 const loginContainerCSS = css`
   padding: 0 24px;
+  max-width: 1024px;
+  margin: 0 auto;
 `;
 
 const loginCanvasCss = css`

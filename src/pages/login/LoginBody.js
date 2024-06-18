@@ -13,6 +13,13 @@ import { saveUserUid } from '../../helper/utils';
 const loginHeadingCss = css`
   margin-top: 30px;
   font-size: 20px;
+  max-width: 700px;
+
+  @media (min-width: 768px) {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 
 const buttonsContainerCss = css`
@@ -33,6 +40,7 @@ const buttonCss = css`
   cursor: pointer;
   background-color: #fff;
   color: black;
+  max-width: 768px;
   box-shadow: 0px 13px 31px rgba(12, 20, 33, 0.04),
     0px 9.45547px 20.8947px rgba(12, 20, 33, 0.032375),
     0px 6.58125px 13.5141px rgba(12, 20, 33, 0.027),
@@ -40,6 +48,11 @@ const buttonCss = css`
     0px 2.6px 5.0375px rgba(12, 20, 33, 0.02),
     0px 1.37109px 2.99707px rgba(12, 20, 33, 0.016875),
     0px 0.56875px 1.79219px rgba(12, 20, 33, 0.013), inset 0px 2px 1px #ffffff;
+
+  @media (min-width: 768px) {
+    width: 300px;
+    margin: 0 auto;
+  }
 `;
 
 /**
